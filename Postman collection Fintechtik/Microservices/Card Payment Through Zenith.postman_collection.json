@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "e75bbc99-18de-4c27-bd47-84982c836cea",
+		"name": "Card Payment Through Zenith",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-e75bbc99-18de-4c27-bd47-84982c836cea?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "cardPayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"app_id\": \"9053874068\",\r\n  \"app_key\": \"05733746\",\r\n  \"transaction_date\": \"2024-05-13T12:00:00\",\r\n  \"fee_type_code\": \"GENERALPAYMENT\",\r\n  \"payment_mode_id\": \"VISA\",\r\n  \"first_name\": \"John\",\r\n  \"middle_name\": \"Doe\",\r\n  \"last_name\": \"Smith\",\r\n  \"mobile\": \"1234567890\",\r\n  \"email\": \"john@example.com\",\r\n  \"address1\": \"123 Main Street\",\r\n  \"address2\": \"Apt 1\",\r\n  \"payment_currency\": \"GHS\",\r\n  \"amount\": 100.00,\r\n  \"transaction_reference_no\": \"12345678989\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:55383/interapi/cardPayment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55383",
+					"path": [
+						"interapi",
+						"cardPayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cardPayment Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:55383/interapi/InitCardPayment?app_id=9053874068&ref_no=56312515",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55383",
+					"path": [
+						"interapi",
+						"InitCardPayment"
+					],
+					"query": [
+						{
+							"key": "app_id",
+							"value": "9053874068"
+						},
+						{
+							"key": "ref_no",
+							"value": "56312515"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cardPayment callback test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:55383/Zenith/Callback?ref=102952707",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "55383",
+					"path": [
+						"Zenith",
+						"Callback"
+					],
+					"query": [
+						{
+							"key": "ref",
+							"value": "102952707"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

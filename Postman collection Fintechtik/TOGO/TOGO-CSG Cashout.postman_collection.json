@@ -1,0 +1,1627 @@
+{
+	"info": {
+		"_postman_id": "fd340214-e0aa-4000-8a79-5cb12f8457d0",
+		"name": "TOGO-CSG Cashout",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645",
+		"_collection_link": "https://dark-satellite-211344.postman.co/workspace/Togo-CSG~192524e0-27c4-42af-993a-243e35bb76ab/collection/14223645-fd340214-e0aa-4000-8a79-5cb12f8457d0?action=share&source=collection_link&creator=14223645"
+	},
+	"item": [
+		{
+			"name": "Cashout",
+			"item": [
+				{
+					"name": "GetTxnStatus dev",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"9496997591\",     //KORAPAYDEMO\r\n    \"app_key\": \"77340613\",\r\n    \"merchant_ref\": \"45215235sj2244453\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v2/api/Cashout/GetTxnStatus",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"Cashout",
+								"GetTxnStatus"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_SUCCESS\",\r\n    \"status_message\": \"TRANSACTION SUCCESSFULLY PROCESSED\"\r\n}"
+						},
+						{
+							"name": "FAILED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_FAILED\",\n    \"status_message\": \"TRANSACTION FAILED\"\n}"
+						},
+						{
+							"name": "PENDING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_PENDING\",\r\n    \"status_message\": \"TRANSACTION PENDING\"\r\n}"
+						},
+						{
+							"name": "EXPIRED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_EXPIRED\",\r\n    \"status_message\": \"TRANSACTION EXPIRED\"\r\n}"
+						},
+						{
+							"name": "CANCELLED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CANCELLED\",\n    \"status_message\": \"TRANSACTION CANCELLED\"\n}"
+						},
+						{
+							"name": "PREPARED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PREPARED\",\n    \"status_message\": \"TRANSACTION BEING PREPARED\"\n}"
+						},
+						{
+							"name": "PROCESSING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PROCESSING\",\n    \"status_message\": \"PREPARED FOR PROCESSING\"\n}"
+						},
+						{
+							"name": "CONFLICTING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CONFLICTING\",\n    \"status_message\": \"CONFLICTING TRANSACTION\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CheckStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"9496997591\",     //KORAPAYDEMO\r\n    \"app_key\": \"77340613\",\r\n    \"merchant_ref\": \"45215235sj2244453\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v2/api/Cashout/GetTxnStatus",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"Cashout",
+								"GetTxnStatus"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_SUCCESS\",\r\n    \"status_message\": \"TRANSACTION SUCCESSFULLY PROCESSED\"\r\n}"
+						},
+						{
+							"name": "FAILED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_FAILED\",\n    \"status_message\": \"TRANSACTION FAILED\"\n}"
+						},
+						{
+							"name": "PENDING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_PENDING\",\r\n    \"status_message\": \"TRANSACTION PENDING\"\r\n}"
+						},
+						{
+							"name": "EXPIRED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_EXPIRED\",\r\n    \"status_message\": \"TRANSACTION EXPIRED\"\r\n}"
+						},
+						{
+							"name": "CANCELLED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CANCELLED\",\n    \"status_message\": \"TRANSACTION CANCELLED\"\n}"
+						},
+						{
+							"name": "PREPARED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PREPARED\",\n    \"status_message\": \"TRANSACTION BEING PREPARED\"\n}"
+						},
+						{
+							"name": "PROCESSING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PROCESSING\",\n    \"status_message\": \"PREPARED FOR PROCESSING\"\n}"
+						},
+						{
+							"name": "CONFLICTING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CONFLICTING\",\n    \"status_message\": \"CONFLICTING TRANSACTION\"\n}"
+						}
+					]
+				},
+				{
+					"name": "InitiateGlobalCashout (MMT)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Get current date-time\r",
+									"const now = new Date();\r",
+									"\r",
+									"// Format function\r",
+									"function formatDate(date) {\r",
+									"    const yyyy = date.getFullYear();\r",
+									"    const MM = String(date.getMonth() + 1).padStart(2, '0');\r",
+									"    const dd = String(date.getDate()).padStart(2, '0');\r",
+									"    const HH = String(date.getHours()).padStart(2, '0');\r",
+									"    const mm = String(date.getMinutes()).padStart(2, '0');\r",
+									"    const ss = String(date.getSeconds()).padStart(2, '0');\r",
+									"    return `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`;\r",
+									"}\r",
+									"\r",
+									"// Set transaction_date to now\r",
+									"const transactionDate = formatDate(now);\r",
+									"\r",
+									"// Set expiry_date to 1 month and 5 days from now\r",
+									"const expiry = new Date(now);\r",
+									"expiry.setMonth(expiry.getMonth() + 1);\r",
+									"expiry.setDate(expiry.getDate() + 5);\r",
+									"const expiryDate = formatDate(expiry);\r",
+									"\r",
+									"// Generate unique merchant_ref (prefix + timestamp)\r",
+									"const merchantRef = 'yogupay' + Date.now().toString(36);\r",
+									"\r",
+									"// Set environment or collection variables\r",
+									"pm.variables.set(\"transaction_date\", transactionDate);\r",
+									"pm.variables.set(\"expiry_date\", expiryDate);\r",
+									"pm.variables.set(\"merchant_ref\", merchantRef);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "//\r\n{\r\n    \"app_id\": \"8389734492\",\r\n    \"app_key\": \"01412551\",\r\n    \"transaction_date\": \"{{transaction_date}}\",\r\n    \"expiry_date\": \"{{expiry_date}}\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"CSPAY TEST\",\r\n    \"payer_email\": \"johndoe@fintechtik.com\",\r\n    \"currency\": \"GHS\",  //XOF for moov\r\n    \"amount\": \"13.0\",\r\n    \"merchant_ref\": \"{{merchant_ref}}\",\r\n    \"payer_mobile\": \"+233233371378\",\r\n    \"payee_mobile\": \"+22899990137\",\r\n    \"mobile_network\": \"MOOV\",\r\n    \"payee_name\": \"test for moov\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CashoutLocalBase}}/api/Cashout/InitiateGlobalCashout",
+							"host": [
+								"{{CashoutLocalBase}}"
+							],
+							"path": [
+								"api",
+								"Cashout",
+								"InitiateGlobalCashout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"9904491\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{ \r\n    \"status_code\": \"CO_SUBMITTED\", \r\n    \"status_message\": \"Transaction Submitted Successfully\", \r\n    \"transaction_ref\": 43535 \r\n}"
+						},
+						{
+							"name": "bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_BAD_REQUEST\",\r\n    \"status_message\": \"app_id is required, app_key is required, payment_mode is required, \"\r\n}"
+						},
+						{
+							"name": "Un-Authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"324343\",\r\n    \"app_key\": \"32456\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_UN_AUTHORIZED\",\n    \"status_message\": \"Unauthorized\",\n    \"transaction_ref\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "CheckAvailableBalance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"app_id\": \"0546227987\",\r\n    \"app_key\": \"57402074\",\r\n    \"currency_code\": \"GHS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CashoutBaseUrl}}/api/Cashout/CheckAvailableBalance",
+							"host": [
+								"{{CashoutBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"Cashout",
+								"CheckAvailableBalance"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"9904491\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{ \r\n    \"status_code\": \"CO_SUBMITTED\", \r\n    \"status_message\": \"Transaction Submitted Successfully\", \r\n    \"transaction_ref\": 43535 \r\n}"
+						},
+						{
+							"name": "bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_BAD_REQUEST\",\r\n    \"status_message\": \"app_id is required, app_key is required, payment_mode is required, \"\r\n}"
+						},
+						{
+							"name": "Un-Authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"324343\",\r\n    \"app_key\": \"32456\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_UN_AUTHORIZED\",\n    \"status_message\": \"Unauthorized\",\n    \"transaction_ref\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "ValidateBankAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"2367618162\",\r\n    \"app_key\": \"25232322\",\r\n    \"Bank_name\": \"Universal Merchant Bank\",\r\n    \"bank_code\": \"300315\",\r\n    \"Bank_account_no\": \"1020820171412\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CashoutBaseUrl}}/api/Cashout/ValidateBankAccount",
+							"host": [
+								"{{CashoutBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"Cashout",
+								"ValidateBankAccount"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_SUCCESS\",\r\n    \"status_message\": \"TRANSACTION SUCCESSFULLY PROCESSED\"\r\n}"
+						},
+						{
+							"name": "FAILED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_FAILED\",\n    \"status_message\": \"TRANSACTION FAILED\"\n}"
+						},
+						{
+							"name": "PENDING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_PENDING\",\r\n    \"status_message\": \"TRANSACTION PENDING\"\r\n}"
+						},
+						{
+							"name": "EXPIRED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_EXPIRED\",\r\n    \"status_message\": \"TRANSACTION EXPIRED\"\r\n}"
+						},
+						{
+							"name": "CANCELLED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CANCELLED\",\n    \"status_message\": \"TRANSACTION CANCELLED\"\n}"
+						},
+						{
+							"name": "PREPARED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PREPARED\",\n    \"status_message\": \"TRANSACTION BEING PREPARED\"\n}"
+						},
+						{
+							"name": "PROCESSING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PROCESSING\",\n    \"status_message\": \"PREPARED FOR PROCESSING\"\n}"
+						},
+						{
+							"name": "CONFLICTING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CONFLICTING\",\n    \"status_message\": \"CONFLICTING TRANSACTION\"\n}"
+						}
+					]
+				},
+				{
+					"name": "ValidateMoovCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"1646296954\",\r\n    \"app_key\": \"46522070\",\r\n    \"network\": \"MOOV\",\r\n    \"mobile\": \"22896127045\",   //working number for testing 22896127045\r\n    \"amount\" : \"300\",\r\n    \"currency\" : \"XOF\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44312/api/kyc/Validate",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44312",
+							"path": [
+								"api",
+								"kyc",
+								"Validate"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_SUCCESS\",\r\n    \"status_message\": \"TRANSACTION SUCCESSFULLY PROCESSED\"\r\n}"
+						},
+						{
+							"name": "FAILED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_FAILED\",\n    \"status_message\": \"TRANSACTION FAILED\"\n}"
+						},
+						{
+							"name": "PENDING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_PENDING\",\r\n    \"status_message\": \"TRANSACTION PENDING\"\r\n}"
+						},
+						{
+							"name": "EXPIRED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_EXPIRED\",\r\n    \"status_message\": \"TRANSACTION EXPIRED\"\r\n}"
+						},
+						{
+							"name": "CANCELLED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CANCELLED\",\n    \"status_message\": \"TRANSACTION CANCELLED\"\n}"
+						},
+						{
+							"name": "PREPARED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PREPARED\",\n    \"status_message\": \"TRANSACTION BEING PREPARED\"\n}"
+						},
+						{
+							"name": "PROCESSING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PROCESSING\",\n    \"status_message\": \"PREPARED FOR PROCESSING\"\n}"
+						},
+						{
+							"name": "CONFLICTING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CONFLICTING\",\n    \"status_message\": \"CONFLICTING TRANSACTION\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GetCustomerProfile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"0298689424\",\r\n    \"app_key\": \"17276622\",\r\n    \"network\": \"MTN\",\r\n    \"mobile\": \"233544338834\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44312/api/Cashout/GetCustomerProfile",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44312",
+							"path": [
+								"api",
+								"Cashout",
+								"GetCustomerProfile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"9904491\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{ \r\n    \"status_code\": \"CO_SUBMITTED\", \r\n    \"status_message\": \"Transaction Submitted Successfully\", \r\n    \"transaction_ref\": 43535 \r\n}"
+						},
+						{
+							"name": "bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_BAD_REQUEST\",\r\n    \"status_message\": \"app_id is required, app_key is required, payment_mode is required, \"\r\n}"
+						},
+						{
+							"name": "Un-Authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"324343\",\r\n    \"app_key\": \"32456\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_UN_AUTHORIZED\",\n    \"status_message\": \"Unauthorized\",\n    \"transaction_ref\": 0\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CashoutDevBase",
+			"value": "https://api-togo.cspay.app:9389/v2/",
+			"type": "string"
+		},
+		{
+			"key": "CashoutLocalBase",
+			"value": "https://localhost:44312/",
+			"type": "string"
+		}
+	]
+}

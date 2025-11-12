@@ -1,0 +1,1010 @@
+{
+	"info": {
+		"_postman_id": "777268a4-c3ed-4d43-aff8-1932fb689fcc",
+		"name": "Gmoney Integration Microservice - Complete Testing",
+		"description": "Complete Postman collection for testing the Gmoney Integration Microservice API with all endpoints and scenarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645",
+		"_collection_link": "https://dark-satellite-211344.postman.co/workspace/Microservices~a6ffaa2f-5cc9-4e14-aadd-80615663ccb2/collection/14223645-777268a4-c3ed-4d43-aff8-1932fb689fcc?action=share&source=collection_link&creator=14223645"
+	},
+	"item": [
+		{
+			"name": "1. Health Checks",
+			"item": [
+				{
+					"name": "Health Check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has status field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData.status).to.equal('Healthy');",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"health"
+							]
+						},
+						"description": "Basic health check - no authentication required"
+					},
+					"response": []
+				},
+				{
+					"name": "Readiness Check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Service is ready\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.equal('Ready');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/health/ready",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"health",
+								"ready"
+							]
+						},
+						"description": "Kubernetes readiness probe"
+					},
+					"response": []
+				},
+				{
+					"name": "Liveness Check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Service is live\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.equal('Live');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/health/live",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"health",
+								"live"
+							]
+						},
+						"description": "Kubernetes liveness probe"
+					},
+					"response": []
+				}
+			],
+			"description": "Health check endpoints - no authentication required"
+		},
+		{
+			"name": "2. Token Generation",
+			"item": [
+				{
+					"name": "Generate Gmoney Token - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has microservice status\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('microserviceStatus');",
+									"    pm.expect(jsonData.microserviceStatus).to.equal('Request successfully processed');",
+									"});",
+									"",
+									"pm.test(\"Response has third party response\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('thirdPartyResponse');",
+									"    pm.expect(jsonData.thirdPartyResponse).to.have.property('data');",
+									"});",
+									"",
+									"pm.test(\"Token data exists\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.thirdPartyResponse && jsonData.thirdPartyResponse.data) {",
+									"        pm.expect(jsonData.thirdPartyResponse.data).to.have.property('access_Token');",
+									"        console.log('Gmoney Token: ' + jsonData.thirdPartyResponse.data.access_Token);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"token"
+							]
+						},
+						"description": "Generate authentication token from Gmoney API"
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Token - No Auth (401)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"token"
+							]
+						},
+						"description": "Test without JWT token - should return 401"
+					},
+					"response": []
+				}
+			],
+			"description": "Token generation endpoints"
+		},
+		{
+			"name": "3. Request To Pay",
+			"item": [
+				{
+					"name": "Initiate RTP - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response structure is correct\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('microserviceStatus');",
+									"    pm.expect(jsonData).to.have.property('thirdPartyStatusCode');",
+									"    pm.expect(jsonData).to.have.property('thirdPartyResponse');",
+									"    pm.expect(jsonData).to.have.property('processedAt');",
+									"});",
+									"",
+									"pm.test(\"RTP ID is present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.thirdPartyResponse && jsonData.thirdPartyResponse.data) {",
+									"        pm.expect(jsonData.thirdPartyResponse.data).to.have.property('rtpID');",
+									"        pm.environment.set('rtp_id', jsonData.thirdPartyResponse.data.rtpID);",
+									"        console.log('RTP ID saved: ' + jsonData.thirdPartyResponse.data.rtpID);",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Status is PENDING\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.thirdPartyResponse && jsonData.thirdPartyResponse.data) {",
+									"        pm.expect(jsonData.thirdPartyResponse.data.status).to.equal('PENDING');",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"merchantRef\": \"MERCH{{$randomInt}}\",\n  \"approverAccount\": \"0209999999\",\n  \"amount\": 25.50,\n  \"narration\": \"Test payment request from microservice\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/initiate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"initiate"
+							]
+						},
+						"description": "Initiate a Request To Pay transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "Initiate RTP - Missing MerchantRef (400)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Validation error message present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('message');",
+									"    pm.expect(jsonData.message).to.equal('Validation failed');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"merchantRef\": \"\",\n  \"approverAccount\": \"0209999999\",\n  \"amount\": 25.50,\n  \"narration\": \"Test payment\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/initiate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"initiate"
+							]
+						},
+						"description": "Test validation - missing merchant reference"
+					},
+					"response": []
+				},
+				{
+					"name": "Initiate RTP - Invalid Amount (400)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Amount validation error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.have.property('Amount');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"merchantRef\": \"MERCH123\",\n  \"approverAccount\": \"0209999999\",\n  \"amount\": 0,\n  \"narration\": \"Test payment\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/initiate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"initiate"
+							]
+						},
+						"description": "Test validation - amount must be greater than zero"
+					},
+					"response": []
+				},
+				{
+					"name": "Initiate RTP - Missing Approver Account (400)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"ApproverAccount validation error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.have.property('ApproverAccount');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"merchantRef\": \"MERCH123\",\n  \"approverAccount\": \"\",\n  \"amount\": 25.50,\n  \"narration\": \"Test payment\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/initiate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"initiate"
+							]
+						},
+						"description": "Test validation - missing approver account"
+					},
+					"response": []
+				},
+				{
+					"name": "Initiate RTP - No Auth (401)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"merchantRef\": \"MERCH123\",\n  \"approverAccount\": \"0209999999\",\n  \"amount\": 25.50,\n  \"narration\": \"Test payment\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/initiate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"initiate"
+							]
+						},
+						"description": "Test without authentication - should return 401"
+					},
+					"response": []
+				}
+			],
+			"description": "Request To Pay initiation endpoints"
+		},
+		{
+			"name": "4. RTP Status Check",
+			"item": [
+				{
+					"name": "Check RTP Status - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has status data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('thirdPartyResponse');",
+									"    if (jsonData.thirdPartyResponse && jsonData.thirdPartyResponse.data) {",
+									"        pm.expect(jsonData.thirdPartyResponse.data).to.have.property('status');",
+									"        pm.expect(jsonData.thirdPartyResponse.data).to.have.property('rtpID');",
+									"        console.log('RTP Status: ' + jsonData.thirdPartyResponse.data.status);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/status/{{rtp_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"status",
+								"{{rtp_id}}"
+							]
+						},
+						"description": "Check status using RTP ID from previous request"
+					},
+					"response": []
+				},
+				{
+					"name": "Check RTP Status - Manual RTP ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 404\", function () {",
+									"    pm.expect([200, 404]).to.include(pm.response.code);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/status/2522J0QCBV",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"status",
+								"2522J0QCBV"
+							]
+						},
+						"description": "Check status with manual RTP ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Check RTP Status - Empty RTP ID (400)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400 or 404\", function () {",
+									"    pm.expect([400, 404]).to.include(pm.response.code);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/status/ ",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"status",
+								" "
+							]
+						},
+						"description": "Test with empty RTP ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Check RTP Status - No Auth (401)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/status/2522J0QCBV",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"status",
+								"2522J0QCBV"
+							]
+						},
+						"description": "Test without authentication"
+					},
+					"response": []
+				}
+			],
+			"description": "RTP status check endpoints"
+		},
+		{
+			"name": "5. Complete Flow Test",
+			"item": [
+				{
+					"name": "Step 1 - Health Check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Service is healthy\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.equal('Healthy');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step 2 - Generate Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Token generated successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step 2 - Generate Token Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Token generated successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step 3 - Initiate RTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"RTP initiated successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.thirdPartyResponse && jsonData.thirdPartyResponse.data) {",
+									"        pm.environment.set('rtp_id', jsonData.thirdPartyResponse.data.rtpID);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"merchantRef\": \"FLOW-TEST-{{$randomInt}}\",\n  \"approverAccount\": \"0209999999\",\n  \"amount\": 100.00,\n  \"narration\": \"Complete flow test payment\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/initiate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"initiate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step 4 - Check RTP Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status checked successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    console.log('Final RTP Status: ' + JSON.stringify(jsonData.thirdPartyResponse.data));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/gmoney/rtp/status/{{rtp_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"gmoney",
+								"rtp",
+								"status",
+								"{{rtp_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Complete flow from health check to RTP status - run in sequence"
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "base_url_https",
+			"value": "https://localhost:7001",
+			"type": "string"
+		},
+		{
+			"key": "jwt_token",
+			"value": "",
+			"type": "string",
+			"description": "Your JWT Bearer token for authentication"
+		},
+		{
+			"key": "rtp_id",
+			"value": "",
+			"type": "string",
+			"description": "RTP ID from initiate response"
+		}
+	]
+}

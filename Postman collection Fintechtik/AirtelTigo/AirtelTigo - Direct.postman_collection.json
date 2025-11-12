@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "c43d5496-bb2b-45fe-9ee9-487a08991524",
+		"name": "AirtelTigo - Direct",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/AirtelTigo~e9e7a2e4-4271-405f-ae53-54e0a6d99e96/collection/16194081-c43d5496-bb2b-45fe-9ee9-487a08991524?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "Purchase Initiate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:v1=\"http://xmlns.tigo.com/MFS/PurchaseInitiateRequest/V1\"\r\n                  xmlns:v3=\"http://xmlns.tigo.com/RequestHeader/V3\"\r\n                  xmlns:v2=\"http://xmlns.tigo.com/ParameterType/V2\"\r\n                  xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\"\r\n                  xmlns:cor=\"http://soa.mic.co.af/coredata_1\">\r\n    <soapenv:Header>\r\n        <cor:debugFlag>true</cor:debugFlag>\r\n        <wsse:Security>\r\n            <wsse:UsernameToken>\r\n                <wsse:Username>{{Username}}</wsse:Username>\r\n                <wsse:Password>{{Password}}</wsse:Password>\r\n            </wsse:UsernameToken>\r\n        </wsse:Security>\r\n    </soapenv:Header>\r\n    <soapenv:Body>\r\n        <v1:PurchaseInitiateRequest>\r\n            <v1:RequestHeader>\r\n                <v3:GeneralConsumerInformation>\r\n                    <v3:consumerID>{{consumerID}}</v3:consumerID>\r\n                    <v3:transactionID>{{transactionID}}</v3:transactionID> <!-- Optional -->\r\n                    <v3:country>{{country}}</v3:country> <!-- Optional -->\r\n                    <v3:correlationID>{{correlationID}}</v3:correlationID>\r\n                </v3:GeneralConsumerInformation>\r\n            </v1:RequestHeader>\r\n            <v1:customerAccount>{{customerAccount}}</v1:customerAccount>\r\n            <v1:initiatorAccount>{{initiatorAccount}}</v1:initiatorAccount>\r\n            <v1:paymentReference>{{paymentReference}}</v1:paymentReference>\r\n            <v1:externalCategory>{{externalCategory}}</v1:externalCategory> <!-- Optional -->\r\n            <v1:externalChannel>{{externalChannel}}</v1:externalChannel> <!-- Optional -->\r\n            <v1:webUser>{{Username}}</v1:webUser> <!-- Optional -->\r\n            <v1:webPassword>{{Password}}</v1:webPassword> <!-- Optional -->\r\n            <v1:merchantName>{{merchantName}}</v1:merchantName> <!-- Optional -->\r\n            <v1:merchantMsisdn>{{merchantMsisdn}}</v1:merchantMsisdn> <!-- Optional -->\r\n            <v1:itemName>{{itemName}}</v1:itemName>\r\n            <v1:amount>{{amount}}</v1:amount>\r\n            <v1:minutesToExpire>{{minutesToExpire}}</v1:minutesToExpire> <!-- Optional -->\r\n            <v1:notificationChannel>{{notificationChannel}}</v1:notificationChannel> <!-- Optional -->\r\n            <v1:AuthorizationCode>{{AuthorizationCode}}</v1:AuthorizationCode>\r\n        </v1:PurchaseInitiateRequest>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.81.0.83:4443/osb/services/PurchaseInitiate_2_0",
+					"protocol": "http",
+					"host": [
+						"10",
+						"81",
+						"0",
+						"83"
+					],
+					"port": "4443",
+					"path": [
+						"osb",
+						"services",
+						"PurchaseInitiate_2_0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Purchase Details -StatusCheck",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:v1=\"http://xmlns.tigo.com/GetPurchaseTransDetailsRequest/V1\"\r\n                  xmlns:v3=\"http://xmlns.tigo.com/RequestHeader/V3\"\r\n                  xmlns:v2=\"http://xmlns.tigo.com/ParameterType/V2\"\r\n                  xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\"\r\n                  xmlns:cor=\"http://soa.mic.co.af/coredata_1\">\r\n    <soapenv:Header>\r\n        <cor:debugFlag>true</cor:debugFlag>\r\n        <wsse:Security>\r\n            <wsse:UsernameToken>\r\n                <wsse:Username>{{Username}}</wsse:Username>\r\n                <wsse:Password>{{Password}}</wsse:Password>\r\n            </wsse:UsernameToken>\r\n        </wsse:Security>\r\n    </soapenv:Header>\r\n    <soapenv:Body>\r\n        <v1:GetPurchaseTransDetailsRequest>\r\n            <v1:RequestHeader>\r\n                <v3:GeneralConsumerInformation>\r\n                    <v3:consumerID>{{consumerID}}</v3:consumerID>\r\n                    <v3:transactionID>{{transactionID}}</v3:transactionID> <!-- Optional -->\r\n                    <v3:country>{{country}}</v3:country>\r\n                    <v3:correlationID>{{correlationID}}</v3:correlationID>\r\n                </v3:GeneralConsumerInformation>\r\n            </v1:RequestHeader>\r\n            <v1:requestBody>\r\n                <v1:paymentReference>{{paymentReference}}</v1:paymentReference>\r\n                <v1:TransactionType>{{TransactionType}}</v1:TransactionType>\r\n                <v1:AuthorizationCode>{{AuthorizationCode}}</v1:AuthorizationCode>\r\n            </v1:requestBody>\r\n        </v1:GetPurchaseTransDetailsRequest>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://22.80.90.51:7777/osb/services/GetPurchaseTransDetails_2_0",
+					"protocol": "http",
+					"host": [
+						"22",
+						"80",
+						"90",
+						"51"
+					],
+					"port": "7777",
+					"path": [
+						"osb",
+						"services",
+						"GetPurchaseTransDetails_2_0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payments -cashout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:v1=\"http://xmlns.tigo.com/MFS/PaymentsRequest/V1\"\r\n                  xmlns:v3=\"http://xmlns.tigo.com/RequestHeader/V3\"\r\n                  xmlns:v2=\"http://xmlns.tigo.com/ParameterType/V2\"\r\n                  xmlns:cor1=\"http://soa.mic.co.af/coredata_1\"\r\n                  xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\r\n    <soapenv:Header>\r\n        <cor1:debugFlag>true</cor1:debugFlag>\r\n        <wsse:Security>\r\n            <wsse:UsernameToken>\r\n                <wsse:Username>{{Username}}</wsse:Username>\r\n                <wsse:Password>{{Password}}</wsse:Password>\r\n            </wsse:UsernameToken>\r\n        </wsse:Security>\r\n    </soapenv:Header>\r\n    <soapenv:Body>\r\n        <v1:payBillRequest>\r\n            <v3:RequestHeader>\r\n                <v3:GeneralConsumerInformation>\r\n                    <v3:consumerID>{{consumerID}}</v3:consumerID>\r\n                    <v3:transactionID>{{transactionID}}</v3:transactionID>\r\n                    <v3:country>{{country}}</v3:country>\r\n                    <v3:correlationID>{{correlationID}}</v3:correlationID>\r\n                </v3:GeneralConsumerInformation>\r\n            </v3:RequestHeader>\r\n            <v1:requestBody>\r\n                <v1:paymentreference>{{paymentReference}}</v1:paymentreference>\r\n                <v1:sourceWallet>\r\n                    <v1:msisdn>{{sourceMsisdn}}</v1:msisdn>\r\n                </v1:sourceWallet>\r\n                <v1:targetWallet>\r\n                    <v1:msisdn>{{targetMsisdn}}</v1:msisdn>\r\n                </v1:targetWallet>\r\n                <v1:pin></v1:pin> <!-- Optional -->\r\n                <v1:companyId>{{companyId}}</v1:companyId>\r\n                <v1:authorizationcode>{{AuthorizationCode}}</v1:authorizationcode>\r\n                <v1:amount>1</v1:amount>\r\n            </v1:requestBody>\r\n        </v1:payBillRequest>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.81.0.83:4443/osb/services/Payments_3_0",
+					"protocol": "http",
+					"host": [
+						"10",
+						"81",
+						"0",
+						"83"
+					],
+					"port": "4443",
+					"path": [
+						"osb",
+						"services",
+						"Payments_3_0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "paymentReference",
+			"value": "5666654544",
+			"type": "string"
+		},
+		{
+			"key": "transactionID",
+			"value": "5666654544",
+			"type": "string"
+		},
+		{
+			"key": "correlationID",
+			"value": "5666654544",
+			"type": "string"
+		},
+		{
+			"key": "AuthorizationCode",
+			"value": "bGl2ZV9td19jcm9zc19zd2l0Y2hocUBTd0A1Mjk=",
+			"type": "string"
+		},
+		{
+			"key": "Username",
+			"value": "live_mw_cross_switch",
+			"type": "string"
+		},
+		{
+			"key": "Password",
+			"value": "hq@Sw@529",
+			"type": "string"
+		},
+		{
+			"key": "consumerID",
+			"value": "cross_switch",
+			"type": "string"
+		},
+		{
+			"key": "country",
+			"value": "GHA",
+			"type": "string"
+		},
+		{
+			"key": "customerAccount",
+			"value": "233264371378",
+			"type": "string"
+		},
+		{
+			"key": "initiatorAccount",
+			"value": "233277623999",
+			"type": "string"
+		},
+		{
+			"key": "itemName",
+			"value": "TestItem",
+			"type": "string"
+		},
+		{
+			"key": "amount",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "minutesToExpire",
+			"value": "10",
+			"type": "string"
+		},
+		{
+			"key": "externalCategory",
+			"value": "tigo_portal",
+			"type": "string"
+		},
+		{
+			"key": "externalChannel",
+			"value": "hybrid",
+			"type": "string"
+		},
+		{
+			"key": "merchantName",
+			"value": "live_mw_cross_switch",
+			"type": "string"
+		},
+		{
+			"key": "merchantMsisdn",
+			"value": "233277623999",
+			"type": "string"
+		},
+		{
+			"key": "notificationChannel",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "TransactionType",
+			"value": "payment",
+			"type": "string"
+		},
+		{
+			"key": "sourceMsisdn",
+			"value": "233277623999",
+			"type": "string"
+		},
+		{
+			"key": "targetMsisdn",
+			"value": "233544338841",
+			"type": "string"
+		},
+		{
+			"key": "companyId",
+			"value": "cross_switch",
+			"type": "string"
+		},
+		{
+			"key": "authorizationCode",
+			"value": "bGl2ZV9td19jcm9zc19zd2l0Y2hocUBTd0A1Mjk=",
+			"type": "string"
+		}
+	]
+}

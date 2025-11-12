@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "3fe11128-2d29-4a8e-b423-4a5798c4357d",
+		"name": "MojoPay PaymentPage api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/MojoPay-CardPayments~fa401b33-a508-48ef-a9cc-dd9ce5f4a1ff/collection/16194081-3fe11128-2d29-4a8e-b423-4a5798c4357d?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "ProcessPayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"9053874068\",\r\n    \"app_key\": \"05733746\",\r\n    \"name\": \"Zeeshan Ilyas\",\r\n    \"FeeTypeCode\": \"GENERALPAYMENT\",\r\n    \"mobile\": \"233544338841\",\r\n    \"currency\": \"GHS\",\r\n    \"amount\": \"10\",\r\n    \"email\": \"zeeshan.ilyas@gmail.com\",\r\n    \"order_id\": \"ZenithCardPaymentTestxxr093489b5x\",\r\n    \"order_desc\": \"Zenith Card Payment Testing\",\r\n    \"return_url\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev}}/interapi/ProcessPayment",
+					"host": [
+						"{{dev}}"
+					],
+					"path": [
+						"interapi",
+						"ProcessPayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetInvoiceStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"app_id\": \"9053874068\",\r\n    \"app_key\": \"05733746\",\r\n    \"order_id\": \"ZenithCardPaymentTestxxr098\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://devsrv.cspay.app/v1/Interapi.svc/GetInvoiceStatusV4",
+					"protocol": "https",
+					"host": [
+						"devsrv",
+						"cspay",
+						"app"
+					],
+					"path": [
+						"v1",
+						"Interapi.svc",
+						"GetInvoiceStatusV4"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "dev",
+			"value": "https://dev.cspay.app",
+			"type": "string"
+		},
+		{
+			"key": "local",
+			"value": "http://localhost:62027",
+			"type": "string"
+		},
+		{
+			"key": "app_id",
+			"value": "9053874068",
+			"type": "string"
+		},
+		{
+			"key": "app_key",
+			"value": "05733746",
+			"type": "string"
+		}
+	]
+}

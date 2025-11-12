@@ -1,0 +1,7 @@
+
+select * from users u where u.email='mohammadzafar12555@gmail.com' or u.alternate_email='mohammadzafar12555@gmail.com';
+update users u set u.email='mohammadzafar125535@gmail.com' , u.alternate_email='mohammadzafar125535@gmail.com' where u.user_id=60; 
+
+
+
+ENTITY_SETUP_UTIL.CONFIRM_GENERAL_MERCHANT

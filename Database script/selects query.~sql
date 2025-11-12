@@ -1,0 +1,3 @@
+select *  from entity_system_config e where e.config_id=1210;
+select * from users order by 1 desc;
+select * from ENTITY_SETUP_DET;

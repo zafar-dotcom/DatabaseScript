@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "5bb7702e-c585-44a8-bbcc-493ebec9780b",
+		"name": "CSG Collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-5bb7702e-c585-44a8-bbcc-493ebec9780b?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "GetAccountProfile KYC",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"9057423960\",\r\n    \"app_key\": \"46540203\",\r\n    \"mobile\": \"+233555515326\",\r\n    \"network\": \"VODAFONE\"  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Interapi.svc/GetAccountProfile",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Interapi.svc",
+						"GetAccountProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetInvoiceStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"app_id\": \"8389734492\",\r\n    \"app_key\": \"01412551\",\r\n    \"order_id\": \"09934562399912599\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/interapi.svc/GetInvoiceStatus",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"interapi.svc",
+						"GetInvoiceStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createmmpayment Zeeshan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"\",\r\n    \"app_key\": \"\",\r\n    \"name\": \"ZeeshanIlyas\",\r\n    \"mobile_network\": \"MTN\",\r\n    \"email\": \"zeeshan.ilyas@cross-switch.com\",\r\n    \"mobile\": \"+233244371378\",\r\n    \"currency\": \"GHS\",\r\n    \"feetypecode\": \"GENERALPAYMENT\",\r\n    \"amount\": 1,\r\n    \"order_id\": \"InvOrderTest001\",\r\n    \"order_desc\": \"CSP TEST INVUAT00000002609941\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Interapi.svc/CreateMMPayment",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Interapi.svc",
+						"CreateMMPayment"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "https://devsrv.cspay.app/v1",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "BaseUrl",
+			"value": "https://localhost:44311",
+			"type": "string"
+		},
+		{
+			"key": "APPIDCSGTEST1",
+			"value": "8412217316",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "APPKeyCSGTEST1",
+			"value": "32075727",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "BaseUrl",
+			"value": "http://localhost:8080",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

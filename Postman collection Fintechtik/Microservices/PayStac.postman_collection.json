@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "7178017e-f138-42b5-80ff-4e46b63f0d66",
+		"name": "PayStac",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/MojoPay-CardPayments~fa401b33-a508-48ef-a9cc-dd9ce5f4a1ff/collection/16194081-7178017e-f138-42b5-80ff-4e46b63f0d66?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "initialize",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sk_test_0f569d10d04247ddaa45cc9013431ac9afe7e5f6",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"customer@email.com\",\r\n    \"amount\": \"1\",\r\n    \"callback_url\":\"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n    \"reference\":\"56t6t6t6t6t61\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.paystack.co/transaction/initialize",
+					"protocol": "https",
+					"host": [
+						"api",
+						"paystack",
+						"co"
+					],
+					"path": [
+						"transaction",
+						"initialize"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sk_test_0f569d10d04247ddaa45cc9013431ac9afe7e5f6",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.paystack.co/transaction/verify/56t6t6t6t6t61",
+					"protocol": "https",
+					"host": [
+						"api",
+						"paystack",
+						"co"
+					],
+					"path": [
+						"transaction",
+						"verify",
+						"56t6t6t6t6t61"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Transactions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sk_test_0f569d10d04247ddaa45cc9013431ac9afe7e5f6",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.paystack.co/transaction",
+					"protocol": "https",
+					"host": [
+						"api",
+						"paystack",
+						"co"
+					],
+					"path": [
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Transaction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sk_test_0f569d10d04247ddaa45cc9013431ac9afe7e5f6",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.paystack.co/transaction/4960818574",
+					"protocol": "https",
+					"host": [
+						"api",
+						"paystack",
+						"co"
+					],
+					"path": [
+						"transaction",
+						"4960818574"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

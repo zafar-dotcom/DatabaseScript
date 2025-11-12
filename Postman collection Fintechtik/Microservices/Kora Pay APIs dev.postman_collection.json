@@ -1,0 +1,1625 @@
+{
+	"info": {
+		"_postman_id": "1ca95a5a-0cc1-4879-b494-2c730d7b2db0",
+		"name": "Kora Pay APIs dev",
+		"description": "Our APIs enable payment processing on your platform which collects your customers' payment information securely on the web or mobile and creates payments.\n\n<p>The Kora API gives you access to pretty much all the features you can use on our dashboard and lets you extend them for use in your application.</p>\n\n<p>Before you do anything, you should<a href=\"https://merchant.korapay.com\"><b>create</b></a>a free Kora account that you can test the API against.</p>\n\n<p>Whether you're building a platform that needs to get sellers paid or building applications to do more with Korap integrations. We will provide you with test keys that you can use to make API calls.</p>\n\n# Get Started\n\n`Base URL - https://api.korapay.com`\n\n1. [<b>API Keys</b>](https://developers.korapay.com/docs/api-keys)\n    \n2. [<b>Test &amp; Live Modes</b>](https://developers.korapay.com/docs/test-live-modes)\n    \n3. [<b>Testing your Integration</b>](https://developers.korapay.com/docs/testing-your-integration)\n    \n4. [<b>Webhooks</b>](https://developers.korapay.com/docs/webhooks)\n    \n\n# Authentication\n\nEvery endpoint requires some form of authentication using a bearer token header. The key required for each request can either be a secret key or a public key.\n\n##### APIs requiring secret key\n\nThe following groups API endpoints require secret key for authentication\n\n`Authorization: Bearer sk_live_****`\n\n- Pay-ins\n    \n- Payouts\n    \n- Virtual Accounts\n    \n- Balances\n    \n- Verification\n    \n\n##### APIs requiring public key\n\nThe following group API endpoint requires public key for authentication\n\n`Authorization: Bearer pk_live_****`\n\n- Miscellaneous\n    \n\n# Responses\n\n### Success Response\n\n``` json\n{\n  \"status\": \"true\",\n  \"message\": \"Transaction retrieved successfully\",\n  \"data\": {...}\n}\n\n ```\n\n| **Field** | **Data Types** | **Description** |\n| --- | --- | --- |\n| status | string | A boolean that lets you know if the request was successful or not. |\n| message | string | A summary of the response based on the status. For example, when retrieving a list of transactions, it would read “Transaction retrieved successfully”. However, In the event of an error, the message key will contain a general description of the error. |\n| data | object | This contains the information specific to your request. It can be an object or an array depending on the request. A request to retrieve a list of transactions would return an array while a request to verify a single charge would return an object. |\n\n### Webhook Request Body\n\n| Field | Data Type | Description |\n| --- | --- | --- |\n| event | string | transfer.success or transfer.failed |\n| data | object | object containing transaction details: amount, fee, currency, status, reference |\n| data.amount | number | transaction amount |\n| data.fee | number | transaction fee |\n| data.currency | string | transaction currency |\n| data.status | string | transaction status. This can success or failed |\n| data.reference | string | transaction reference |\n\n# Errors\n\nKorapay API errors are expressed as a combination of HTTP status codes and an accompanying JSON body providing required detail where possible.\n\n``` json\n{\n    \"status\": false,\n    \"message\": \"Invalid request data\",\n    \"data\": {\n        \"amount\": {\n            \"message\": \"amount is required\",\n            \"customErrorMessage\": \"amount is required\"\n        }\n    }\n}\n\n ```\n\n---\n\n``` json\n{\n    \"status\": false,\n    \"message\": \"insufficient funds in wallet balance.\",\n    \"data\": null\n}\n\n ```\n\n| **Field** |  | **Description** |\n| --- | --- | --- |\n| status | string | A boolean that lets you know if the request was successful or not. |\n| message | string | A summary of the response bases on the status. For example, when the request is caused by a validation error, the message will read **Invalid request data** however when it's not a validation error, the message would hold the actual error for example, **Insufficient funds** |\n| data | object | This contains the information specific to the error. For validation errors, the data would contain the key that failed validation and the **key.message** would contain the actual reason why the validation failed |\n\n### HTTP Status Codes\n\n| **Status code** | **Description** |\n| --- | --- |\n| 200,201 | This indicates that the request was successfully made and the action was carried out. However, check the data object of the response to confirm the status of the charge or verification. This can either be **success**, **failed** or **processing** |\n| 400 | This indicates the validation error or client-side error. Check the **message** and **data** object of the response to confirm the exact reason for the error. |\n| 401 | This indicates that the request was not authorized, This can either be caused by an invalid **secret key,** **public key** or an improperly formed authorization header. |\n| 403 | This indicates permission has not been granted to the resource the request is made to. |\n| 404 | This indicates the resource meant to be accessed does not exist. |\n| 409 | This indicates that an action meant to be performed has already been carried out. Verify or query the transaction to confirm the status of the transaction. |\n| 500, 501, 502, 503, 504 | This indicates that the request could not be fulfilled due to an error on Korapay's end. However, this should not happen so kindly report any instance of this error to us. |",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "Payouts",
+			"item": [
+				{
+					"name": "Single Payout",
+					"item": [
+						{
+							"name": "Single Payout to Bank Account",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "korPy#mMRztzL",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "3?@9j#@77F5!9f",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reference\": \"4556776\",\n    \"destination\": {\n        \"type\": \"bank_account\",\n        \"amount\": \"100\",\n        \"currency\": \"NGN\",\n        \"bank_account\": {\n            \"bank\": \"033\",\n            \"account\": \"0000000000\"\n        },\n        \"customer\": {\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@email.com\"\n        }\n    }\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}api/Payouts/BankPayout",
+									"host": [
+										"{{baseurl}}api"
+									],
+									"path": [
+										"Payouts",
+										"BankPayout"
+									]
+								},
+								"description": "This endpoint is used to initiate a single disbursement to bank account.\n\n## Request Body\n\n| Field | Data Type | Description |\n| --- | --- | --- |\n| reference | string | `Required` unique transaction reference |\n| destination | object | `Required` |\n| destination.type | string | `Required` can be bank_account |\n| destination.amount | number | `Required` transaction amount |\n| destination.currency | string | `Required` transaction amount currency e.g. NGN |\n| destination.narration | string | `Optional` transaction narration or description |\n| destination.bank_account | object | `Required` if destination type is `bank_account` |\n| destination.bank_account.bank | string | `Required` recipient bank code. Bank_codes on testmode with Test keys to simulate a successful transaction are `044`, `033`, `058` i.e. Access, UBA and GTB respectively other banks would simulate a failed transaction on testmode with testkeys |\n| destination.bank_account.account | string | `Required` recipient account number |\n| destination.customer | object | `Required` |\n| destination.customer.name | string | `Optional` Customer Name |\n| destination.customer.email | string | `Required` Customer Email |\n\n## Successful Response Body\n\n| Field | Data Type | Description |\n| --- | --- | --- |\n| status | string | request status |\n| message | string | request status message |\n| data | object | object containing transaction details:amount, fee, narration, currency, status, reference, customer |\n| amount | string | transaction amount |\n| fee | string | transaction fee |\n| currency | string | transaction currency |\n| status | string | transaction status. Note that this would be `processing` upon initiating the transfer and eventually updated to `success` or `failed` once we process the transfer |\n| reference | string | transaction reference |\n| narration | string | transaction narration |\n| customer | object | object containing name, email and phone |"
+							},
+							"response": [
+								{
+									"name": "Single Payout to Bank Account - Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"reference\": \"your-unique-transaction-reference-001\",\n\t\"destination\": {\n\t\t\"type\": \"bank_account\",\n\t\t\"amount\": \"100\",\n\t\t\"currency\": \"NGN\",\n\t\t\"narration\": \"Test Transfer Payment\",\n\t\t\"bank_account\": {\n\t\t\t\"bank\": \"033\",\n\t\t\t\"account\": \"0000000000\"\n\t\t},\n\t\t\"customer\": {\n\t\t\t\"name\": \"John Doe\",\n\t\t\t\"email\": \"johndoe@email.com\"\n\t\t}\n\t}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/merchant/api/v1/transactions/disburse",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"merchant",
+												"api",
+												"v1",
+												"transactions",
+												"disburse"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"transfer initiated successfully\",\n    \"data\": {\n        \"amount\": \"100.00\",\n        \"fee\": \"2.50\",\n        \"currency\": \"NGN\",\n        \"status\": \"processing\",\n        \"reference\": \"your-unique-transaction-reference-001\",\n        \"narration\": \"Test Transfer Payment\",\n        \"customer\": {\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@email.com\",\n            \"phone\": null\n        }\n    }\n}"
+								},
+								{
+									"name": "Single Payout to Bank Account - Insufficient Funds",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"reference\": \"your-unique-transaction-reference-001\",\n\t\"destination\": {\n\t\t\"type\": \"bank_account\",\n\t\t\"amount\": \"100\",\n\t\t\"currency\": \"NGN\",\n\t\t\"narration\": \"Test Transfer Payment\",\n\t\t\"bank_account\": {\n\t\t\t\"bank\": \"033\",\n\t\t\t\"account\": \"0000000000\"\n\t\t},\n\t\t\"customer\": {\n\t\t\t\"name\": \"john doe\",\n\t\t\t\"email\": \"johndoe@email.com\"\n\t\t}\n\t}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/merchant/api/v1/transactions/disburse",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"merchant",
+												"api",
+												"v1",
+												"transactions",
+												"disburse"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"Insufficient funds in disbursement wallet\",\n    \"data\": null\n}"
+								},
+								{
+									"name": "Single Payout to Bank Account - Bank not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"reference\": \"your-unique-transaction-reference-001\",\n\t\"destination\": {\n\t\t\"type\": \"bank_account\",\n\t\t\"amount\": \"100\",\n\t\t\"currency\": \"NGN\",\n\t\t\"narration\": \"Test Transfer Payment\",\n\t\t\"bank_account\": {\n\t\t\t\"bank\": \"033\",\n\t\t\t\"account\": \"0000000000\"\n\t\t},\n\t\t\"customer\": {\n\t\t\t\"name\": \"john doe\",\n\t\t\t\"email\": \"johndoe@email.com\"\n\t\t}\n\t}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/merchant/api/v1/transactions/disburse",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"merchant",
+												"api",
+												"v1",
+												"transactions",
+												"disburse"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"bank not found\",\n    \"data\": null\n}"
+								},
+								{
+									"name": "Single Payout to Bank Account - Request Validation Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"reference\": \"your-unique-transaction-reference-001\",\n    \"destination\": {\n        \"type\": \"bank_account\",\n        \"amount\": \"100\",\n        \"currency\": \"NGN\",\n        \"narration\": \"Test Transfer Payment\",\n        \"bank_account\": {\n            \"bank\": \"033\",\n            \"account\": \"0000000000\"\n        },\n        \"customer\": {\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@email.com\"\n        }\n    }\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/merchant/api/v1/transactions/disburse",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"merchant",
+												"api",
+												"v1",
+												"transactions",
+												"disburse"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": ""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"error\": \"bad_request\",\n    \"message\": \"invalid request data\",\n    \"data\": {\n        \"amount\": {\n            \"message\": \"reference is required\",\n            \"customErrorMessage\": \"reference is required\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Single Payout to Mobile Money",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "3?@9j#@77F5!9f",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "korPy&#mMRztzL",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reference\": \"y3\",\n\t\"destination\": {\n\t\t\"type\": \"mobile_money\",\n\t\t\"amount\": \"100\",\n\t\t\"currency\": \"KES\",\n\t\t\"narration\": \"Test Transfer Payment 008\",\n\t\t\"mobile_money\": {\n\t\t\t\"operator\": \"safaricom-ke\",\n            \"mobile_number\": \"256700000000\"\n\t\t},\n\t\t\"customer\": {\n\t\t\t\"name\": \"John Doe\",\n\t\t\t\"email\": \"johndoe@email.com\"\n\t\t}\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}api/Payouts/MobileMoneyPayout",
+									"host": [
+										"{{local}}api"
+									],
+									"path": [
+										"Payouts",
+										"MobileMoneyPayout"
+									]
+								},
+								"description": "This endpoint is used to initiate single disbursement to mobile money.\n\n## Request Body\n\n| Field | Data Type | Description |\n| --- | --- | --- |\n| reference | string | `Required` unique transaction reference |\n| destination | object | `Required` |\n| destination.type | string | `Required` This should be `mobile_money` |\n| destination.amount | number | `Required` transaction amount |\n| destination.currency | string | `Required` transaction currency e.g. KES, GHS |\n| destination.narration | string | `Optional` transaction narration or description |\n| destination.mobile_money | object | `Required` if destination type is `mobile_money` |\n| destination.mobile_money.operator | string | `Required` the recipient's mobile money operator |\n| destination.mobile_money.mobile_number | string | `Required` recipient mobile money number |\n| destination.customer | object | `Required` |\n| destination.customer.name | string | `Optional` Customer Name |\n| destination.customer.email | string | `Required` Customer Email |\n\n## Successful Response Body\n\n| Field | Data Type | Description |\n| --- | --- | --- |\n| status | string | request status |\n| message | string | request status message |\n| data | object | object containing transaction details: amount, fee, narration, currency, status, reference, customer |\n| amount | string | transaction amount |\n| fee | string | transaction fee |\n| currency | string | transaction currency |\n| status | string | transaction status.  <br>Note that this would be `processing` upon initiating the transfer and eventually updated to `success` or `failed` once we complete the transfer |\n| reference | string | transaction reference |\n| narration | string | transaction narration |\n| customer | object | an object containing name and email |"
+							},
+							"response": [
+								{
+									"name": "Single Payout to Mobile Money - Initiated Successfully",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"reference\": \"your-unique-transaction-reference-002\",\n\t\"destination\": {\n\t\t\"type\": \"mobile_money\",\n\t\t\"amount\": \"100\",\n\t\t\"currency\": \"KES\",\n\t\t\"narration\": \"Test Transfer Payment\",\n\t\t\"mobile_money\": {\n\t\t\t\"operator\": \"safaricom-ke\",\n            \"mobile_number\": \"256700000000\"\n\t\t},\n\t\t\"customer\": {\n\t\t\t\"name\": \"John Doe\",\n\t\t\t\"email\": \"johndoe@email.com\"\n\t\t}\n\t}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/merchant/api/v1/transactions/disburse",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"merchant",
+												"api",
+												"v1",
+												"transactions",
+												"disburse"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"transfer initiated successfully\",\n    \"data\": {\n        \"amount\": \"100.00\",\n        \"fee\": \"2.50\",\n        \"currency\": \"KES\",\n        \"status\": \"processing\",\n        \"reference\": \"your-unique-transaction-reference-001\",\n        \"narration\": \"Test Transfer Payment\",\n        \"customer\": {\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@email.com\",\n            \"phone\": null\n        }\n    }\n}"
+								},
+								{
+									"name": "Single Payout to Mobile Money - Insufficient Funds",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"reference\": \"your-unique-transaction-reference-002\",\n\t\"destination\": {\n\t\t\"type\": \"mobile_money\",\n\t\t\"amount\": \"100\",\n\t\t\"currency\": \"KES\",\n\t\t\"narration\": \"Test Transfer Payment\",\n\t\t\"mobile_money\": {\n\t\t\t\"operator\": \"safaricom-ke\",\n            \"mobile_number\": \"256700000000\"\n\t\t},\n\t\t\"customer\": {\n\t\t\t\"name\": \"john doe\",\n\t\t\t\"email\": \"johndoe@email.com\"\n\t\t}\n\t}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/merchant/api/v1/transactions/disburse",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"merchant",
+												"api",
+												"v1",
+												"transactions",
+												"disburse"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"Insufficient funds in disbursement wallet\",\n    \"data\": null\n}"
+								},
+								{
+									"name": "Single Payout to Mobile Money - Mobile Money Account not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"reference\": \"your-unique-transaction-reference-002\",\n\t\"destination\": {\n\t\t\"type\": \"mobile_money\",\n\t\t\"amount\": \"100\",\n\t\t\"currency\": \"KES\",\n\t\t\"narration\": \"Test Transfer Payment\",\n\t\t\"mobile_money\": {\n\t\t\t\"operator\": \"safaricom-ke\",\n            \"mobile_number\": \"256700000000\"\n\t\t},\n\t\t\"customer\": {\n\t\t\t\"name\": \"john doe\",\n\t\t\t\"email\": \"johndoe@email.com\"\n\t\t}\n\t}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/merchant/api/v1/transactions/disburse",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"merchant",
+												"api",
+												"v1",
+												"transactions",
+												"disburse"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"message\": \"Mobile money operator is not available for this currency or does not exist\",\n    \"data\": null\n}"
+								},
+								{
+									"name": "Single Payout to Mobile Money - Request Validation Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"destination\": {\n\t\t\"type\": \"mobile_money\",\n\t\t\"amount\": \"100\",\n\t\t\"currency\": \"KES\",\n\t\t\"narration\": \"Test Transfer Payment 008\",\n\t\t\"mobile_money\": {\n\t\t\t\"operator\": \"safaricom-ke\",\n            \"mobile_number\": \"256700000000\"\n\t\t},\n\t\t\"customer\": {\n\t\t\t\"name\": \"John Doe\",\n\t\t\t\"email\": \"johndoe@email.com\"\n\t\t}\n\t}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseurl}}/merchant/api/v1/transactions/disburse",
+											"host": [
+												"{{baseurl}}"
+											],
+											"path": [
+												"merchant",
+												"api",
+												"v1",
+												"transactions",
+												"disburse"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": ""
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": false,\n    \"error\": \"bad_request\",\n    \"message\": \"invalid request data\",\n    \"data\": {\n        \"amount\": {\n            \"message\": \"reference is required\",\n            \"customErrorMessage\": \"reference is required\"\n        }\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Verify Payout Transaction",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "3?@9j#@77F5!9f",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "korPy#mMRztzL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}api/Payouts/verify_transaction?transactionReference=56e63545e4345446545",
+							"host": [
+								"{{baseurl}}api"
+							],
+							"path": [
+								"Payouts",
+								"verify_transaction"
+							],
+							"query": [
+								{
+									"key": "transactionReference",
+									"value": "56e63545e4345446545"
+								}
+							]
+						},
+						"description": "This endpoints returns the status and details of a disbursement through the reference.\n\n## URL Parameters\n\n| Field | Data Type | Description |\n| --- | --- | --- |\n| transactionReference | string | unique reference |\n\n## Successful Response Body\n\n| Field | Data Type | Description |\n| --- | --- | --- |\n| status | string | request status |\n| message | string | request status message |\n| data | object | object containing transaction details: amount, fee, narration, currency, status, reference, customer etc. |\n| data.fee | money | transaction fee |\n| data.reference | string | unique transaction identifier |\n| data.amount | money | transaction amount |\n| data.narration | string | purpose of transaction |\n| data.currency | string | transaction currency e.g. NGN |\n| data.status | string | gives an overview status of the transaction ie. was the payment made successfully or not. It can be **processing**, **failed** or **success** |\n| data.trace_id | string | Trace ID can be shared with the bank to trace a transaction. Session ID is a type of trace ID |\n| data.customer | object | object containing name, email and phone |\n| customer.name | string | name of sender/recipient |\n| customer.email | string | email of sender/recipient |\n| customer.phone | string | phone of sender/recipient |\n\n## Failed Response Body\n\n| Field | Data Type | Description |\n| --- | --- | --- |\n| status | string | request status true/false |\n| error | string | error returned |\n| message | string | request status description |\n| data | string | error data |"
+					},
+					"response": [
+						{
+							"name": "Verify Payout Transaction - Successful Payout",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/merchant/api/v1/transactions/:transactionReference",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"merchant",
+										"api",
+										"v1",
+										"transactions",
+										":transactionReference"
+									],
+									"variable": [
+										{
+											"key": "transactionReference",
+											"value": "your-unique-transaction-reference-001"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "457"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c9-1z4Ai7x0Gw8kI8JUXB3n4gZd8+4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Aug 2019 20:38:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Transaction retrieved successfully\",\n    \"data\": {\n        \"reference\": \"your-unique-transaction-reference-001\",\n        \"status\": \"success\",\n        \"amount\": 1000,\n        \"fee\": 10,\n        \"currency\": \"NGN\",\n        \"narration\": \"payout to customer\",    \n        \"trace_id\": \"000000000000000111111111111111\",\n        \"message\": \"Payout successful\",\n        \"customer\": {\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@korapay.com\",\n            \"phone\": null\n        }\n    }\n}"
+						},
+						{
+							"name": "Verify Payout Transaction - Failed Payout",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/merchant/api/v1/transactions/:transactionReference",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"merchant",
+										"api",
+										"v1",
+										"transactions",
+										":transactionReference"
+									],
+									"variable": [
+										{
+											"key": "transactionReference",
+											"value": "your-unique-transaction-reference-002"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "457"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c9-1z4Ai7x0Gw8kI8JUXB3n4gZd8+4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Aug 2019 20:38:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Transaction retrieved successfully\",\n    \"data\": {\n        \"reference\": \"your-unique-transaction-reference-002\",\n        \"status\": \"failed\",\n        \"amount\": 1000,\n        \"fee\": 10,\n        \"currency\": \"NGN\",\n        \"narration\": \"payout to customer\",    \n        \"message\": \"Timeout waiting for response from destination\",\n        \"customer\": {\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@korapay.com\",\n            \"phone\": null\n        }\n    }\n}"
+						},
+						{
+							"name": "Verify Payout Transaction - Pending Payout",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/merchant/api/v1/transactions/:transactionReference",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"merchant",
+										"api",
+										"v1",
+										"transactions",
+										":transactionReference"
+									],
+									"variable": [
+										{
+											"key": "transactionReference",
+											"value": "your-unique-transaction-reference-002"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "457"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c9-1z4Ai7x0Gw8kI8JUXB3n4gZd8+4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Aug 2019 20:38:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Transaction retrieved successfully\",\n    \"data\": {\n        \"reference\": \"your-unique-transaction-reference-002\",\n        \"status\": \"processing\",\n        \"amount\": 1000,\n        \"fee\": 10,\n        \"currency\": \"NGN\",\n        \"narration\": \"payout to customer\",    \n        \"message\": \"Timeout waiting for response from destination\",\n        \"customer\": {\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@korapay.com\",\n            \"phone\": null\n        }\n    }\n}"
+						},
+						{
+							"name": "Verify Payout Transaction - Transaction not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/merchant/api/v1/transactions/:transactionReference",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"merchant",
+										"api",
+										"v1",
+										"transactions",
+										":transactionReference"
+									],
+									"variable": [
+										{
+											"key": "transactionReference",
+											"value": "your-unique-transaction-reference-003"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-D/jU98+U6NVrjRWqRqPK/zrncC4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Aug 2019 20:39:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"Transaction not found\",\n    \"data\": null\n}"
+						}
+					]
+				}
+			],
+			"description": "Payouts, also sometimes called Disbursements, are outbound fund transfers from your merchant account to any bank account.\n\nYou can easily create and manage your payouts directly from your dashboard or through Korapay’s Payout API. These APIs enable you to send payments via a simple, secured process that requires only the bank information of the recipients.\n\n## Disbursements Channels\n\n- Bank accounts\n- Mobile Money",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{secret_key}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Verification",
+			"item": [
+				{
+					"name": "Bank Account Resolve (kyc)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "Content-Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bank\": \"044\",\n    \"account\": \"1234567890\"  /*1234567890*/\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}api/KYC/kyc",
+							"host": [
+								"{{baseurl}}api"
+							],
+							"path": [
+								"KYC",
+								"kyc"
+							]
+						},
+						"description": "This resolves bank account.\n\n\n## Request Body\n\n|Field |  Data Type | Description  |\n|---|---|---|\n|  bank |string   | `Required` bank code of account number |\n|  account |string   | `Required` account number to be resolved |\n\n## Successful Response Body\n\n|Field |  Data Type | Description  |\n|---|---|---|\n|  status |string   |  request status |\n|  message |  string |  request status message |\n| data  |string   | object containing transaction details:bank_name, bank_code, account_number, account_name |  \n\n\n## Failed Response Body\n\n|Field |  Data Type | Description  |\n|---|---|---|\n|  status |string   |  request status true/false |\n|  error |  string |  error returned |\n| message  |string   | request status description |  \n| data  | string  |  error data |"
+					},
+					"response": [
+						{
+							"name": "Bank Account Resolve - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"bank\": \"033\",\n\t\"account\": \"2158634852\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/merchant/api/v1/misc/banks/resolve",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"merchant",
+										"api",
+										"v1",
+										"misc",
+										"banks",
+										"resolve"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Feb 2020 13:31:59 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "www-environment",
+									"value": "live"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"bb-QWys+gKhpSikfZHn/cdP16IJJec\""
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "frame-ancestors 'none'"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "frame-ancestors 'none'"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Request Completed\",\n    \"data\": {\n        \"bank_name\": \"United Bank for Africa\",\n        \"bank_code\": \"033\",\n        \"account_number\": \"2158634852\",\n        \"account_name\": \"EBUKA CIROMA OLADEMJI\"\n    }\n}"
+						},
+						{
+							"name": "Bank Account Resolve - Invalid account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"bank\": \"058\",\n    \"account\": \"0237251709\",\n    \"currency\": \"NGN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/merchant/api/v1/misc/banks/resolve",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"merchant",
+										"api",
+										"v1",
+										"misc",
+										"banks",
+										"resolve"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 19:30:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"48-/vskXfsoQyvlK8WhwOnihceNu1g\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "7d7d3ad8eed4b8be-AMS"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"code\": \"AA027\",\n    \"message\": \"Invalid account.\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "Bank Account Resolve - Request Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account\": \"0237251709\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/merchant/api/v1/misc/banks/resolve",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"merchant",
+										"api",
+										"v1",
+										"misc",
+										"banks",
+										"resolve"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 19:30:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"48-/vskXfsoQyvlK8WhwOnihceNu1g\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "7d7d3ad8eed4b8be-AMS"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"error\": \"bad_request\",\n    \"message\": \"invalid request data\",\n    \"data\": {\n        \"amount\": {\n            \"message\": \"bank is required\",\n            \"customErrorMessage\": \"bank is required\"\n        }\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "The Verification API allows you perform KYC processes."
+		},
+		{
+			"name": "Balances",
+			"item": [
+				{
+					"name": "Get Balances",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "3?@9j#@77F5!9f",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "korPy#mMRztzL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}api/Payouts/getbalance",
+							"host": [
+								"{{baseurl}}api"
+							],
+							"path": [
+								"Payouts",
+								"getbalance"
+							]
+						},
+						"description": "This API allows you to retrieve your pending and available balances\n\n## Successful Response Body\n\n| Field | Data Type | Description |\n| --- | --- | --- |\n| status | string | request status |\n| message | string | request status message |\n| data.currency | object | The currency can be NGN, USD or any of the currencies available for you. |\n| data.currency.pending_balance | number | This refers to funds that have been received but are yet to be settled to you. |\n| data.currency.available_balance | number | This represents funds that are available and ready for you to use - to withdraw or to make payouts. |"
+					},
+					"response": [
+						{
+							"name": "Get Balance - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_***",
+										"description": "API secret key"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}/merchant/api/v1/balances",
+									"host": [
+										"{{baseurl}"
+									],
+									"path": [
+										"merchant",
+										"api",
+										"v1",
+										"balances"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Sucuri/Cloudproxy"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Apr 2021 13:47:59 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "96"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Sucuri-ID",
+									"value": "13002"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "www-environment",
+									"value": "live"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"60-d4XYr4D4BKC21ZimtFOSErXKHM4\""
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "frame-ancestors 'none'"
+								},
+								{
+									"key": "X-Sucuri-Cache",
+									"value": "MISS"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"NGN\": {\n            \"pending_balance\": 0,\n            \"available_balance\": 946\n        }\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Your Balance on Korapay simply represents how much funds you have in your Korapay account. Getting balance information can be useful for reconciliatory purposes, preventing failures from insufficient funds, or even fraud detection."
+		},
+		{
+			"name": "Miscellaneous",
+			"item": [
+				{
+					"name": "List Banks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
+									"    const banks = jsonData.data;",
+									"    banks.forEach(bank => {",
+									"        if (bank.code.length != 3) {",
+									"            console.log(bank.name)",
+									"        }",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}api/Miscellaneous/listbanks/?countryCode=NG",
+							"host": [
+								"{{baseurl}}api"
+							],
+							"path": [
+								"Miscellaneous",
+								"listbanks",
+								""
+							],
+							"query": [
+								{
+									"key": "countryCode",
+									"value": "NG"
+								}
+							]
+						},
+						"description": "Get a list of all supported banks and their properties"
+					},
+					"response": [
+						{
+							"name": "List Banks - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer pk_***",
+										"description": "API public key"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/merchant/api/v1/misc/banks?countryCode=NG",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"merchant",
+										"api",
+										"v1",
+										"misc",
+										"banks"
+									],
+									"query": [
+										{
+											"key": "countryCode",
+											"value": "NG"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 19 May 2022 12:05:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6c1f-8/rCq1wIVLzpLQ75vnRLjMnhtWQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "frame-ancestors 'none'"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "70dcb3cb78737562-LHR"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Successful\",\n    \"data\": [\n        {\n            \"name\": \" AL-Barakah Microfinance Bank\",\n            \"slug\": \"al-barakah-mfb\",\n            \"code\": \"090133\",\n            \"nibss_bank_code\": \"090133\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"9 Payment Service Bank\",\n            \"slug\": \"9payment\",\n            \"code\": \"000802\",\n            \"nibss_bank_code\": \"000802\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"AB Microfinance Bank\",\n            \"slug\": \"ab-mfb\",\n            \"code\": \"090270\",\n            \"nibss_bank_code\": \"090270\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Abbey Mortgage Bank\",\n            \"slug\": \"abbey-mb\",\n            \"code\": \"070010\",\n            \"nibss_bank_code\": \"070010\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Above Only Microfinance Bank\",\n            \"slug\": \"above-only-mfb\",\n            \"code\": \"090260\",\n            \"nibss_bank_code\": \"090260\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"ABU Microfinance Bank\",\n            \"slug\": \"abu-mfb\",\n            \"code\": \"090197\",\n            \"nibss_bank_code\": \"090197\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Access Bank Nigeria\",\n            \"slug\": \"access\",\n            \"code\": \"044\",\n            \"nibss_bank_code\": \"000014\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Access Bank Plc (Diamond)\",\n            \"slug\": \"diamond\",\n            \"code\": \"063\",\n            \"nibss_bank_code\": \"000005\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"ACCESS MOBILE\",\n            \"slug\": \"access-mobile\",\n            \"code\": \"323\",\n            \"nibss_bank_code\": null,\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Access Money\",\n            \"slug\": \"access-money\",\n            \"code\": \"927\",\n            \"nibss_bank_code\": \"100013\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Access Yello &amp; Beta\",\n            \"slug\": \"access-yellow\",\n            \"code\": \"100052\",\n            \"nibss_bank_code\": \"100052\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Accion Microfinance Bank\",\n            \"slug\": \"accion-mfb\",\n            \"code\": \"090134\",\n            \"nibss_bank_code\": \"090134\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Addosser Microfinance Bank\",\n            \"slug\": \"addosser-mfb\",\n            \"code\": \"090160\",\n            \"nibss_bank_code\": \"090160\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Adeyemi College Staff Microfinance Bank\",\n            \"slug\": \"adeyemi-mfb\",\n            \"code\": \"090268\",\n            \"nibss_bank_code\": \"090268\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"AG Mortgage Bank\",\n            \"slug\": \"ag-mb\",\n            \"code\": \"100028\",\n            \"nibss_bank_code\": \"100028\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Al-Hayat Microfinance Bank\",\n            \"slug\": \"al-hayat-mfb\",\n            \"code\": \"090277\",\n            \"nibss_bank_code\": \"090277\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Alekun Microfinance Bank\",\n            \"slug\": \"alekun-mfb\",\n            \"code\": \"090259\",\n            \"nibss_bank_code\": \"090259\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Alert MFB\",\n            \"slug\": \"alert-mfb\",\n            \"code\": \"090297\",\n            \"nibss_bank_code\": \"090297\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Allworkers Microfinance Bank\",\n            \"slug\": \"allworkers-mfb\",\n            \"code\": \"090131\",\n            \"nibss_bank_code\": \"090131\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Alpha Kapital Microfinance Bank\",\n            \"slug\": \"alpha-kapital-mfb\",\n            \"code\": \"090169\",\n            \"nibss_bank_code\": \"090169\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"AMJU Unique Microfinance Bank\",\n            \"slug\": \"amju-unique-mfb\",\n            \"code\": \"090180\",\n            \"nibss_bank_code\": \"090180\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"AMML Micro-finance Bank\",\n            \"slug\": \"amml-mfb\",\n            \"code\": \"914\",\n            \"nibss_bank_code\": \"090116\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Apeks Microfinance Bank\",\n            \"slug\": \"apeks-mfb\",\n            \"code\": \"090143\",\n            \"nibss_bank_code\": \"090143\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Arise MFB\",\n            \"slug\": \"arise-mfb\",\n            \"code\": \"090282\",\n            \"nibss_bank_code\": \"090282\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Aso Savings and Loans\",\n            \"slug\": \"aso-savings\",\n            \"code\": \"401\",\n            \"nibss_bank_code\": \"090001\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Astrapolaris Microfinance Bank\",\n            \"slug\": \"astrapolaris-mfb\",\n            \"code\": \"090172\",\n            \"nibss_bank_code\": \"090172\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Auchi Microfinance Bank\",\n            \"slug\": \"auchi-mfb\",\n            \"code\": \"090264\",\n            \"nibss_bank_code\": \"090264\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Baines Credit Microfinance Bank\",\n            \"slug\": \"baines-mfb\",\n            \"code\": \"090188\",\n            \"nibss_bank_code\": \"090188\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Balogun Gambari MFB\",\n            \"slug\": \"balogun-mfb\",\n            \"code\": \"090326\",\n            \"nibss_bank_code\": \"090326\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Bayero MICROFINANCE BANK\",\n            \"slug\": \"bayero-mfb\",\n            \"code\": \"090316\",\n            \"nibss_bank_code\": \"090316\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"BC Kash Microfinance Bank\",\n            \"slug\": \"bc-kash-mfb\",\n            \"code\": \"090127\",\n            \"nibss_bank_code\": \"090127\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"BIPC MICROFINANCE BANK\",\n            \"slug\": \"bipc-mfb\",\n            \"code\": \"090336\",\n            \"nibss_bank_code\": \"090336\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"BOCTrust Micro-finance Bank\",\n            \"slug\": \"boc-trust-mfb\",\n            \"code\": \"952\",\n            \"nibss_bank_code\": \"090117\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Bosak Microfinance Bank\",\n            \"slug\": \"bosak-mfb\",\n            \"code\": \"090176\",\n            \"nibss_bank_code\": \"090176\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Bowen Microfinance Bank\",\n            \"slug\": \"bowen-mfb\",\n            \"code\": \"090148\",\n            \"nibss_bank_code\": \"090148\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Brent Mortgage Bank\",\n            \"slug\": \"brent-mb\",\n            \"code\": \"070015\",\n            \"nibss_bank_code\": \"070015\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"BRETHREN MICROFINANCE BANK\",\n            \"slug\": \"brethren-mfb\",\n            \"code\": \"090293\",\n            \"nibss_bank_code\": \"090293\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"BRIDGEWAY MICROFINANCE BANK\",\n            \"slug\": \"bridgeway-mfb\",\n            \"code\": \"090393\",\n            \"nibss_bank_code\": \"090393\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Brightway MFB\",\n            \"slug\": \"brightway-mfb\",\n            \"code\": \"090308\",\n            \"nibss_bank_code\": \"090308\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Cellulant\",\n            \"slug\": \"cellulant\",\n            \"code\": \"919\",\n            \"nibss_bank_code\": \"100005\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"CEMCS Microfinance Bank\",\n            \"slug\": \"cems-mfb\",\n            \"code\": \"090154\",\n            \"nibss_bank_code\": \"090154\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Chams Mobile\",\n            \"slug\": \"chams-mobile\",\n            \"code\": \"929\",\n            \"nibss_bank_code\": null,\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Chikum Microfinance Bank\",\n            \"slug\": \"chikum-mfb\",\n            \"code\": \"090141\",\n            \"nibss_bank_code\": \"090141\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"CIT Microfinance Bank\",\n            \"slug\": \"cit-mfb\",\n            \"code\": \"090144\",\n            \"nibss_bank_code\": \"090144\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Citi Bank\",\n            \"slug\": \"citibankng\",\n            \"code\": \"023\",\n            \"nibss_bank_code\": \"000009\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Consumer Microfinance Bank\",\n            \"slug\": \"consumer-mfb\",\n            \"code\": \"090130\",\n            \"nibss_bank_code\": \"090130\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Contec Global Infotech Limited (NowNow)\",\n            \"slug\": \"contec-global\",\n            \"code\": \"100032\",\n            \"nibss_bank_code\": \"100032\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Coronation Merchant Bank\",\n            \"slug\": \"cmfb\",\n            \"code\": \"559\",\n            \"nibss_bank_code\": \"060001\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Covenant Micro-finance Bank\",\n            \"slug\": \"covenant-mfb\",\n            \"code\": \"949\",\n            \"nibss_bank_code\": \"070006\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Credit Afrique Microfinance Bank\",\n            \"slug\": \"credit-afrique-mfb\",\n            \"code\": \"090159\",\n            \"nibss_bank_code\": \"090159\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Daylight Microfinance Bank\",\n            \"slug\": \"daylight-mfb\",\n            \"code\": \"090167\",\n            \"nibss_bank_code\": \"090167\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"e-Barcs Microfinance Bank\",\n            \"slug\": \"e-barcs-mfb\",\n            \"code\": \"090156\",\n            \"nibss_bank_code\": \"090156\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Eagle Flight MFB\",\n            \"slug\": \"eagle-flight-mfb\",\n            \"code\": \"090294\",\n            \"nibss_bank_code\": \"090294\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Eartholeum\",\n            \"slug\": \"eartholeum\",\n            \"code\": \"935\",\n            \"nibss_bank_code\": \"100021\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Ecobank\",\n            \"slug\": \"eco\",\n            \"code\": \"050\",\n            \"nibss_bank_code\": \"000010\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Ecobank Express Account\",\n            \"slug\": \"ecobank-express-account\",\n            \"code\": \"922\",\n            \"nibss_bank_code\": \"100008\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Ecobank Mobile\",\n            \"slug\": \"ecobank-mobile\",\n            \"code\": \"307\",\n            \"nibss_bank_code\": null,\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Edfin MFB\",\n            \"slug\": \"edfin-mfb\",\n            \"code\": \"090310\",\n            \"nibss_bank_code\": \"090310\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Ekondo MFB\",\n            \"slug\": \"ekondo-mfb\",\n            \"code\": \"090097\",\n            \"nibss_bank_code\": \"090097\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Emeralds Microfinance Bank\",\n            \"slug\": \"emeral-mfb\",\n            \"code\": \"090273\",\n            \"nibss_bank_code\": \"090273\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Empire Trust Micro-finance Bank\",\n            \"slug\": \"empire-trust-mfb\",\n            \"code\": \"913\",\n            \"nibss_bank_code\": \"090114\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Enterprise Bank\",\n            \"slug\": \"enterprise\",\n            \"code\": \"084\",\n            \"nibss_bank_code\": \"000019\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Esan Microfinance Bank\",\n            \"slug\": \"esan-mfb\",\n            \"code\": \"090189\",\n            \"nibss_bank_code\": \"090189\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Eso-E Microfinance Bank\",\n            \"slug\": \"eso-e-mfb\",\n            \"code\": \"090166\",\n            \"nibss_bank_code\": \"090166\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"eTRANZACT\",\n            \"slug\": \"e-tranzact\",\n            \"code\": \"920\",\n            \"nibss_bank_code\": \"100006\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Evangel MFB\",\n            \"slug\": \"evangel-mfb\",\n            \"code\": \"090304\",\n            \"nibss_bank_code\": \"090304\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Evergreen MICROFINANCE BANK\",\n            \"slug\": \"evergreen-mfb\",\n            \"code\": \"090332\",\n            \"nibss_bank_code\": \"090332\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Eyowo MFB\",\n            \"slug\": \"eyowo-mfb\",\n            \"code\": \"090328\",\n            \"nibss_bank_code\": \"090328\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FAST Microfinance Bank\",\n            \"slug\": \"fast-mfb\",\n            \"code\": \"090179\",\n            \"nibss_bank_code\": \"090179\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FBN MOBILE\",\n            \"slug\": \"first-mobile\",\n            \"code\": \"309\",\n            \"nibss_bank_code\": null,\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FBN Mortgages Limited\",\n            \"slug\": \"fbn-mortgages-ltd\",\n            \"code\": \"090107\",\n            \"nibss_bank_code\": \"090107\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FBNQuest Merchant Bank\",\n            \"slug\": \"fbnquest-meb\",\n            \"code\": \"911\",\n            \"nibss_bank_code\": \"060002\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FCMB Easy Account\",\n            \"slug\": \"fcmb-easy-account\",\n            \"code\": \"100031\",\n            \"nibss_bank_code\": \"100031\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FCMB Plc\",\n            \"slug\": \"fcmb\",\n            \"code\": \"214\",\n            \"nibss_bank_code\": \"000003\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FCT MFB\",\n            \"slug\": \"fct-mfb\",\n            \"code\": \"090290\",\n            \"nibss_bank_code\": \"090290\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FEDERAL UNIVERSITY DUTSE MICROFINANCE BANK\",\n            \"slug\": \"fed-uni-duste-mfb\",\n            \"code\": \"090318\",\n            \"nibss_bank_code\": \"090318\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FederalPoly NasarawaMFB\",\n            \"slug\": \"federalPoly-nasarawa-mfb\",\n            \"code\": \"090298\",\n            \"nibss_bank_code\": \"090298\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FETS\",\n            \"slug\": \"fets\",\n            \"code\": \"915\",\n            \"nibss_bank_code\": \"100001\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FFS Microfinance Bank\",\n            \"slug\": \"ffs-mfb\",\n            \"code\": \"090153\",\n            \"nibss_bank_code\": \"090153\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Fidelity Bank\",\n            \"slug\": \"fidelity\",\n            \"code\": \"070\",\n            \"nibss_bank_code\": \"000007\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Fidelity Mobile\",\n            \"slug\": \"Fidelity-mobile\",\n            \"code\": \"933\",\n            \"nibss_bank_code\": \"100019\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Fidfund Microfinance Bank\",\n            \"slug\": \"fidfund-mfb\",\n            \"code\": \"090126\",\n            \"nibss_bank_code\": \"090126\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FINATRUST MICROFINANCE BANK\",\n            \"slug\": \"finatrust-mfb\",\n            \"code\": \"090111\",\n            \"nibss_bank_code\": \"090111\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Firmus MFB\",\n            \"slug\": \"firmus-mfb\",\n            \"code\": \"090366\",\n            \"nibss_bank_code\": \"090366\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"First Bank of Nigeria\",\n            \"slug\": \"firstbank\",\n            \"code\": \"011\",\n            \"nibss_bank_code\": \"000016\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"First Generation Mortgage Bank\",\n            \"slug\": \"first-gen-mb\",\n            \"code\": \"070014\",\n            \"nibss_bank_code\": \"070014\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"First Multiple MFB\",\n            \"slug\": \"first-multiple-mfb\",\n            \"code\": \"090163\",\n            \"nibss_bank_code\": \"090163\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"First Option MFB\",\n            \"slug\": \"first-option-mfb\",\n            \"code\": \"090285\",\n            \"nibss_bank_code\": \"090285\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"First Royal Microfinance Bank\",\n            \"slug\": \"first-royal-mfb\",\n            \"code\": \"090164\",\n            \"nibss_bank_code\": \"090164\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"First Trust Mortgage Bank Plc\",\n            \"slug\": \"first-trust-mob\",\n            \"code\": \"910\",\n            \"nibss_bank_code\": null,\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FirstMonie Wallet\",\n            \"slug\": \"firstMonie-wallet\",\n            \"code\": \"928\",\n            \"nibss_bank_code\": \"100014\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Flutterwave Technology Solutions Limited\",\n            \"slug\": \"flutterwave\",\n            \"code\": \"110002\",\n            \"nibss_bank_code\": \"110002\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Fortis Micro-finance Bank\",\n            \"slug\": \"fortis-mfb\",\n            \"code\": \"948\",\n            \"nibss_bank_code\": \"070002\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Fortis Mobile\",\n            \"slug\": \"fortis-mobile\",\n            \"code\": \"930\",\n            \"nibss_bank_code\": \"100016\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"FSDH Merchant Bank\",\n            \"slug\": \"fsdh\",\n            \"code\": \"601\",\n            \"nibss_bank_code\": \"400001\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Fullrange Microfinance Bank\",\n            \"slug\": \"fullrange-mfb\",\n            \"code\": \"090145\",\n            \"nibss_bank_code\": \"090145\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Futo Microfinance Bank\",\n            \"slug\": \"futo-mfb\",\n            \"code\": \"090158\",\n            \"nibss_bank_code\": \"090158\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Gashua Microfinance Bank\",\n            \"slug\": \"gashua-mfb\",\n            \"code\": \"090168\",\n            \"nibss_bank_code\": \"090168\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Gateway Mortgage Bank\",\n            \"slug\": \"gateway-mb\",\n            \"code\": \"070009\",\n            \"nibss_bank_code\": \"070009\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Globus Bank\",\n            \"slug\": \"globus-bank\",\n            \"code\": \"103\",\n            \"nibss_bank_code\": \"000027\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Glory MFB\",\n            \"slug\": \"glory-mfb\",\n            \"code\": \"090278\",\n            \"nibss_bank_code\": \"090278\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"GoMoney\",\n            \"slug\": \"go-money\",\n            \"code\": \"100022\",\n            \"nibss_bank_code\": \"100022\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Gowans Microfinance Bank\",\n            \"slug\": \"gowans-mfb\",\n            \"code\": \"090122\",\n            \"nibss_bank_code\": \"090122\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"GreenBank Microfinance Bank\",\n            \"slug\": \"greenbank-mfb\",\n            \"code\": \"090178\",\n            \"nibss_bank_code\": \"090178\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Greenville Microfinance Bank\",\n            \"slug\": \"greenville-mfb\",\n            \"code\": \"090269\",\n            \"nibss_bank_code\": \"090269\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Greenwich Merchant Bank\",\n            \"slug\": \"greenwich-mb\",\n            \"code\": \"060004\",\n            \"nibss_bank_code\": \"060004\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Grooming Microfinance Bank\",\n            \"slug\": \"grooming-mfb\",\n            \"code\": \"090195\",\n            \"nibss_bank_code\": \"090195\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"GT MOBILE\",\n            \"slug\": \"gt-mobile\",\n            \"code\": \"923\",\n            \"nibss_bank_code\": \"100009\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"GTBank Mobile Money\",\n            \"slug\": \"gtb-mobile\",\n            \"code\": \"315\",\n            \"nibss_bank_code\": null,\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"GTBank Plc\",\n            \"slug\": \"gtb\",\n            \"code\": \"058\",\n            \"nibss_bank_code\": \"000013\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Hackman Microfinance Bank\",\n            \"slug\": \"hackman-mfb\",\n            \"code\": \"090147\",\n            \"nibss_bank_code\": \"090147\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Haggai Mortgage Bank Limited\",\n            \"slug\": \"haggai-mb\",\n            \"code\": \"070017\",\n            \"nibss_bank_code\": \"070017\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Hala MFB\",\n            \"slug\": \"hala-mfb\",\n            \"code\": \"090291\",\n            \"nibss_bank_code\": \"090291\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Hasal Micro-finance Bank\",\n            \"slug\": \"hasal-mfb\",\n            \"code\": \"958\",\n            \"nibss_bank_code\": \"090121\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Hedonmark\",\n            \"slug\": \"hedonmark\",\n            \"code\": \"931\",\n            \"nibss_bank_code\": \"100017\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Heritage Bank\",\n            \"slug\": \"heritage\",\n            \"code\": \"030\",\n            \"nibss_bank_code\": \"000020\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"IBILE Microfinance Bank\",\n            \"slug\": \"ibile-mfb\",\n            \"code\": \"090118\",\n            \"nibss_bank_code\": \"090118\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"IKENNE MFB\",\n            \"slug\": \"ikenne-mfb\",\n            \"code\": \"090324\",\n            \"nibss_bank_code\": \"090324\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Ikire MFB\",\n            \"slug\": \"ikire-mfb\",\n            \"code\": \"090279\",\n            \"nibss_bank_code\": \"090279\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Imo State Microfinance Bank\",\n            \"slug\": \"imo-state-mfb\",\n            \"code\": \"090258\",\n            \"nibss_bank_code\": \"090258\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Imperial Homes Mortgage Bank\",\n            \"slug\": \"imperial-homes-mob\",\n            \"code\": \"938\",\n            \"nibss_bank_code\": \"100024\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Infinity Microfinance Bank\",\n            \"slug\": \"infinity-mfb\",\n            \"code\": \"090157\",\n            \"nibss_bank_code\": \"090157\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Infinity Trust Mortgage Bank\",\n            \"slug\": \"infinity-mb\",\n            \"code\": \"070016\",\n            \"nibss_bank_code\": \"070016\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Innovectives Kesh\",\n            \"slug\": \"innovectives-kesh\",\n            \"code\": \"100029\",\n            \"nibss_bank_code\": \"100029\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Intellfin\",\n            \"slug\": \"intellfin\",\n            \"code\": \"941\",\n            \"nibss_bank_code\": \"100027\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"IRL Microfinance Bank\",\n            \"slug\": \"irl-mfb\",\n            \"code\": \"090149\",\n            \"nibss_bank_code\": \"090149\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"JAIZ Bank\",\n            \"slug\": \"jaiz\",\n            \"code\": \"301\",\n            \"nibss_bank_code\": \"000006\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Jubliee Life\",\n            \"slug\": \"jubliee-life\",\n            \"code\": \"906\",\n            \"nibss_bank_code\": \"090003\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Kadick Integration Limited\",\n            \"slug\": \"kadick-integration\",\n            \"code\": \"110008\",\n            \"nibss_bank_code\": \"110008\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Kadpoly MICROFINANCE BANK\",\n            \"slug\": \"kadpoly-mfb\",\n            \"code\": \"090320\",\n            \"nibss_bank_code\": \"090320\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"KCMB Microfinance Bank\",\n            \"slug\": \"kcmb-mfb\",\n            \"code\": \"090191\",\n            \"nibss_bank_code\": \"090191\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Kegow\",\n            \"slug\": \"kegow\",\n            \"code\": \"100015\",\n            \"nibss_bank_code\": \"100015\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Keystone Bank\",\n            \"slug\": \"keystone\",\n            \"code\": \"082\",\n            \"nibss_bank_code\": \"000002\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Kontagora MFB\",\n            \"slug\": \"kontagora-mfb\",\n            \"code\": \"090299\",\n            \"nibss_bank_code\": \"090299\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Kuda Micro-finance Bank\",\n            \"slug\": \"kuda-mfb\",\n            \"code\": \"50211\",\n            \"nibss_bank_code\": \"090267\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"La Fayette Microfinance Bank\",\n            \"slug\": \"la-fayette-mfb\",\n            \"code\": \"090155\",\n            \"nibss_bank_code\": \"090155\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Lagos Building Investment Company\",\n            \"slug\": \"lagos-building\",\n            \"code\": \"070012\",\n            \"nibss_bank_code\": \"070012\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Lapo Microfinance Bank\",\n            \"slug\": \"lapo-mfb\",\n            \"code\": \"090177\",\n            \"nibss_bank_code\": \"090177\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Lavender Microfinance Bank\",\n            \"slug\": \"lavender-mfb\",\n            \"code\": \"090271\",\n            \"nibss_bank_code\": \"090271\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Letshego MFB\",\n            \"slug\": \"letshego-mfb\",\n            \"code\": \"090420\",\n            \"nibss_bank_code\": \"090420\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Lovonus Microfinance Bank\",\n            \"slug\": \"lovonus-mfb\",\n            \"code\": \"090265\",\n            \"nibss_bank_code\": \"090265\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"M36\",\n            \"slug\": \"m36\",\n            \"code\": \"100035\",\n            \"nibss_bank_code\": \"100035\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Mainland MICROFINANCE BANK\",\n            \"slug\": \"mainland-mfb\",\n            \"code\": \"090323\",\n            \"nibss_bank_code\": \"090323\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Mainstreet Micro-finance Bank\",\n            \"slug\": \"mainstreet-mfb\",\n            \"code\": \"014\",\n            \"nibss_bank_code\": \"090171\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Malachy Microfinance Bank\",\n            \"slug\": \"malachy-mfb\",\n            \"code\": \"090174\",\n            \"nibss_bank_code\": \"090174\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Manny Microfinance bank\",\n            \"slug\": \"manny-mfb\",\n            \"code\": \"090383\",\n            \"nibss_bank_code\": \"090383\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"MAUTECH Microfinance Bank\",\n            \"slug\": \"mautech-mfb\",\n            \"code\": \"090423\",\n            \"nibss_bank_code\": \"090423\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Mayfair MFB\",\n            \"slug\": \"mayfair-mfb\",\n            \"code\": \"090321\",\n            \"nibss_bank_code\": \"090321\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"MayFresh Mortgage Bank\",\n            \"slug\": \"mayFresh-mortgage\",\n            \"code\": \"070019\",\n            \"nibss_bank_code\": \"070019\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Megapraise Microfinance Bank\",\n            \"slug\": \"megapraise-mfb\",\n            \"code\": \"090280\",\n            \"nibss_bank_code\": \"090280\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Meridian MFB\",\n            \"slug\": \"meridian-mfb\",\n            \"code\": \"090275\",\n            \"nibss_bank_code\": \"090275\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Microcred Microfinance Bank\",\n            \"slug\": \"microcred-mfb\",\n            \"code\": \"090136\",\n            \"nibss_bank_code\": \"090136\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Midland Microfinance Bank\",\n            \"slug\": \"midland-mfb\",\n            \"code\": \"090192\",\n            \"nibss_bank_code\": \"090192\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Mint-Finex Micro-finance Bank\",\n            \"slug\": \"mint-finex-mfb\",\n            \"code\": \"50304\",\n            \"nibss_bank_code\": \"090281\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Mkudi\",\n            \"slug\": \"mkudi\",\n            \"code\": \"100011\",\n            \"nibss_bank_code\": \"100011\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Money Trust Micro-finance Bank\",\n            \"slug\": \"money-trust-mfb\",\n            \"code\": \"963\",\n            \"nibss_bank_code\": \"090129\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"MoneyBox\",\n            \"slug\": \"money-box\",\n            \"code\": \"934\",\n            \"nibss_bank_code\": \"100020\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Mutual Benefits Microfinance Bank\",\n            \"slug\": \"mutual-benefits-mfb\",\n            \"code\": \"090190\",\n            \"nibss_bank_code\": \"090190\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Mutual Trust Microfinance Bank\",\n            \"slug\": \"mutual-trust-mfb\",\n            \"code\": \"090151\",\n            \"nibss_bank_code\": \"090151\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Nagarta Microfinance Bank\",\n            \"slug\": \"nagarta-mfb\",\n            \"code\": \"090152\",\n            \"nibss_bank_code\": \"090152\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Navy Microfinance Bank\",\n            \"slug\": \"navy-mfb\",\n            \"code\": \"090263\",\n            \"nibss_bank_code\": \"090263\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Ndiorah Microfinance Bank\",\n            \"slug\": \"ndiorah-mfb\",\n            \"code\": \"090128\",\n            \"nibss_bank_code\": \"090128\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"New Dawn Microfinance Bank\",\n            \"slug\": \"new-dawn-mfb\",\n            \"code\": \"090205\",\n            \"nibss_bank_code\": \"090205\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"New Prudential Bank\",\n            \"slug\": \"new-prudential\",\n            \"code\": \"090108\",\n            \"nibss_bank_code\": \"090108\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"NIP Virtual Bank\",\n            \"slug\": \"nip-vb\",\n            \"code\": \"999999\",\n            \"nibss_bank_code\": \"999999\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"NIRSAL Microfinance Bank\",\n            \"slug\": \"nirsal-mfb\",\n            \"code\": \"090194\",\n            \"nibss_bank_code\": \"090194\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Nnew women MFB\",\n            \"slug\": \"nnew-women-mfb\",\n            \"code\": \"090283\",\n            \"nibss_bank_code\": \"090283\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Nova Merchant Bank\",\n            \"slug\": \"nova-meb\",\n            \"code\": \"637\",\n            \"nibss_bank_code\": \"060003\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"NPF Micro-finance Bank\",\n            \"slug\": \"npf-mfb\",\n            \"code\": \"947\",\n            \"nibss_bank_code\": \"070001\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Oche MFB\",\n            \"slug\": \"oche-mfb\",\n            \"code\": \"090333\",\n            \"nibss_bank_code\": \"090333\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Ohafia Microfinance Bank\",\n            \"slug\": \"ohafia-mfb\",\n            \"code\": \"090119\",\n            \"nibss_bank_code\": \"090119\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Okpoga Microfinance Bank\",\n            \"slug\": \"okpoga-mfb\",\n            \"code\": \"090161\",\n            \"nibss_bank_code\": \"090161\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Olabisi Onabanjo University Microfinance Bank\",\n            \"slug\": \"olabisi-onabanjo-mfb\",\n            \"code\": \"090272\",\n            \"nibss_bank_code\": \"090272\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Omiye MFB\",\n            \"slug\": \"omiye-mfb\",\n            \"code\": \"090295\",\n            \"nibss_bank_code\": \"090295\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Omoluabi Mortgage Bank Plc\",\n            \"slug\": \"omoluabi-mob\",\n            \"code\": \"950\",\n            \"nibss_bank_code\": \"070007\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"One Finance\",\n            \"slug\": \"one-finance\",\n            \"code\": \"940\",\n            \"nibss_bank_code\": \"100026\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"PAGA\",\n            \"slug\": \"paga\",\n            \"code\": \"916\",\n            \"nibss_bank_code\": \"100002\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Page Micro-finance Bank\",\n            \"slug\": \"page-mfb\",\n            \"code\": \"951\",\n            \"nibss_bank_code\": \"070008\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"PALMPAY\",\n            \"slug\": \"palmpay\",\n            \"code\": \"100033\",\n            \"nibss_bank_code\": \"100033\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"PARALLEX BANK\",\n            \"slug\": \"parallex\",\n            \"code\": \"526\",\n            \"nibss_bank_code\": \"000030\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Parkway\",\n            \"slug\": \"parkway\",\n            \"code\": \"311\",\n            \"nibss_bank_code\": null,\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"ParkWay-ReadyCash\",\n            \"slug\": \"parkway-readycash\",\n            \"code\": \"917\",\n            \"nibss_bank_code\": \"100003\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Parralex Microfinance bank\",\n            \"slug\": \"parralex-mfb\",\n            \"code\": \"090004\",\n            \"nibss_bank_code\": \"090004\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"PatrickGold Microfinance Bank\",\n            \"slug\": \"patrick-gold-mfb\",\n            \"code\": \"090317\",\n            \"nibss_bank_code\": \"090317\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"PayAttitude Online\",\n            \"slug\": \"pay-attitude-online\",\n            \"code\": \"943\",\n            \"nibss_bank_code\": \"110001\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"PAYCOM\",\n            \"slug\": \"paycom\",\n            \"code\": \"305\",\n            \"nibss_bank_code\": \"100004\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"PecanTrust Microfinance Bank\",\n            \"slug\": \"pecanTrust-mfb\",\n            \"code\": \"090137\",\n            \"nibss_bank_code\": \"090137\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Pennywise Microfinance Bank\",\n            \"slug\": \"pennywise-mfb\",\n            \"code\": \"090196\",\n            \"nibss_bank_code\": \"090196\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Personal Trust Microfinance Bank\",\n            \"slug\": \"personal-trust-mfb\",\n            \"code\": \"090135\",\n            \"nibss_bank_code\": \"090135\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Petra Microfinance Bank\",\n            \"slug\": \"petra-mfb\",\n            \"code\": \"090165\",\n            \"nibss_bank_code\": \"090165\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Pillar MFB\",\n            \"slug\": \"pillar-mfb\",\n            \"code\": \"090289\",\n            \"nibss_bank_code\": \"090289\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Platinum Mortgage Bank\",\n            \"slug\": \"platinum-mb\",\n            \"code\": \"070013\",\n            \"nibss_bank_code\": \"070013\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Polaris Bank\",\n            \"slug\": \"polaris\",\n            \"code\": \"076\",\n            \"nibss_bank_code\": \"000008\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Polyuwanna MFB\",\n            \"slug\": \"polyuwanna-mfb\",\n            \"code\": \"090296\",\n            \"nibss_bank_code\": \"090296\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Prestige Microfinance bank\",\n            \"slug\": \"prestige-mfb\",\n            \"code\": \"090274\",\n            \"nibss_bank_code\": \"090274\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Providus Bank\",\n            \"slug\": \"providus\",\n            \"code\": \"101\",\n            \"nibss_bank_code\": \"000023\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Purplemoney MFB\",\n            \"slug\": \"purplemoney-mfb\",\n            \"code\": \"090303\",\n            \"nibss_bank_code\": \"090303\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Quickfund Microfinance Bank\",\n            \"slug\": \"quickfund-mfb\",\n            \"code\": \"090261\",\n            \"nibss_bank_code\": \"090261\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Rahama MFB\",\n            \"slug\": \"rahama-mfb\",\n            \"code\": \"090170\",\n            \"nibss_bank_code\": \"090170\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Rand Merchant Bank\",\n            \"slug\": \"rand-meb\",\n            \"code\": \"502\",\n            \"nibss_bank_code\": \"000024\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Refuge Mortgage Bank\",\n            \"slug\": \"refuge-mb\",\n            \"code\": \"070011\",\n            \"nibss_bank_code\": \"070011\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Regent Micro-finance Bank\",\n            \"slug\": \"regent-mfb\",\n            \"code\": \"955\",\n            \"nibss_bank_code\": \"090125\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Reliance Microfinance Bank\",\n            \"slug\": \"reliance-mfb\",\n            \"code\": \"090173\",\n            \"nibss_bank_code\": \"090173\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"RenMoney Microfinance Bank\",\n            \"slug\": \"renmoney-mfb\",\n            \"code\": \"090198\",\n            \"nibss_bank_code\": \"090198\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Rephidim MICROFINANCE BANK\",\n            \"slug\": \"rephidim-mfb\",\n            \"code\": \"090322\",\n            \"nibss_bank_code\": \"090322\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Richway Microfinance Bank\",\n            \"slug\": \"richway-mfb\",\n            \"code\": \"090132\",\n            \"nibss_bank_code\": \"090132\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Royal Exchange Microfinance Bank\",\n            \"slug\": \"royal-exchange-mfb\",\n            \"code\": \"090138\",\n            \"nibss_bank_code\": \"090138\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Rubies Micro-finance Bank\",\n            \"slug\": \"rubies-mfb\",\n            \"code\": \"125\",\n            \"nibss_bank_code\": \"090175\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Safe Haven MFB\",\n            \"slug\": \"safe-haven-mfb\",\n            \"code\": \"090286\",\n            \"nibss_bank_code\": \"090286\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"SafeTrust\",\n            \"slug\": \"safetrust\",\n            \"code\": \"909\",\n            \"nibss_bank_code\": \"090006\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Sagamu Micro-finance Bank\",\n            \"slug\": \"sagamu-mfb\",\n            \"code\": \"966\",\n            \"nibss_bank_code\": \"090140\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Seed Capital Micro-finance Bank\",\n            \"slug\": \"seed-capital-mfb\",\n            \"code\": \"609\",\n            \"nibss_bank_code\": \"090112\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Sparkle\",\n            \"slug\": \"sparkle\",\n            \"code\": \"090325\",\n            \"nibss_bank_code\": \"090325\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Stanbic IBTC @ease Wallet\",\n            \"slug\": \"stanbic-ibtc-ease-wallet\",\n            \"code\": \"921\",\n            \"nibss_bank_code\": \"100007\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Stanbic IBTC Bank\",\n            \"slug\": \"stanbic\",\n            \"code\": \"221\",\n            \"nibss_bank_code\": \"000012\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Stanbic Mobile\",\n            \"slug\": \"stanbic-mobile\",\n            \"code\": \"304\",\n            \"nibss_bank_code\": null,\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Standard Chartered Bank\",\n            \"slug\": \"standard-chartered\",\n            \"code\": \"068\",\n            \"nibss_bank_code\": \"000021\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Stanford Microfinance Bak\",\n            \"slug\": \"stanford-mfb\",\n            \"code\": \"090162\",\n            \"nibss_bank_code\": \"090162\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Stellas Microfinance Bank\",\n            \"slug\": \"stellas-mfb\",\n            \"code\": \"090262\",\n            \"nibss_bank_code\": \"090262\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Sterling Bank\",\n            \"slug\": \"sterling\",\n            \"code\": \"232\",\n            \"nibss_bank_code\": \"000001\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Sterling Mobile\",\n            \"slug\": \"sterling-mobile\",\n            \"code\": \"936\",\n            \"nibss_bank_code\": null,\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Sulsap MFB\",\n            \"slug\": \"sulsap-mfb\",\n            \"code\": \"090305\",\n            \"nibss_bank_code\": \"090305\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Suntrust Bank Nigeria Limited\",\n            \"slug\": \"suntrust\",\n            \"code\": \"100\",\n            \"nibss_bank_code\": \"000022\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"TAGPAY\",\n            \"slug\": \"tagpay\",\n            \"code\": \"937\",\n            \"nibss_bank_code\": \"100023\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Taj Bank\",\n            \"slug\": \"taj\",\n            \"code\": \"302\",\n            \"nibss_bank_code\": \"000026\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"TCF Micro-finance Bank\",\n            \"slug\": \"tcf-mfb\",\n            \"code\": \"567\",\n            \"nibss_bank_code\": \"090115\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Teasy MOBILE\",\n            \"slug\": \"teasy-mobile\",\n            \"code\": \"924\",\n            \"nibss_bank_code\": \"100010\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Titan Trust Bank\",\n            \"slug\": \"titan\",\n            \"code\": \"102\",\n            \"nibss_bank_code\": \"000025\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Trident Microfinance Bank\",\n            \"slug\": \"trident-mfb\",\n            \"code\": \"090146\",\n            \"nibss_bank_code\": \"090146\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Trust MFB\",\n            \"slug\": \"trust-mfb\",\n            \"code\": \"090327\",\n            \"nibss_bank_code\": \"090327\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Trustbond Mortgage Bank\",\n            \"slug\": \"trustbond-mb\",\n            \"code\": \"090005\",\n            \"nibss_bank_code\": \"090005\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Trustfund Microfinance Bank\",\n            \"slug\": \"trustfund-mfb\",\n            \"code\": \"090276\",\n            \"nibss_bank_code\": \"090276\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"U AND C MFB\",\n            \"slug\": \"u-and-c-mfb\",\n            \"code\": \"090315\",\n            \"nibss_bank_code\": \"090315\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"UNAAB MFB\",\n            \"slug\": \"unaab-mfb\",\n            \"code\": \"090331\",\n            \"nibss_bank_code\": \"090331\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Uniben Microfinance Bank\",\n            \"slug\": \"uniben-mfb\",\n            \"code\": \"090266\",\n            \"nibss_bank_code\": \"090266\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Unical Microfinance Bank\",\n            \"slug\": \"unical-mfb\",\n            \"code\": \"090193\",\n            \"nibss_bank_code\": \"090193\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Union Bank\",\n            \"slug\": \"unionbank\",\n            \"code\": \"032\",\n            \"nibss_bank_code\": \"000018\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"United Bank for Africa\",\n            \"slug\": \"uba\",\n            \"code\": \"033\",\n            \"nibss_bank_code\": \"000004\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Unity Bank\",\n            \"slug\": \"unity\",\n            \"code\": \"215\",\n            \"nibss_bank_code\": \"000011\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"UNN MFB\",\n            \"slug\": \"unn-mfb\",\n            \"code\": \"090251\",\n            \"nibss_bank_code\": \"090251\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Verite Microfinance Bank\",\n            \"slug\": \"verite-mfb\",\n            \"code\": \"090123\",\n            \"nibss_bank_code\": \"090123\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"VFD Micro-finance Bank\",\n            \"slug\": \"vfd-mfb\",\n            \"code\": \"566\",\n            \"nibss_bank_code\": \"090110\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Virtue Microfinance Bank\",\n            \"slug\": \"virtue-mfb\",\n            \"code\": \"090150\",\n            \"nibss_bank_code\": \"090150\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Visa Microfinance Bank\",\n            \"slug\": \"visa-mfb\",\n            \"code\": \"090139\",\n            \"nibss_bank_code\": \"090139\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"VT Networks\",\n            \"slug\": \"vt-networks\",\n            \"code\": \"926\",\n            \"nibss_bank_code\": \"100012\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Wema Bank\",\n            \"slug\": \"wema\",\n            \"code\": \"035\",\n            \"nibss_bank_code\": \"000017\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"WetLand Micro-finance Bank\",\n            \"slug\": \"wetland-mfb\",\n            \"code\": \"954\",\n            \"nibss_bank_code\": \"090120\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Xslnce Microfinance Bank\",\n            \"slug\": \"xslnce-mfb\",\n            \"code\": \"090124\",\n            \"nibss_bank_code\": \"090124\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Yes Microfinance Bank\",\n            \"slug\": \"yes-mfb\",\n            \"code\": \"090142\",\n            \"nibss_bank_code\": \"090142\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"Zenith Bank Plc\",\n            \"slug\": \"zenith\",\n            \"code\": \"057\",\n            \"nibss_bank_code\": \"000015\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"ZENITH Mobile\",\n            \"slug\": \"zenith-mobile\",\n            \"code\": \"322\",\n            \"nibss_bank_code\": \"100018\",\n            \"country\": \"NG\"\n        },\n        {\n            \"name\": \"ZINTERNET - KONGAPAY\",\n            \"slug\": \"zinternet-kongapay\",\n            \"code\": \"939\",\n            \"nibss_bank_code\": \"100025\",\n            \"country\": \"NG\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List MMO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}api/Miscellaneous/listMMo/?countryCode=GH",
+							"host": [
+								"{{baseurl}}api"
+							],
+							"path": [
+								"Miscellaneous",
+								"listMMo",
+								""
+							],
+							"query": [
+								{
+									"key": "countryCode",
+									"value": "GH",
+									"description": "KE for KES, GH for GHS"
+								}
+							]
+						},
+						"description": "Get a list of all supported mobile money operators and their properties"
+					},
+					"response": [
+						{
+							"name": "List MMO - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.koraapi.com/core-middleware/api/v1/misc/mobile-money?countryCode=KE",
+									"protocol": "https",
+									"host": [
+										"api",
+										"koraapi",
+										"com"
+									],
+									"path": [
+										"core-middleware",
+										"api",
+										"v1",
+										"misc",
+										"mobile-money"
+									],
+									"query": [
+										{
+											"key": "countryCode",
+											"value": "KE"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 25 Oct 2022 10:22:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "www-environment",
+									"value": "live"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"f4-uF4O4iYtUhG/t0HG6E8m1rM7BQo\""
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "75fa3add0d4d6fce-IAD"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"code\": \"AA000\",\n    \"message\": \"Successful\",\n    \"data\": [\n        {\n            \"name\": \"AIRTEL\",\n            \"slug\": \"airtel-ke\",\n            \"country\": \"KE\",\n            \"code\": \"0002\",\n            \"min\": 10,\n            \"max\": 1000000\n        },\n        {\n            \"name\": \"SAFARICOM\",\n            \"slug\": \"safaricom-ke\",\n            \"country\": \"KE\",\n            \"code\": \"0001\",\n            \"min\": 10,\n            \"max\": 70000\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "The Miscellaneous APIs are supporting APIs that can be used to provide more details to other APIs."
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "3?@9j#@77F5!9f",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "korPy#mMRztzL",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "http://65.108.141.10:6972/"
+		},
+		{
+			"key": "secret_key",
+			"value": "sk_test_5q3AeG4i4v1dTQezzL9vvLmUcZuGQUs5DPYq3hkD"
+		},
+		{
+			"key": "local",
+			"value": "https://localhost:7156/",
+			"type": "string"
+		},
+		{
+			"key": "public_key",
+			"value": "pk_test_iUZ6xE3iEtnrARc9HDia2KQBAkZ65obGKKYqnPbV",
+			"type": "string"
+		}
+	]
+}

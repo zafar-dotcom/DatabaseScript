@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "ac686edb-bbeb-40aa-860e-01514c008f38",
+		"name": "MerchantPayService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "MerchantPayTransfer",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \r\n  \"Amount\":23.000,\r\n  \"currency\": \"GHA\",\r\n  \"externalId\": \" .\",\r\n  \"payee\": {\r\n    \"partyIdType\": \"ALIAS\",\r\n    \"partyId\": \"224324\"\r\n  },\r\n  \"payerMessage\": \"Payment for services\",\r\n  \"payeeNote\": \"Received payment\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44376/api/MerchantPay/Transfer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44376",
+					"path": [
+						"api",
+						"MerchantPay",
+						"Transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProfile",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44376/api/MerchantPay/GetProfile?MerchantID=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44376",
+					"path": [
+						"api",
+						"MerchantPay",
+						"GetProfile"
+					],
+					"query": [
+						{
+							"key": "MerchantID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Direct test tokenURL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://proxy.momoapi.mtn.com/disbursement/token/",
+					"protocol": "https",
+					"host": [
+						"proxy",
+						"momoapi",
+						"mtn",
+						"com"
+					],
+					"path": [
+						"disbursement",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "direct request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": \"50.00\",\r\n  \"currency\": \"GHS\",\r\n  \"externalId\": \"ABC123\",\r\n  \"payee\": {\r\n    \"partyIdType\": \"ALIAS\",\r\n    \"partyId\": \"123456@momopay\"\r\n  },\r\n  \"payerMessage\": \"Payment for services\",\r\n  \"payeeNote\": \"Received payment\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://proxy.momoapi.mtn.com/disbursement/v1_0/transfer",
+					"protocol": "https",
+					"host": [
+						"proxy",
+						"momoapi",
+						"mtn",
+						"com"
+					],
+					"path": [
+						"disbursement",
+						"v1_0",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

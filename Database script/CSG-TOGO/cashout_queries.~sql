@@ -1,0 +1,285 @@
+
+      -- cashout search 
+select  br.transaction_id,rr.x_trans_reference_no, rr.main_entity_id, rr.payee_mobile, rr.recipient_mobile, rr.narration, rr.is_paid, rr.status_code, rr.status_desc, rr.*, br.*   from remittance_register rr 
+ inner join mobile_network mn on rr.recipient_mobile_network_id = mn.mobile_network_id
+  inner join remittance_payout_type rpt on rr.remit_payout_type_id = rpt.remit_payout_type_id
+  inner join remit_trans_channel rtc on rr.remit_trans_channel_id = rtc.remit_trans_channel_id
+  inner join bank_register br on rr.transaction_id = br.remittance_reg_transid
+where
+-- rr.transaction_id = 2654530
+ -- main_entity_id = 88909 and
+   rr.transaction_date  >= TO_DATE('13/04/2025','dd/mm/yyyy')
+and rr.transaction_date  < TO_DATE('14/04/2025','dd/mm/yyyy')
+ --and rr.remit_trans_channel_id = 3
+ --and rr.status_code not in (0,1)
+ --and rpt.remit_payout_type_code = 'BAT' 
+ --and rr.remarks is not null
+  and rr.main_entity_id = 150357
+ --and rr.recipient_mobile = '+233555410366'
+ -- rr.x_trans_reference_no = '888353225'
+--and rr.recipient_mobile_network_id  = 2
+-- and rr.status_desc = 'FAILED - processed by system'
+--and br.transaction_id = 132144313
+    order by  br.transaction_id desc;
+    
+    
+    
+    
+    select * from mobile_network;
+    select * from entity e where e.entity_code = 'IPAYTEST';
+    select * from remittance_payout_type;
+    select
+    select * from bank_register br where br.
+    select * from entity e where e.entity_id = 100569;
+    
+ 
+   
+ SELECT * FROM V_YET_TO_XFR_BANK_TRANSACTIONS V WHERE
+    v.transaction_date  >= TO_DATE('07/04/2025','dd/mm/yyyy')
+ and v.transaction_date  < TO_DATE('09/04/2025','dd/mm/yyyy')
+ 
+ and  V.TRANSACTION_ID = 162260520;
+    
+    select * from elevy_
+    select * from country ;
+    select * from entity where entity_id = 130980;
+    
+select * from cashout_payment_batch_trans t where t.system_trans_id in( 83723535,83712438,83711609,83704422) order by 1 desc;
+
+select * from  remittance_register rr where rr.transaction_id in ( select br.remittance_reg_transid from bank_register br where br.system_trans_id in (select  t.system_trans_id from cashout_payment_batch_trans t where t.system_trans_id in( 80448994,80636248)));
+
+select  t.* from cashout_payment_batch_trans t where t.system_trans_id in( 83723535,80636248);
+select br.* from bank_register br where br.system_trans_id in (83723535,80636248);
+
+select * from telco_response_code_mapping tt where tt.is_final_status = 1;
+
+select br.* from bank_register br where br.system_trans_id in (select  t.system_trans_id from cashout_payment_batch_trans t where t.system_trans_id in(
+80448994,
+80448995,
+80448997,
+80449004,
+80449017,
+80449406,
+80449715,
+80449716,
+80449717,
+80449719,
+80450386,
+80562805,
+80562844,
+80562851,
+80562850,
+80636248,
+80642331,
+80644376,
+80665188,
+80667604,
+80667594,
+80667613,
+80667598
+)));
+
+select  t.* from cashout_payment_batch_trans t where t.system_trans_id in(
+80448994,
+80448995,
+80448997,
+80449004,
+80449017,
+80449406,
+80449715,
+80449716,
+80449717,
+80449719,
+80450386,
+80562805,
+80562844,
+80562851,
+80562850,
+80636248,
+80642331,
+80644376,
+80665188,
+80667604,
+80667594,
+80667613,
+80667598)
+
+REMITTANCE_UTIL.PROCESS_CASHOUT_BATCH
+
+
+    select * from entity where entity_id = 130980;
+    select * from remit_c
+    select unique mno.ova_spid from mobile_network_ova mno;
+    select * from mobile_network_ova;
+    
+    select * from trn_code tc where tc.menu_url like '%RemittanceFileUpload%';
+    select * from role_detail rd where rd.trn_id = 190 ; 
+    select * from role
+-- Cashouts STATUS LIVE CURRENT, DO NOT MODIFY, copy it first
+
+select * from entity e where e.entity_id = 130980;
+
+select * from entity e where e.entity_code = 'UL';
+
+   -- cashout search UNITYLINK
+select rr.x_trans_reference_no, rr.main_entity_id,mn.mobile_network_code, rr.amount_fcy, rr.ova_config_rule_id,rpt.remit_payout_type_code,rtc.remit_trans_channel_code, rr.transaction_date,rr.recipient_mobile,rr.status_code, rr.status_desc,rr.remarks from remittance_register rr 
+ inner join mobile_network mn on rr.recipient_mobile_network_id = mn.mobile_network_id
+  inner join remittance_payout_type rpt on rr.remit_payout_type_id = rpt.remit_payout_type_id
+  inner join remit_trans_channel rtc on rr.remit_trans_channel_id = rtc.remit_trans_channel_id
+where
+-- rr.transaction_id = 2654530
+-- and --
+ -- main_entity_id = 130980 and
+   rr.transaction_date  >= TO_DATE('15/12/2021','dd/mm/yyyy')
+ and rr.transaction_date  < TO_DATE('16/12/2021','dd/mm/yyyy')
+ --and rr.status_code = 0
+ --and rr.remarks is not null
+ and rr.main_entity_id = 130980
+ --and rr.x_trans_reference_no = '444UL00191100'
+-- and rr.recipient_mobile_network_id in (3)
+--br.system_trans_id = 73963525
+    order by rr.transaction_id desc;
+    
+    
+        
+select * from mobile_network_ova ;
+   -- cashout search 
+select rr.x_trans_reference_no, rr.main_entity_id,mn.mobile_network_code, rr.ova_config_rule_id,rpt.remit_payout_type_code,rtc.remit_trans_channel_code, rr.transaction_date,rr.recipient_mobile,rr.status_code, rr.status_desc,rr.remarks, rr.* from remittance_register rr 
+ inner join mobile_network mn on rr.recipient_mobile_network_id = mn.mobile_network_id
+  inner join remittance_payout_type rpt on rr.remit_payout_type_id = rpt.remit_payout_type_id
+  inner join remit_trans_channel rtc on rr.remit_trans_channel_id = rtc.remit_trans_channel_id
+where
+-- rr.transaction_id = 2654530
+-- and --
+ -- main_entity_id = 130980 and
+   rr.transaction_date  >= TO_DATE('04/12/2021','dd/mm/yyyy')
+ and rr.transaction_date  < TO_DATE('05/12/2021','dd/mm/yyyy')
+ --and rr.status_code = 0
+ --and rr.remarks is not null
+ --and rr.main_entity_id = 130980
+ --and rr.x_trans_reference_no = '431DG0533595729'
+-- and rr.recipient_mobile_network_id in (3)
+--br.system_trans_id = 73963525
+    order by rr.transaction_id desc;
+    
+    
+    select * from ELEVY_MERCHANT_EXEMPTION_CONFIG;
+    
+    431UM8433527603
+455RT195000197
+455RT151777542
+431DG0533595729
+444WR106684665
+444WR106684896
+ 455RT186907361
+455RT124170248
+455RT142896510
+444WR106712738
+444WR106714355
+401AA41313186675
+455RT128653842
+444WR106719940
+455RT118947819
+    
+    BANK_INTEGRATION_UTIL.GET_YETTOXFR_BANKTXN_CASHOUT
+    
+    select * from telco_response_code_mapping tt where tt.is_final_status = 1;
+    
+    select br.transaction_id, rr.recipient_mobile_network_id, br.batch_no, br.bank_reference_code, rr.*, br.*
+      from bank_register br, remittance_register rr
+     where br.remittance_reg_transid = rr.transaction_id
+      -- and rr.recipient_mobile_network_id=3
+     --  and br.transaction_id = 2334970
+  and rr.transaction_date  >= TO_DATE('30/09/2021','dd/mm/yyyy')
+  and rr.transaction_date  < TO_DATE('01/10/2021','dd/mm/yyyy')
+ and rr.status_code = 0
+ and rr.main_entity_id = 130980
+ --and br.system_trans_id = 64257675
+ --and rr.recipient_mobile_network_id = 2
+       order by 1 desc;
+       
+       select 
+       --FAILED -- 26___System busy. The service request is rejected.___AG_20210930_000056f11a82238892f4
+       
+       select * from  mobile_network;
+       select * from mobile_network; 
+
+select * from entity where entity_code like '%BTC%';
+
+
+   -- cashout search 
+select rr.transaction_id, mn.mobile_network_code,mn.mobile_network_id, rr.transaction_date,rr.status_code, rr.status_desc from remittance_register rr 
+ inner join mobile_network mn on rr.recipient_mobile_network_id = mn.mobile_network_id
+where
+ mn.mobile_network_id = 3  and rr.status_code  in (8,0,1) and rownum <= 10 order by rr.transaction_id;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+select count(*)
+from remittance_register rr, mobile_network mn where rr.recipient_mobile_network_id = mn.mobile_network_id
+ and rr.recipient_mobile_network_id = 1 --- this will be input from screen.                 ,, send from code 
+ and rr.status_code in (8,0)   -- will only get failed or conflict at gateway, can be hard coded 
+ and rr.transaction_date >   to_date('2021-10-12 09:39:00 AM' , 'yyyy-mm-dd HH:MI:SS AM')       -- datetime now - 1  ,, send from code 
+ and rr.transaction_date <   to_date('2021-10-12 10:39:00 AM' , 'yyyy-mm-dd HH:MI:SS AM')       -- dateime now        ,, send from code 
+ order by rr.transaction_id desc ;
+ 
+ 
+ select count(*)
+from remittance_register rr, mobile_network mn where rr.recipient_mobile_network_id = mn.mobile_network_id
+ and rr.recipient_mobile_network_id = 1 --- this will be input from screen.                 ,, send from code 
+ and rr.status_code in (1)   -- will only get failed or conflict at gateway, can be hard coded 
+ and rr.transaction_date >   to_date('2021-10-12 09:39:00 AM' , 'yyyy-mm-dd HH:MI:SS AM')       -- datetime now - 1  ,, send from code 
+ and rr.transaction_date <   to_date('2021-10-12 10:39:00 AM' , 'yyyy-mm-dd HH:MI:SS AM')       -- dateime now        ,, send from code 
+ order by rr.transaction_id desc ;
+ 
+ -- success no of transactions 
+ -- failure no of trnsactions 
+ -- success * 100 / (failure+success)
+ 
+ -- return paramter of SP  , sucess rate , decimal 
+ -- input parameters  1. network_id , 2. from_datetime 3. to_datetime
+ 
+
+-- TO_DATE('07/18/2012 13:27:18', 'MM/DD/YYYY HH24:MI:SS')
+
+ SELECT to_date('2010-Aug-09 02:00:01 PM' , 'yyyy-Mon-dd HH:MI:SS AM') "date"
+  FROM dual;
+SELECT to_date('2010-Aug-09 03:00:01 AM' , 'yyyy-Mon-dd HH:MI:SS PM') "date"
+  FROM dual;
+  
+ select * from (select mn.mobile_network_code, mn.mobile_network_id, rr.transaction_date, rr.status_code, rr.status_desc from remittance_register rr, mobile_network mn where rr.recipient_mobile_network_id = mn.mobile_network_id and rr.main_entity_id = (select entity_id from entity where entity_code = 'BTC') and rr.status_code in (8) order by rr.transaction_id desc)t where rownum <= 100; 
+select * from entity_system_config where config_id = 371;
+  -- cashout search 
+select mn.mobile_network_code,
+       mn.mobile_network_id,
+       rr.transaction_date,
+       rr.status_code,
+       rr.status_desc
+  from remittance_register rr, mobile_network mn
+ where rr.recipient_mobile_network_id = mn.mobile_network_id
+   and rr.recipient_mobile_network_id = 3
+   and rr.status_code in (8, 0, 1)
+   and rownum <= 1000
+ order by rr.transaction_id desc;
+
+select * From PAYMENT_MODE_ENTITY_OVA_CONFIG pmc where pmc. = 75391 order by 1 desc;
+
+
+
+select * from (
+select mn.mobile_network_code,
+       mn.mobile_network_id,
+       rr.transaction_date,
+       rr.status_code,
+       rr.status_desc
+  from remittance_register rr, mobile_network mn
+ where rr.recipient_mobile_network_id = mn.mobile_network_id
+   and rr.recipient_mobile_network_id = 3
+   and rr.status_code in (8, 0, 1)
+ order by rr.transaction_id desc
+ )t where rownum <= 10;
+select * from entity e where e.entity_code = 'BTC';

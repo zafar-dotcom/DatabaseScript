@@ -1,0 +1,537 @@
+{
+	"info": {
+		"_postman_id": "52cfaaa7-f06b-4fe5-96b2-45ceac2c0bc6",
+		"name": "KYC EndPoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "Collection",
+			"item": [
+				{
+					"name": "GetAccountProfile KYC Copy",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cashout",
+			"item": [
+				{
+					"name": "GetCustomerProfile Copy",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Un-Authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "ValidateBankAccount Copy",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "FAILED",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "PENDING",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "EXPIRED",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "CANCELLED",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "PREPARED",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "PROCESSING",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "CONFLICTING",
+							"originalRequest": {
+								"method": "POST",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "GetTxnStatus dev Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"9496997591\",     //KORAPAYDEMO\r\n    \"app_key\": \"77340613\",\r\n    \"merchant_ref\": \"45215235sj2244453\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v2/api/Cashout/GetTxnStatus",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"Cashout",
+								"GetTxnStatus"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_SUCCESS\",\r\n    \"status_message\": \"TRANSACTION SUCCESSFULLY PROCESSED\"\r\n}"
+						},
+						{
+							"name": "FAILED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_FAILED\",\n    \"status_message\": \"TRANSACTION FAILED\"\n}"
+						},
+						{
+							"name": "PENDING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_PENDING\",\r\n    \"status_message\": \"TRANSACTION PENDING\"\r\n}"
+						},
+						{
+							"name": "EXPIRED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_EXPIRED\",\r\n    \"status_message\": \"TRANSACTION EXPIRED\"\r\n}"
+						},
+						{
+							"name": "CANCELLED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CANCELLED\",\n    \"status_message\": \"TRANSACTION CANCELLED\"\n}"
+						},
+						{
+							"name": "PREPARED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PREPARED\",\n    \"status_message\": \"TRANSACTION BEING PREPARED\"\n}"
+						},
+						{
+							"name": "PROCESSING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PROCESSING\",\n    \"status_message\": \"PREPARED FOR PROCESSING\"\n}"
+						},
+						{
+							"name": "CONFLICTING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CONFLICTING\",\n    \"status_message\": \"CONFLICTING TRANSACTION\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GetAccountProfile",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "FAILED",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "PENDING",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "EXPIRED",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "CANCELLED",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "PREPARED",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "PROCESSING",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "CONFLICTING",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": "",
+							"header": "",
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	]
+}

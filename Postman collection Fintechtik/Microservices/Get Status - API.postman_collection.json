@@ -1,0 +1,942 @@
+{
+	"info": {
+		"_postman_id": "1cdd347a-95ed-4295-bd69-f538619c0f14",
+		"name": "Get Status - API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-1cdd347a-95ed-4295-bd69-f538619c0f14?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "GetInvoiceStatus api Fargate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"{{appid}}\",\r\n    \"app_key\": \"{{appkey}}\",\r\n    \"order_id\": \"PASW5R1733784\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Live}}/Interapi/GetInvoiceStatus",
+					"host": [
+						"{{Live}}"
+					],
+					"path": [
+						"Interapi",
+						"GetInvoiceStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckStatus -api fargate live",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"{{appid}}\",\r\n    \"app_key\": \"{{appkey}}\",\r\n    \"merchant_ref\": \"PA9O20Z733778\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Live}}/Cashout/CheckStatus",
+					"host": [
+						"{{Live}}"
+					],
+					"path": [
+						"Cashout",
+						"CheckStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTxnStatus api fargate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{Live}}/Cashout/GetTxnStatus",
+					"host": [
+						"{{Live}}"
+					],
+					"path": [
+						"Cashout",
+						"GetTxnStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetInvoiceStatus Live Proxy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"{{appid}}\",\r\n    \"app_key\": \"{{appkey}}\",\r\n    \"order_id\": \"PASW5R1733784\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://getstatus-prod.cs-pay.app/GetInvoiceStatus",
+					"protocol": "https",
+					"host": [
+						"getstatus-prod",
+						"cs-pay",
+						"app"
+					],
+					"path": [
+						"GetInvoiceStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckStatus Live Proxy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"{{appid}}\",\r\n    \"app_key\": \"{{appkey}}\",\r\n    \"merchant_ref\": \"PA9O20Z733778\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://getstatus-prod.cs-pay.app/CheckStatus",
+					"protocol": "https",
+					"host": [
+						"getstatus-prod",
+						"cs-pay",
+						"app"
+					],
+					"path": [
+						"CheckStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTxnStatus Live Proxy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"{{appid}}\",\r\n    \"app_key\": \"{{appkey}}\",\r\n    \"merchant_ref\": \"PA9O20Z733778\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://getstatus-prod.cs-pay.app/GetTxnStatus",
+					"protocol": "https",
+					"host": [
+						"getstatus-prod",
+						"cs-pay",
+						"app"
+					],
+					"path": [
+						"GetTxnStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckStatus CSG IIS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"{{appid}}\",\r\n    \"app_key\": \"{{appkey}}\",\r\n    \"merchant_ref\": \"PA9O20Z733778\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.cs-pay.app/v2/api/Cashout/CheckStatus",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cs-pay",
+						"app"
+					],
+					"path": [
+						"v2",
+						"api",
+						"Cashout",
+						"CheckStatus"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status_code\": \"CO_SUCCESS\",\r\n    \"status_message\": \"TRANSACTION SUCCESSFULLY PROCESSED\"\r\n}"
+				},
+				{
+					"name": "FAILED",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904492\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_FAILED\",\n    \"status_message\": \"TRANSACTION FAILED\"\n}"
+				},
+				{
+					"name": "PENDING",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904493\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status_code\": \"CO_PENDING\",\r\n    \"status_message\": \"TRANSACTION PENDING\"\r\n}"
+				},
+				{
+					"name": "EXPIRED",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status_code\": \"CO_EXPIRED\",\r\n    \"status_message\": \"TRANSACTION EXPIRED\"\r\n}"
+				},
+				{
+					"name": "CANCELLED",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_CANCELLED\",\n    \"status_message\": \"TRANSACTION CANCELLED\"\n}"
+				},
+				{
+					"name": "PREPARED",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_PREPARED\",\n    \"status_message\": \"TRANSACTION BEING PREPARED\"\n}"
+				},
+				{
+					"name": "PROCESSING",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_PROCESSING\",\n    \"status_message\": \"PREPARED FOR PROCESSING\"\n}"
+				},
+				{
+					"name": "CONFLICTING",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_CONFLICTING\",\n    \"status_message\": \"CONFLICTING TRANSACTION\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetTxnStatusCSG IIS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"{{appid}}\",\r\n    \"app_key\": \"{{appkey}}\",\r\n    \"merchant_ref\": \"PA9O20Z733778\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.cs-pay.app/v2/api/Cashout/GetTxnStatus",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cs-pay",
+						"app"
+					],
+					"path": [
+						"v2",
+						"api",
+						"Cashout",
+						"GetTxnStatus"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status_code\": \"CO_SUCCESS\",\r\n    \"status_message\": \"TRANSACTION SUCCESSFULLY PROCESSED\"\r\n}"
+				},
+				{
+					"name": "FAILED",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904492\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_FAILED\",\n    \"status_message\": \"TRANSACTION FAILED\"\n}"
+				},
+				{
+					"name": "PENDING",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904493\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"status_code\": \"CO_PENDING\",\r\n    \"status_message\": \"TRANSACTION PENDING\"\r\n}"
+				},
+				{
+					"name": "EXPIRED",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status_code\": \"CO_EXPIRED\",\r\n    \"status_message\": \"TRANSACTION EXPIRED\"\r\n}"
+				},
+				{
+					"name": "CANCELLED",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_CANCELLED\",\n    \"status_message\": \"TRANSACTION CANCELLED\"\n}"
+				},
+				{
+					"name": "PREPARED",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_PREPARED\",\n    \"status_message\": \"TRANSACTION BEING PREPARED\"\n}"
+				},
+				{
+					"name": "PROCESSING",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_PROCESSING\",\n    \"status_message\": \"PREPARED FOR PROCESSING\"\n}"
+				},
+				{
+					"name": "CONFLICTING",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"Cashout",
+								"CheckStatus"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": \"CO_CONFLICTING\",\n    \"status_message\": \"CONFLICTING TRANSACTION\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetInvoiceStatus CSG IIS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"{{appid}}\",\r\n    \"app_key\": \"{{appkey}}\",\r\n    \"order_id\": \"PASW5R1733784\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.cs-pay.app/v1/interapi.svc/GetInvoiceStatus",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cs-pay",
+						"app"
+					],
+					"path": [
+						"v1",
+						"interapi.svc",
+						"GetInvoiceStatus"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "appid",
+			"value": "0038320463",
+			"type": "string"
+		},
+		{
+			"key": "appkey",
+			"value": "13321171",
+			"type": "string"
+		},
+		{
+			"key": "Live",
+			"value": "https://getstatus-prod.mojo-pay.com:8081",
+			"type": "string"
+		},
+		{
+			"key": "Dev",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

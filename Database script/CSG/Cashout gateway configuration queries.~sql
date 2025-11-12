@@ -1,0 +1,49 @@
+select * from mobile_network m where m.mobile_network_id in (1,2,3) order by 1 desc;
+select * from REMIT_ENTITY_PROCESS_CONFIG order by 1 desc;
+select * from REMIT_ENTITY_PROCESS_CONFIG rpc where rpc.merchant_entity_id=149818 and rpc.isenabled=1 and rpc.payout_type_id=2 and rpc.network_entity=37135;
+select * from REMIT_ENTITY_PROCESS_CONFIG rpc where rpc.merchant_entity_id=149810; 
+select * from REMIT_ENTITY_PROCESS_CONFIG rpc where rpc.network_entity=43035; 
+select * from entity e where e.entity_id=43035;
+select * from entity_type order by 1 desc;
+SELECT * from REMIT_ENTITY_PROCESS_CONFIG ;
+ENTITY_UTIL.GET_ENTITY_RECORD
+select c.rule_id,
+       c.description,
+       m.mobile_network_code,
+       e.entity_code,
+       c.pm_provider_entity_id,
+       c.network_entity
+  from REMIT_ENTITY_PROCESS_CONFIG c, mobile_network m, entity e
+ where  m.entity_id= c.network_entity
+   and e.entity_id = c.pm_provider_entity_id
+   and c.merchant_entity_id = 149810;   --149818 zeeshan
+    
+   
+   
+   
+   
+                              SELECT 
+    c.rule_id AS rule_id,
+    c.description AS description,
+    m.mobile_network_code AS mobile_network_code,
+    e.entity_code AS entity_code,
+    c.pm_provider_entity_id AS pm_provider_entity_id,
+    c.network_entity AS network_entity
+FROM 
+    REMIT_ENTITY_PROCESS_CONFIG c
+JOIN 
+    mobile_network m ON c.network_entity = m.entity_id
+JOIN 
+    entity e ON e.entity_id = c.pm_provider_entity_id
+WHERE 
+    c.merchant_entity_id is null;
+
+
+
+select * from REMIT_ENTITY_PROCESS_CONFIG where merchant_entity_id=149807;
+select * from REMIT_ENTITY_PROCESS_CONFIG order by 1 desc ;
+SELECT MAX(RULE_ID) FROM REMIT_ENTITY_PROCESS_CONFIG;
+select * from mobile_network;
+ENTITY_UTIL.GET_ENTITY_RECORD
+select e.entity_id,e.entity_code from entity e where  e.entity_code in ('GHIPSS','CSP','EP','MTN');
+insert into REMIT_ENTITY_PROCESS_CONFIG values((select NVL(MAX(RULE_ID),0) + 1 from REMIT_ENTITY_PROCESS_CONFIG);

@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "b04c2486-ce8f-4e82-967f-3385a191281c",
+		"name": "Cashout Api's Sandbox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645",
+		"_collection_link": "https://dark-satellite-211344.postman.co/workspace/Global-APIs-FIDO~0553f143-3f07-4ac7-845b-25c36c446613/collection/14223645-b04c2486-ce8f-4e82-967f-3385a191281c?action=share&source=collection_link&creator=14223645"
+	},
+	"item": [
+		{
+			"name": "Disbursement",
+			"item": [
+				{
+					"name": "Cashout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"TransactionDate\": \"2025-04-04 14:18:22\",\r\n  \"ExpiryDate\": \"2025-04-05 13:18:22\",\r\n  \"TransactionType\": \"local\",\r\n  \"PayerName\": \"Zeeshan\",\r\n  \"PayerEmail\": \"zeehan.ilyas@fintechtik.com\",\r\n  \"PayerMobile\": \"\",\r\n  \"PayeeName\": \"Sohail Haider\",\r\n  \"PayeeEmail\": \"SohailHaider@mojo-pay.com\",\r\n  \"PayeeMobile\": \"+233544338841\",\r\n  \"MobileNetwork\": \"MTN\",\r\n  \"Currency\": \"GHS\",\r\n  \"Country\": \"GHA\",\r\n  \"Amount\": 0.5,\r\n  \"OrderId\": \"ORD123456789345\",\r\n  \"Narration\": \"Payment for services rendered\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sandbox}}/api/Disbursement/momo/initiate",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"Disbursement",
+								"momo",
+								"initiate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BankTransfer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"TransactionDate\": \"2025-04-10 14:18:22\",\r\n  \"ExpiryDate\": \"2025-04-11 13:18:22\",\r\n  \"TransactionType\": \"local\",\r\n  \"PayerName\": \"\",\r\n  \"PayerEmail\": \"johndoe@example.com\",\r\n  \"PayerMobile\": \"\",\r\n  \"PayeeName\": \"Jane Smith\",\r\n  \"PayeeEmail\": \"janesmith@example.com\",\r\n  \"Currency\": \"GHS\",\r\n  \"Country\": \"GHA\",\r\n  \"Amount\": 0.25,\r\n  \"BankName\": \"Zenith bank\",\r\n  \"BankBranchSortCode\": \"300311\",\r\n  \"BankCode\": \"300311\",\r\n  \"AccountNumber\": \"6010913802\",\r\n  \"AccountTitle\": \"Jane Smith\",\r\n  \"OrderId\": \"ORD987654321781\",\r\n  \"Narration\": \"Payment for product purchase\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sandbox}}/api/Disbursement/bank/initiate",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"Disbursement",
+								"bank",
+								"initiate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TransactionStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sandbox}}/api/Disbursement/status/ORD1234567893457",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"Disbursement",
+								"status",
+								"ORD1234567893457"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Misc",
+			"item": [
+				{
+					"name": "GetAllowedBankList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sandbox}}/api/Misc/banks/NGA",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"Misc",
+								"banks",
+								"NGA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CheckBalance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sandbox}}/api/Misc/CheckBalance/GHS",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"Misc",
+								"CheckBalance",
+								"GHS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllowedNetworks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sandbox}}/api/Misc/GetAllowedNetworks/GHA",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"Misc",
+								"GetAllowedNetworks",
+								"GHA"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kyc",
+			"item": [
+				{
+					"name": "KYC bank/profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"BankCode\": \"300311\",  //300311\r\n    \"BankAccount\": \"6010913802\" ,  //\r\n    \"CountryCode\": \"GHA\"   //\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sandbox}}/api/Kyc/bank/profile",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"Kyc",
+								"bank",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "KYC momo/profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"network\":\"MTN\",\r\n    \"MSISDN\":\"+233244371378\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kycSandbox}}/api/Kyc/momo/profile",
+							"host": [
+								"{{kycSandbox}}"
+							],
+							"path": [
+								"api",
+								"Kyc",
+								"momo",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "34343434",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "444444",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "sandbox",
+			"value": "https://glbl-cashout.cspay.app",
+			"type": "string"
+		},
+		{
+			"key": "AppId",
+			"value": "fdfd",
+			"type": "string"
+		},
+		{
+			"key": "Appkey",
+			"value": "fdf",
+			"type": "string"
+		},
+		{
+			"key": "kycSandbox",
+			"value": "https://glbl-clxn.cspay.app",
+			"type": "string"
+		}
+	]
+}

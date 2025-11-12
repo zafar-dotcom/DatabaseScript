@@ -1,0 +1,33 @@
+select * from entity_system_config order by 1 desc;
+select * from entity_system_config where config_id in(1271,1272,1273,1274);
+
+insert into entity_system_config (CONFIG_ID, CONFIG_KEY, CONFIG_VALUE, CONFIG_STATUS)
+values (1268, 'MTN_OPEN_API_CLIENT_URL', 'https://devsrv.cspay.app/mtnapi', 'MTN OPEN API CLIENT BASE URL');
+
+insert into entity_system_config (CONFIG_ID, CONFIG_KEY, CONFIG_VALUE, CONFIG_STATUS)
+values (1269, 'MTN_OPEN_API_CLIENT_USERNAME', 'test', 'MTN OPEN API BASIC AUTH CREDS');
+
+insert into entity_system_config (CONFIG_ID, CONFIG_KEY, CONFIG_VALUE, CONFIG_STATUS)
+values (1270, 'MTN_OPEN_API_CLIENT_PASSWORD', '12345', 'MTN OPEN API BASIC AUTH CREDS');
+
+
+
+
+
+insert into entity_system_config (CONFIG_ID, CONFIG_KEY, CONFIG_VALUE, CONFIG_STATUS)
+values (1271, 'MTN_COLLECTION_OVA', '233598341766', 'MTN Collection OVA account');
+
+insert into entity_system_config (CONFIG_ID, CONFIG_KEY, CONFIG_VALUE, CONFIG_STATUS)
+values (1272, 'MTN_DISBURSMENT_OVA', '233598349348', 'MTN disbursment OVA account');
+
+insert into entity_system_config (CONFIG_ID, CONFIG_KEY, CONFIG_VALUE, CONFIG_STATUS)
+values (1273, 'MTN_INSTORE_OVA', '233598402474', 'MTN_INSTORE_OVA');
+
+insert into entity_system_config (CONFIG_ID, CONFIG_KEY, CONFIG_VALUE, CONFIG_STATUS)
+values (1274, 'MTN_RECURRING_OVA', '233598350750', 'Recurring OVA for MTN');
+
+
+
+insert into entity_system_config (CONFIG_ID, CONFIG_KEY, CONFIG_VALUE, CONFIG_STATUS)
+values (1275, 'VALIDITY_TIME', '3700', 'This is created for validity time of pre approval request');
+

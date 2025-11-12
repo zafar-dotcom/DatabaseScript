@@ -1,0 +1,381 @@
+swagger: '2.0'
+info:
+  description: |
+        This API allows a Third-Party Provider (3PP) to request KYC details for a given mobile number. The 3PP initiates the process by sending a consent request to the user via SMS or USSD, seeking approval to access their KYC details.Once approved KYC details will be shared with callbackUrl specified in the request.
+        
+          Preprod : https://preprod.api.chenosis.io 
+          Prod : https://api.chenosis.io
+   
+  version: "0.1"
+  title: KYC Details Ghana
+  contact:
+    email: engineering@chenosis.io
+host: api.chenosis.io
+basePath: /v1/gha/kyc-details
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  OAuth2:
+    type: oauth2
+    flow: application
+    tokenUrl: "https://api.chenosis.io/oauth/client/accesstoken?grant_type=client_credentials"
+security:
+  - OAuth2: []
+paths:
+  /customers/{MobileNumber}:
+    post:
+      produces:
+        - application/json
+      parameters:
+      - name: MobileNumber
+        in: path
+        description: MobileNumber
+        required: true
+        type: string
+      - name: transactionId
+        in: header
+        description: transactionId
+        required: false
+        type: string
+      - in: body
+        name: body
+        description: Request body
+        required: true
+        schema:
+          $ref: '#/definitions/KYCDetailsRequest'
+      responses:
+        200:
+          description: 200 response
+          schema:
+            $ref: '#/definitions/KYCDetailsAcknowledgement'
+        400:
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/Error400"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error401"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error403"
+        404:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error404"
+        405:
+          description: Method No Allowed
+          schema:
+            $ref: "#/definitions/Error405"
+        408:
+          description: Time out
+          schema:
+            $ref: "#/definitions/Error408"
+        415:
+          description: Time out
+          schema:
+            $ref: "#/definitions/Error415"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/Error500"
+        503:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/Error503"
+
+
+
+
+definitions:
+  KYCDetailsAcknowledgement: 
+   type: object
+   properties:
+      statusCode: 
+        type : string
+        example : "0000"
+      statusMessage  :
+        type: string
+        description: Success
+        example: 'Consent validation message delivered to user.'
+      transactionId:
+        type: string
+        description: transaction ID From the backend provider system for tracing.
+        example: "9dfc1db0-06e1-5916-a0b7-18edb2badf14"
+  KYCDetailsRequest:
+   type: object
+   properties: 
+    consentType : 
+     type: string
+     description: consentType
+     example : "sms"
+     enum : [
+       "sms", 
+       "ussd"
+       ]
+    companyName : 
+     type : string
+     description : companyName
+     example : "companyName"
+    callbackUrl : 
+     type: string
+     description: Callback url to which KYC details will be shared post consent approval.Queryparams will be ignored if present in payload
+     example: "https://3PP/callbackurl"
+   required: [
+      "consentType",
+      "companyName",
+      "callbackUrl"
+      ]
+  KYCDetails:
+    type: object
+    properties : 
+      statusCode: 
+        type : string
+        example : "0000"
+      statusMessage  :
+        type: string
+        description: Success
+        example: 'Success'
+      transactionId:
+        type: string
+        description: transaction ID From the backend provider system for tracing.
+        example: 232TXYZ-212
+      data:
+        type: object
+        properties : 
+         idNumber:
+           type: string
+           example : "GHA-7252xxxx-7"
+         dateOfBirth:
+           type: string
+           example : "2002-02-02"
+         firstName:
+           type: string
+           example : "John"
+         lastName:
+           type: string
+           example : "Smith"
+         phoneNumber:
+           type: string
+           example : "590008405"
+         alternativePhoneNumber:
+           type: string
+           example : "590008405"
+         registrationStatus:
+           type: string
+           example : "active"
+         registrationDate:
+           type: string
+           example : "2023-12-17T13:00:22.269Z"
+         contractType:
+           type: string
+           example : "Prepaid"
+         documentIdType:
+           type: string
+           example : "NIA CARD"
+         residentialAddress:
+           type: object
+           properties:
+             addressOne:
+               type: string
+               example : "AB-1234-2025"
+             city:
+               type: string
+               example : "ACCRA"
+             country:
+               type: string
+               example : "GHA"
+             countryState:
+               type: string
+               example : "AA"
+         subIdDclm:
+           type: string
+           example : "PPR1000008171"
+         productType:
+           type: string
+           example : "NORMAL PREPAID CATEGORY"
+  Error400:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "5000"
+      statusMessage:
+        type: string
+        description: "The input parameters provided are invalid.\n"
+        example: "Bad Request"
+      SupportMessage:
+        type: string
+        enum : [
+          "Missing mandatory fields or having invalid values",
+          "consentType should be either 'sms' or 'ussd'",
+          "callbackUrl should be a valid URL",
+          ]
+        description: "Error support messages"
+        example: "Error parsing the request"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "fg545f-cf4gg4fd55-fdg85hg6"      
+  Error401:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "4000"
+      statusMessage:
+        type: string
+        description: "Unauthorised."
+        example: "Unauthorised"
+      SupportMessage:
+        type: string
+        description: "Did not provide valid token"
+        example: "Please verify token environment or access token or API key"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "rrt-2055955879466555495-a-geu2-23563-1529151-598"
+  Error403:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "6000"
+      statusMessage:
+        type: string
+        description: "Forbidden"
+        example: "Forbidden"
+      SupportMessage:
+        type: string
+        description: "Did not provide valid token"
+        example: "Please verify token environment or access token or API key"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "rrt-2055955879466555495-a-geu2-23563-1529151-598"
+  Error404:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "2000"
+      statusMessage:
+        type: string
+        description: "Not Found"
+        example: "Not Found"
+      SupportMessage:
+        type: string
+        description: "Resource not found"
+        example: "Resource not found"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "rrt-2055955879466555495-a-geu2-23563-1529151-598"
+  Error405:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "4001"
+      statusMessage:
+        type: string
+        description: "Not Allowed"
+        example: "Not Allowed"
+      SupportMessage:
+        type: string
+        description: "Invalid http method"
+        example: "Method Not Allowed"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "rrt-2055955879466555495-a-geu2-23563-1529151-598"
+  Error408:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "3003"
+      statusMessage:
+        type: string
+        description: "The request timed out."
+        example: "The request timed out."
+      SupportMessage:
+        type: string
+        description: "The server took too long to respond."
+        example: "The server took too long to respond."
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "rrt-2055955879466555495-a-geu2-23563-1529151-598"
+  Error415:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: HTTP error code extension
+        example: "5000"
+      statusMessage:
+        type: string
+        description: "Media type is not supported"
+        example: "Unsupported Media Type"
+      SupportMessage:
+        type: string
+        description: "Unsupported Media Type.It should be application/json"
+        example: "Unsupported Media Type.It should be application/json"
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "rrt-2055955879466555495-a-geu2-23563-1529151-598" 
+  Error500:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: "HTTP error code extension\n3000-Provider API Internal server error.\n3001-Processing error\n1005-Please retry"
+        example: "3000"
+        enum:
+          - "3000"
+          - "3001"
+          - "1005"
+      statusMessage:
+        type: string
+        description: "Brief description"
+        example: "System error"
+      SupportMessage:
+        type: string
+        description: "More information on error\n3000-Provider API Internal server error.\n3001-Processing error\n1005-Please retry"
+        example: "Provider API Internal server error."
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "rrt-2055955879466555495-a-geu2-23563-1529151-598"
+  Error503:
+    type: object
+    properties:
+      statusCode:
+        type: string
+        description: "Service Unavailable"
+        example: "5002"
+      statusMessage:
+        type: string
+        description: "Service Unavailable"
+        example: "Service Unavailable"
+      SupportMessage:
+        type: string
+        description: "Service Unavailable"
+        example: "Provider API Service Unavailable."
+      transactionId:
+        type: string
+        description: "Id for tracing."
+        example: "rrt-2055955879466555495-a-geu2-23563-1529151-598"

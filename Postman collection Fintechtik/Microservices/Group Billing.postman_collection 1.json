@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "8b039091-6dc1-41a2-8475-10b8327103e8",
+		"name": "Group Billing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-8b039091-6dc1-41a2-8475-10b8327103e8?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "Member",
+			"item": [
+				{
+					"name": "Member-Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\": \"zafar@Finteck.com\",\r\n    \"Phone\": \"+23355551234\",\r\n    \"Password\": \"123\",\r\n    \"Description\": \"User for Test organization\",\r\n    \"Address\": \"123 ACCRA Street,Ghana\",\r\n    \"group_code\":\"SRLJDQYL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/member/Member-Signup",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"member",
+								"Member-Signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-member-profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"member_type\": \"MEMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/member/get-member-profile",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"member",
+								"get-member-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-billers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/api/member/get-billers",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"member",
+								"get-billers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Group",
+			"item": [
+				{
+					"name": "Group Signup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiemVlc2hhbi5pbHlhc0BmaW50ZWNodGlrLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6InplZXNoYW4uaWx5YXNAZmludGVjaHRpay5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiIyMDIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIyMDMiLCJleHAiOjE3MTk5NTM4NTQsImlzcyI6Im1vam93ZWIiLCJhdWQiOiJtb2pvbW9iaWxlIn0._45zdI32PjzlGxGXAGTEAhIudfmXExTdF7E-Er__6yg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\": \"test345@Finteck.com\",\r\n    \"Phone\": \"+23355551234\",\r\n    \"Password\": \"123@345\",\r\n    \"OrganizationName\": \"Finteck org\",\r\n    \"Description\": \"its an payment service.\",\r\n    \"Address\": \"123 ACCRA Street,Ghana\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/Organization/org-signup",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"Organization",
+								"org-signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-group-detail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/api/Organization/get-group-detail",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"Organization",
+								"get-group-detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get org members",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/api/member/get-members",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"member",
+								"get-members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_group_details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"group_title\": \"Test group\",\r\n    \"Description\": \"test group description\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/organization/update_group_details",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"organization",
+								"update_group_details"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "user-login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"test001@Finteck.com\",\r\n  \"password\": \"qaz123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/account/user-login",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"user-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"zeeshan.ilyas@fintechtik.com\",\r\n    \"code\": \"26882\",\r\n    \"new_password\": \"qaz123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/account/reset-password",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"zeeshan.ilyas@fintechtik.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/account/forgot-password",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"RefreshToken\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/account/refresh-token",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiemVlc2hhbi5pbHlhc0BmaW50ZWNodGlrLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6InplZXNoYW4uaWx5YXNAZmludGVjaHRpay5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiIyMDIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIyMDMiLCJleHAiOjE3MTk5NTM4NTQsImlzcyI6Im1vam93ZWIiLCJhdWQiOiJtb2pvbW9iaWxlIn0._45zdI32PjzlGxGXAGTEAhIudfmXExTdF7E-Er__6yg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7234/api/member/get-members",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7234",
+					"path": [
+						"api",
+						"member",
+						"get-members"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdDAwMDNARmludGVjay5jb20iLCJleHAiOjE3MjAwODI2NDYsImlzcyI6Im1vam93ZWIiLCJhdWQiOiJtb2pvbW9iaWxlIn0.3tF1ZBSq3_9EfegikgY34o_eH36K29GZ5oQEwS6queA",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "https://localhost:7234",
+			"type": "string"
+		}
+	]
+}

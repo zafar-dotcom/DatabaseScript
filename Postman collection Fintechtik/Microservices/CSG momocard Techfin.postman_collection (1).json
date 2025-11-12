@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "12c9cdee-ace9-4fba-b699-356a75824e99",
+		"name": "CSG momocard Techfin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-12c9cdee-ace9-4fba-b699-356a75824e99?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "MomoCard",
+			"item": [
+				{
+					"name": "cardissuance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-id",
+								"value": ""
+							},
+							{
+								"key": "x-app-key",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"network\": \"MTN\",\r\n  \"mobile\": \"+233456786821\",\r\n  \"productCode\": \"MOMOCARD\",\r\n  \"userName\": \"TEST\",\r\n  \"email\": \"test@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/momocards/cardissuance",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"momocards",
+								"cardissuance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-id",
+								"value": ""
+							},
+							{
+								"key": "x-app-key",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"network\": \"MTN\",\r\n  \"mobile\": \"+233456786821\",\r\n  \"cardIssuanceId\": \"306036584289\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/momocards/verify",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"momocards",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-id",
+								"value": ""
+							},
+							{
+								"key": "x-app-key",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"network\": \"MTN\",\r\n  \"mobile\": \"+233456786821\",\r\n  \"cardIssuanceId\": \"106036584286\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/momocards/confirm",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"momocards",
+								"confirm"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "initiatepayment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-id",
+								"value": ""
+							},
+							{
+								"key": "x-app-key",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Name\": \"John Doe\",\r\n  \"CustomerID\": \"123456\",\r\n  \"Amount\": 100.00,\r\n  \"Currency\": \"GHS\",\r\n  \"CountryCode\": \"GHA\",\r\n  \"Email\": \"john@example.com\",\r\n  \"Mobile\": \"+2334567890234\",\r\n  \"MobileNetwork\": \"VODAFONE\",\r\n  \"Timeout\": 60,\r\n  \"Description\": \"Atm withdrawl\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/Payments/initiatepayment?referenceId=1c13479f-07cb-46f1-af91-70c0cb01541f",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"Payments",
+								"initiatepayment"
+							],
+							"query": [
+								{
+									"key": "referenceId",
+									"value": "1c13479f-07cb-46f1-af91-70c0cb01541f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-id",
+								"value": ""
+							},
+							{
+								"key": "x-app-key",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Name\": \"John Doe\",\r\n  \"CustomerID\": \"123456\",\r\n  \"Amount\": 100.00,\r\n  \"Currency\": \"GHS\",\r\n  \"CountryCode\": \"GHA\",\r\n  \"Email\": \"john@example.com\",\r\n  \"Mobile\": \"+2334567890234\",\r\n  \"MobileNetwork\": \"VODAFONE\",\r\n  \"Timeout\": 60,\r\n  \"Description\": \"Atm withdrawl\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/Payments/status/1c13479f-07cb-46f1-af91-70c0cb01541f",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"Payments",
+								"status",
+								"1c13479f-07cb-46f1-af91-70c0cb01541f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reverse",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-id",
+								"value": ""
+							},
+							{
+								"key": "x-app-key",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Amount\": 100.00,\r\n  \"PaymentMode\": \"MTN\" \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/Payments/reverse/1c13479f-07cb-46f1-af91-70c0cb01541f",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"Payments",
+								"reverse",
+								"1c13479f-07cb-46f1-af91-70c0cb01541f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kyc",
+			"item": [
+				{
+					"name": "profile Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-id",
+								"value": ""
+							},
+							{
+								"key": "x-app-key",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"network\": \"MTN\",\r\n  \"mobile\": \"+23345678681\",\r\n  \"cardIssuanceId\": \"110630969660\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/kyc/profile",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"kyc",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "https://devsrv.cspay.app/momocard",
+			"type": "string"
+		}
+	]
+}

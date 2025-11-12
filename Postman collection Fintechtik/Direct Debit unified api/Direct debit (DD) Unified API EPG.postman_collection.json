@@ -1,0 +1,1121 @@
+{
+	"info": {
+		"_postman_id": "1e942400-5707-4c79-a5b5-b53835081e49",
+		"name": "Direct debit (DD) Unified API EPG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645",
+		"_collection_link": "https://dark-satellite-211344.postman.co/workspace/DD-Unified_Api-(CSG%252BEPG)~16e1350a-c89b-4893-a68b-131d6ede7dfd/collection/14223645-1e942400-5707-4c79-a5b5-b53835081e49?action=share&source=collection_link&creator=14223645"
+	},
+	"item": [
+		{
+			"name": "Mockon responses",
+			"item": [
+				{
+					"name": "PreApprovalRequest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v2/madapi/PreApprovalRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"madapi",
+								"PreApprovalRequest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelPreapproval",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v2/madapi/cancelPreapproval",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"madapi",
+								"cancelPreapproval"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostPayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v2/madapi/PostPayment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"madapi",
+								"PostPayment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostPayment Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v2/madapi/PostPayment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"madapi",
+								"PostPayment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/mtn-madapi-preapproval-callBack/{proxy+} Copy",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"referenceId\": \"testReference007\",\r\n    \"preapprovalStatus\": \"APPROVED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://diij3avn54.execute-api.eu-west-3.amazonaws.com/devtest/MtnApi/MadApiPreApprovalCallback",
+							"protocol": "https",
+							"host": [
+								"diij3avn54",
+								"execute-api",
+								"eu-west-3",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"devtest",
+								"MtnApi",
+								"MadApiPreApprovalCallback"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthToken",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse JSON response\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"// Check if accessToken exists\r",
+							"if (jsonData && jsonData.accessToken) {\r",
+							"    // Save it as a GLOBAL variable\r",
+							"    pm.globals.set(\"DDaccessToken\", jsonData.accessToken);\r",
+							"\r",
+							"    // Optional: Log it in Postman Console for debugging\r",
+							"    console.log(\"New Access Token:\", jsonData.accessToken);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"AppId\": \"7095548480\",    //TISSOT \r\n    \"AppKey\": \"00163605\"\r\n \r\n}\r\n\r\n// TISSOT WATCH\r\n// 7095548480\r\n// 00163605\r\n// 104818 entityid\r\n//EPG merchant\r\n// {\r\n//    \"AppId\": \"5312087842\", //Wara\r\n//    \"AppKey\": \"60070471\"\r\n// }\r\n\r\n// {\r\n//     \"AppId\": \"3435590135\",    //TESTMERCHANT \r\n//     \"AppKey\": \"37144652\"\r\n \r\n// }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/api/auth/token",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create OTA Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Base numbers with fixed status prefix\r",
+							"const baseNumbers = [\r",
+							"    \"+23314486\", // SUCCESS\r",
+							"    \"+23324486\", // Time out\r",
+							"    \"+23334486\", // Failed\r",
+							"    \"+23344486\"  // Internal Error\r",
+							"];\r",
+							"\r",
+							"// Pick one status randomly\r",
+							"let base = baseNumbers[Math.floor(Math.random() * baseNumbers.length)];\r",
+							"\r",
+							"// Generate random 3-4 digit suffix\r",
+							"let suffix = Math.floor(1000 + Math.random() * 9000); // 4 digits\r",
+							"let selectedMobile = base + suffix;\r",
+							"\r",
+							"// Save mobile into Postman global\r",
+							"pm.globals.set(\"Mobile\", selectedMobile);\r",
+							"\r",
+							"// Generate a random Frequency (Monthly, Weekly, Daily, Yearly)\r",
+							"const frequencies = [\"MONTHLY\", \"WEEKLY\", \"DAILY\", \"YEARLY\"];\r",
+							"let randomFrequency = frequencies[Math.floor(Math.random() * frequencies.length)];\r",
+							"pm.globals.set(\"Frequency\", randomFrequency);\r",
+							"\r",
+							"// Get today's date in YYYY-MM-DD format\r",
+							"let today = new Date();\r",
+							"let todayStr = today.toISOString().split(\"T\")[0] + \"T00:00:00\";\r",
+							"pm.globals.set(\"StartDate\", todayStr);\r",
+							"\r",
+							"// Get end date (1 year later)\r",
+							"let endDate = new Date();\r",
+							"endDate.setFullYear(endDate.getFullYear() + 1);\r",
+							"let endDateStr = endDate.toISOString().split(\"T\")[0] + \"T00:00:00\";\r",
+							"pm.globals.set(\"EndDate\", endDateStr);\r",
+							"\r",
+							"// Generate a random OrderId (16-digit random number)\r",
+							"let randomOrderId = Math.floor(1000000000000000 + Math.random() * 9000000000000000).toString();\r",
+							"pm.globals.set(\"OrderId\", randomOrderId);\r",
+							"\r",
+							"// Generate a random Description\r",
+							"const descriptions = [\r",
+							"    \"Subscription for premium service\",\r",
+							"    \"Payment for monthly package\",\r",
+							"    \"Weekly renewal of streaming service\",\r",
+							"    \"Yearly gym membership renewal\",\r",
+							"    \"Mobile data plan subscription\"\r",
+							"];\r",
+							"let randomDescription = descriptions[Math.floor(Math.random() * descriptions.length)];\r",
+							"pm.globals.set(\"Description\", randomDescription);\r",
+							"\r",
+							"// Log values in Postman Console for debugging\r",
+							"console.log(\"Selected Mobile:\", selectedMobile);\r",
+							"console.log(\"Generated Frequency:\", randomFrequency);\r",
+							"console.log(\"Start Date:\", todayStr);\r",
+							"console.log(\"End Date:\", endDateStr);\r",
+							"console.log(\"Generated OrderId:\", randomOrderId);\r",
+							"console.log(\"Generated Description:\", randomDescription);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Mobile\": \"+233535188900\",\r\n    \"Network\": \"MTN\",/*MTN*/\r\n    \"Amount\": 10.00,\r\n    \"Currency\": \"GHS\",\r\n    \"Frequency\": \"daily\",\r\n    \"Country\": \"GHA\",\r\n    \"StartDate\": \"2025-09-11T00:00:00Z\",\r\n    \"EndDate\": \"2025-09-30T23:59:59Z\",\r\n    \"DayOfDebit\": 5,\r\n    \"Data\": {\r\n        \"MerchantReferenceId\": \"54654768444429sesr5e\",\r\n        \"Description\": \"daily subscription payment\"\r\n    },\r\n    \"PlatformScheduling\": false,\r\n    \"FeeTypeCode\": \"POS\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://8tpfge5956.execute-api.eu-west-3.amazonaws.com/dev/dd/ota",
+					"protocol": "https",
+					"host": [
+						"8tpfge5956",
+						"execute-api",
+						"eu-west-3",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"dd",
+						"ota"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OTA STATUS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let mandateId = data.MandateId;\r",
+							"let mobile = data.Mobile;\r",
+							"\r",
+							"let url = `https://localhost:7186/api/mandate/Consent?Mobile=${mobile}&MandateId=${mandateId}`;\r",
+							"pm.sendRequest({\r",
+							"    url: url,\r",
+							"    method: 'GET',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    console.log(res);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{dev}}/api/mandate/status?MerchantReferenceId=123456789346587872611111",
+					"host": [
+						"{{dev}}"
+					],
+					"path": [
+						"api",
+						"mandate",
+						"status"
+					],
+					"query": [
+						{
+							"key": "MerchantReferenceId",
+							"value": "123456789346587872611111"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MadApiOtaCallbackApiGatway",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"referenceId\": \"testReference007\",\r\n    \"preapprovalStatus\": \"APPROVED\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://diij3avn54.execute-api.eu-west-3.amazonaws.com/devtest/MtnApi/MadApiPreApprovalCallback",
+					"protocol": "https",
+					"host": [
+						"diij3avn54",
+						"execute-api",
+						"eu-west-3",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"devtest",
+						"MtnApi",
+						"MadApiPreApprovalCallback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel OTA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Mobile\": \"+233444865724\",\r\n    \"MandateId\": \"19\",\r\n    \"Reason\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://8tpfge5956.execute-api.eu-west-3.amazonaws.com/dev/dd/cancel-ota",
+					"protocol": "https",
+					"host": [
+						"8tpfge5956",
+						"execute-api",
+						"eu-west-3",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"dd",
+						"cancel-ota"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel BBOX OTA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Mobile\": \"+233444865724\",\r\n    \"MandateId\": \"19\",\r\n    \"Reason\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://8tpfge5956.execute-api.eu-west-3.amazonaws.com/dev/dd/cancel-ota",
+					"protocol": "https",
+					"host": [
+						"8tpfge5956",
+						"execute-api",
+						"eu-west-3",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"dd",
+						"cancel-ota"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Generating a random TransactionReferenceId\r",
+							"let referenceId = 'TXN-' + Math.floor(Math.random() * 1000000);\r",
+							"pm.environment.set(\"TransactionReferenceId\", referenceId);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"MandateId\": \"248\",\r\n    \"Amount\":12,\r\n    \"Currency\": \"GHS\",\r\n    \"TransactionReferenceId\": \"436545656fretet84632\",\r\n    \"Network\" : \"MTN\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/api/DirectDebit/Payment",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"DirectDebit",
+						"Payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create payment Mtn",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// List of MandateIds\r",
+							"// Store all GATEWAY_REFERENCE_IDs in a constant array\r",
+							"let mandates = [\r",
+							"    \"1376821774\",\r",
+							"    \"1376821774\",\r",
+							"    \"1376821774\",\r",
+							"    \"508097743\",\r",
+							"    \"1034162244\",\r",
+							"    \"1006642117\",\r",
+							"    \"192758887\",\r",
+							"    \"1938694809\",\r",
+							"    \"1938694809\",\r",
+							"    \"1938694809\",\r",
+							"    \"1762970540\",\r",
+							"    \"964214274\",\r",
+							"    \"1349252915\",\r",
+							"    \"228980955\",\r",
+							"    \"228980955\",\r",
+							"    \"228980955\",\r",
+							"    \"687195849\",\r",
+							"    \"687195849\",\r",
+							"    \"346058222\",\r",
+							"    \"1210197374\",\r",
+							"    \"1930651523\",\r",
+							"    \"1930651523\",\r",
+							"    \"1930651523\",\r",
+							"    \"520560863\",\r",
+							"    \"158817334\",\r",
+							"    \"1508500900\",\r",
+							"    \"1519183036\",\r",
+							"    \"1033930372\",\r",
+							"    \"1033930372\",\r",
+							"    \"1844221365\",\r",
+							"    \"1844221365\",\r",
+							"    \"1844221365\",\r",
+							"    \"1021903273\",\r",
+							"    \"1545005496\",\r",
+							"    \"1545005496\",\r",
+							"    \"1545005496\",\r",
+							"    \"544389499\",\r",
+							"    \"68932837\",\r",
+							"    \"68932837\",\r",
+							"    \"50708556\",\r",
+							"    \"1921290708\",\r",
+							"    \"530727176\",\r",
+							"    \"530727176\",\r",
+							"    \"333616260\",\r",
+							"    \"333616260\",\r",
+							"    \"918846047\",\r",
+							"    \"194749361\",\r",
+							"    \"68616339\",\r",
+							"    \"667743477\",\r",
+							"    \"653651852\"\r",
+							"];\r",
+							"\r",
+							"// Pick the next MandateId (you can rotate through the list)\r",
+							"let currentIndex = pm.environment.get(\"mandateIndex\") || 0;\r",
+							"let mandateId = mandates[currentIndex];\r",
+							"\r",
+							"// Update index for next request\r",
+							"currentIndex = (currentIndex + 1) % mandates.length;\r",
+							"pm.environment.set(\"mandateIndex\", currentIndex);\r",
+							"\r",
+							"// Generate unique TransactionReferenceId\r",
+							"let transactionReferenceId = \"TRX-\" + Date.now() + \"-\" + Math.floor(Math.random() * 1000);\r",
+							"\r",
+							"// Save to environment variables for the body\r",
+							"pm.environment.set(\"MandateId\", mandateId);\r",
+							"pm.environment.set(\"TransactionReferenceId\", transactionReferenceId);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"PreApprovalId\": \"{{MandateId}}\",\r\n    \"Amount\": 16,\r\n    \"Currency\": \"GHS\",\r\n    \"TransactionReferenceId\": \"{{TransactionReferenceId}}\",\r\n    \"Network\": \"MTN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/api/DirectDebit/MtnPayment",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"DirectDebit",
+						"MtnPayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Direct Debit Payment status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ1NHUExVUyBURVNUIiwibWVyY2hhbnRfZW50aXR5X2lkIjoiMTQ5ODEwIiwianRpIjoiMDdjYzRmMGItZTZjMi00ODZmLWI1N2UtMzgwYjRkYjEwMmYzIiwiQXBwSWQiOiIzMzE0OTM0MDI0IiwiQXBwS2V5IjoiNjQ2MDMzNDQiLCJleHAiOjE3NTU2MDczMjAsImlzcyI6IlVuaWZpZWQgQXBpIiwiYXVkIjoiTW9qb1BheSJ9.DKhIvgnex01CNf6RBLa3qaZGiDzvQOF1oqKOzuQXhXQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"MandateId\" :\"241\",\r\n    \"TransactionReferenceId\" : \"43654565684632\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev}}/api/DirectDebit/status",
+					"host": [
+						"{{dev}}"
+					],
+					"path": [
+						"api",
+						"DirectDebit",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MadApiPreApprovalCallback",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Store all system reference IDs in a constant array\r",
+							"const systemReferenceIds = [\r",
+							"    \"147cf41a62569ac383ae1f376f585488\",\r",
+							"    \"0ffa152d36ae06210430f179e5a311bb\",\r",
+							"    \"0ec697ed6447d0a86edfe25a557735b9\",\r",
+							"    \"f7083227a91c58c91877059a65842d55\",\r",
+							"    \"c708bef82389a12c4e84cf4f962858e9\",\r",
+							"    \"6a9a7405ac000cf3eb692cb6db53c361\",\r",
+							"    \"123dfa52f3a039add12d637479ae8e38\",\r",
+							"    \"f0f8ded6ccb7d1fe3135d016f6c951c5\",\r",
+							"    \"0c4b2448819d3e9ba63ccf848a2aeaf8\",\r",
+							"    \"7392a1558f7caec3922bd1ea004b4686\",\r",
+							"    \"5256b62a20a01ed38fce740c49aec061\",\r",
+							"    \"7cb765de6407f1a07267cd5f8de3be59\",\r",
+							"    \"f41f7850f42399e4e7cf2ea4c5e889d2\",\r",
+							"    \"50abc0dacb46e1f0a987bedb048037f5\",\r",
+							"    \"29fc69ce578582c1b521a5fa10ebd1c7\",\r",
+							"    \"f902cef6546d82b7ed0b997fd502c472\",\r",
+							"    \"efc8db075f4970e355690c5ac7f24cca\",\r",
+							"    \"767bf48c30e58556e58fec8dec7efc74\",\r",
+							"    \"3ac5d37e4b510b46e5f51b72da63bd02\",\r",
+							"    \"5f8009b23413c531583d34f4c8110cb1\",\r",
+							"    \"06f6e5eb5d79acea9c8212ba25b27c3f\",\r",
+							"    \"b12149d1df2f5e984e76024bba1f673f\",\r",
+							"    \"2e5c1ddcf8c427ce2f97e18d5bde088d\",\r",
+							"    \"482a4578396fa0938a0f06b5b810384a\",\r",
+							"    \"bfda0fd07148b52c88d3d5fd66dd217c\",\r",
+							"    \"7b31d299718a241687558ba598c52760\",\r",
+							"    \"77393b908ad6bcedd0fa83891edc7983\",\r",
+							"    \"d3e6e2e55584581fff7cb60b1a06cf8f\",\r",
+							"    \"6b28c285e2a4cba98711d95e23bb8241\",\r",
+							"    \"ea5b042406816dd4177cdd9d281adfbf\",\r",
+							"    \"d9b6f1ac6eaca24a6753b06628711bc3\",\r",
+							"    \"4eed35777f475d6a7146730c2eda09a7\",\r",
+							"    \"280618fbfc8b81044d9f626ac6095922\",\r",
+							"    \"58d038cbdf302059846ab8f04b997553\",\r",
+							"    \"0522667621ed7ff0151c16cafcca764e\",\r",
+							"    \"0ee50a49d13574f8b5f81e61769a856a\",\r",
+							"    \"3f1c39975fa788a68ecec794d0aa24f0\",\r",
+							"    \"0094b50adfb1b6cf7408e38a1fb406d4\",\r",
+							"    \"a94e6203c166a16b75f4454825d2e2a3\",\r",
+							"    \"8bd4d1c48dbc5a37fd431c985c48349c\",\r",
+							"    \"deda5b10ec93b838d0a493b78788d859\",\r",
+							"    \"2642a34b20aadf336ede61170f6ade05\",\r",
+							"    \"46c0cc472ab536d32804b2ddcdd59e9c\",\r",
+							"    \"06be73a26a9573b7b311d2ce936df1aa\",\r",
+							"    \"f44fa3b1d00d80586bed8d4a0041e4a4\",\r",
+							"    \"c873ae49217db4953f8d1b718093f58e\",\r",
+							"    \"056f4029ebb7e8a93dbbe7ba02de41d4\",\r",
+							"    \"066c80c7e81fe985d55cb933ac41e388\",\r",
+							"    \"8d1e1325412700500d8feab14fde5078\",\r",
+							"    \"a181de1d24520538cb4fcfedeefce3ed\"\r",
+							"];\r",
+							"\r",
+							"// Pick the next ID in sequence or randomly\r",
+							"// Example: pick random\r",
+							"const randomIndex = Math.floor(Math.random() * systemReferenceIds.length);\r",
+							"const selectedReferenceId = systemReferenceIds[randomIndex];\r",
+							"\r",
+							"// Save it as a Postman variable to use in the request body\r",
+							"pm.collectionVariables.set(\"systemReferenceId\", selectedReferenceId);\r",
+							"\r",
+							"// Example request body usage in Body tab (raw JSON):\r",
+							"// {\r",
+							"//   \"referenceId\": \"{{systemReferenceId}}\",\r",
+							"//   \"preapprovalStatus\": \"APPROVED\"\r",
+							"// }\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"referenceId\" : \"{{systemReferenceId}}\",\r\n    \"preapprovalStatus\" : \"APPROVED\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/api/MtnMadApiCallback/preapproval/notification",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"MtnMadApiCallback",
+						"preapproval",
+						"notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancel-dd-mandate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let mandateId = data.MandateId;\r",
+							"let mobile = data.Mobile;\r",
+							"\r",
+							"let url = `https://localhost:7186/api/mandate/Consent?Mobile=${mobile}&MandateId=${mandateId}`;\r",
+							"pm.sendRequest({\r",
+							"    url: url,\r",
+							"    method: 'GET',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    console.log(res);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"MandateId\": \"579\",\r\n    \"Mobile\": \"2331448697219\",\r\n    \"Reason\": \"Testing Reason\" \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev}}/api/mandate/CancelMandate",
+					"host": [
+						"{{dev}}"
+					],
+					"path": [
+						"api",
+						"mandate",
+						"CancelMandate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Active Mandate List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let mandateId = data.MandateId;\r",
+							"let mobile = data.Mobile;\r",
+							"\r",
+							"let url = `https://localhost:7186/api/mandate/Consent?Mobile=${mobile}&MandateId=${mandateId}`;\r",
+							"pm.sendRequest({\r",
+							"    url: url,\r",
+							"    method: 'GET',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    console.log(res);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7186/api/mandate/fetch-active-mandate-list",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7186",
+					"path": [
+						"api",
+						"mandate",
+						"fetch-active-mandate-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MandateVodafone Callback",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_OriginalConversationID\": \"1234567890\",\r\n  \"input_TransactionReference\": \"8\",\r\n  \"input_MsisdnToken\": \"TOKEN123456\",\r\n  \"input_ThirdPartyConversationID\": \"fbf833c40b29aa86103b82fd3936830f\",\r\n  \"input_ResultCode\": \"INS-0\",\r\n  \"input_ResultDesc\": \"Successfully Processed!\",\r\n  \"input_MandateID\": \"MANDATE12345\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7006/api/VodafoneOpenApiCallbacks/DDMandateNotification",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"VodafoneOpenApiCallbacks",
+						"DDMandateNotification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MTN Callback API",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7006/MtnPreApproval/PreApprovalCallback/d344828af118458baeac5b769dbad2e7",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"MtnPreApproval",
+						"PreApprovalCallback",
+						"d344828af118458baeac5b769dbad2e7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MTN Callback CSG",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:52627/MtnPreApproval/PreApprovalCallbackV2/d344828af118458baeac5b769dbad2e7",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "52627",
+					"path": [
+						"MtnPreApproval",
+						"PreApprovalCallbackV2",
+						"d344828af118458baeac5b769dbad2e7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MandateVodafone Callback Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_OriginalConversationID\": \"1234567890\",\r\n  \"input_TransactionReference\": \"8\",\r\n  \"input_MsisdnToken\": \"TOKEN123456\",\r\n  \"input_ThirdPartyConversationID\": \"fbf833c40b29aa86103b82fd3936830f\",\r\n  \"input_ResultCode\": \"INS-0\",\r\n  \"input_ResultDesc\": \"Successfully Processed!\",\r\n  \"input_MandateID\": \"MANDATE12345\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://callbacks-dev.mojo-pay.com:8080/api/VodafoneOpenApiCallbacks/DDMandateNotification",
+					"protocol": "http",
+					"host": [
+						"callbacks-dev",
+						"mojo-pay",
+						"com"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"VodafoneOpenApiCallbacks",
+						"DDMandateNotification"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{DDaccessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "https://localhost:7186"
+		},
+		{
+			"key": "dev",
+			"value": "https://devsrv-directdebit.cspay.app",
+			"disabled": true
+		},
+		{
+			"key": "systemReferenceId",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "dev",
+			"value": "https://unified-directdebit-dev.interpayafrica.com"
+		}
+	]
+}

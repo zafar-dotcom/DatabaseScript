@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "b4b28e0c-1d4d-4787-bd69-3d466eafceaa",
+		"name": "Collectionc + Cashout EP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "MMPayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// dev url : https://devsrv.interpayafrica.com/v7 \r\n {\r\n  \"app_id\": \"2277260506\",//nhia\r\n  \"app_key\": \"11032676\",\r\n  \"name\": \"test user\",\r\n  \"mobile_network\":\"MTN\",\r\n  \"email\":\"test@gmail.com\",\r\n  \"mobile\":\"233209092931\",\r\n  \"currency\":\"GHS\",\r\n  \"amount\":1,\r\n  \"order_id\":\"8863434j35656uy\",\r\n  \"order_desc\":\"Demo Order testing\",\r\n  \"IS_HMAC_SIGNATURE_ENABLED\":0,\r\n  \"merchantcode\":\"10210\",\r\n  \"terminal_id\":\"xyz\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:14331/interapi.svc/CreateMMPayment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14331",
+					"path": [
+						"interapi.svc",
+						"CreateMMPayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCashoutTrans",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"app_id\": \"2277260506\",\r\n    \"app_key\": \"11032676\",\r\n    \"trans_amount\": 1,\r\n    \"payment_mode\": \"MMT\",\r\n    \"payee_name\": \"AnchoraTechs\",\r\n    \"payee_mobile\": \"0208125139\",\r\n    \"recipient_name\": \"Bernard Danso\",\r\n    \"recipient_mobile\": \"+233249567265\",\r\n    \"trans_currency\": \"GHS\",\r\n    \"narration\": \"CREDIT\",\r\n    \"transaction_type\": \"local\",\r\n    \"expiry_date\": \"/Date(2024-12-09t11:43:37/\",\r\n    \"transaction_date\": \"/Date(2024-12-01t11:43:37/\",\r\n    \"merch_trans_ref_no\": \"45g4343hjyt123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:14331/CashoutRestV2.svc/CreateCashoutTrans",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14331",
+					"path": [
+						"CashoutRestV2.svc",
+						"CreateCashoutTrans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCashoutTrans BAT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"app_id\": \"2277260506\",\r\n    \"app_key\": \"11032676\",\r\n   \"merch_trans_ref_no\":\"534677528398882\",\r\n \"transaction_date\": \"/Date(2024-12-09t11:06:08)/\",\r\n    \"expiry_date\": \"/Date(2024-12-25t11:06:08)/\",\r\n \"trans_currency\":\"GHS\",\r\n \"trans_amount\":2.555,\r\n \"transaction_type\":\"local\",\r\n \"payee_name\":\"Orobo Payments\",\r\n  \"payee_mobile\" : \"+233248886541\",\r\n \"payee_email\":\"iiloeje@orobo.com\",\r\n \"Narration\":\"Orobo Bill Payments\",\r\n \"payment_mode\":\"BAT\",\r\n \"recipient_name\":\"test\",\r\n \"bank_branch_sort_code\":\"280100\",\r\n \"bank_account_no\":\"0043490200\",  //0043490218\r\n \"bank_account_title\":\"ikenna iloeje\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:14331/CashoutRestV2.svc/CreateCashoutTrans",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "14331",
+					"path": [
+						"CashoutRestV2.svc",
+						"CreateCashoutTrans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTransStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"9232163604\",\r\n    \"app_key\": \"66245076\",\r\n    \"merchant_ref\": \"INVUAT876459x550210155121913910\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/Cashout/GetTxnStatus",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"Cashout",
+						"GetTxnStatus"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "http://localhost:14331",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "BaseUrl",
+			"value": "https://localhost:44312",
+			"type": "string"
+		},
+		{
+			"key": "BaseUrl",
+			"value": "https://devsrv.cspay.app/v2",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "df664751-c782-4b35-8c9d-62f3ec56e523",
+		"name": "Collections Api's Sandbox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645",
+		"_collection_link": "https://dark-satellite-211344.postman.co/workspace/Global-APIs-FIDO~0553f143-3f07-4ac7-845b-25c36c446613/collection/14223645-df664751-c782-4b35-8c9d-62f3ec56e523?action=share&source=collection_link&creator=14223645"
+	},
+	"item": [
+		{
+			"name": "Collection",
+			"item": [
+				{
+					"name": "initpayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"CustomerName\":\"test\",\r\n    \"Network\":\"MTN\",\r\n    \"Mobile\":\"+2334545454\",\r\n    \"Email\":\"test@mail.com\",\r\n    \"FeeTypeCode\":\"GENERALPAYMENT\",\r\n    \"Currency\":\"GHS\",\r\n    \"CountryCode\":\"GHA\",\r\n    \"Amount\": 1.0,\r\n    \"OrderId\":\"12GHTEST61\",\r\n    \"OrderDesc\":\"1212\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sandbox}}/api/payments/initpayment",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"initpayment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sandbox}}/api/payments/status/12GHTEST61",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"status",
+								"12GHTEST61"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kyc Copy",
+			"item": [
+				{
+					"name": "KYC bank/profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"BankCode\": \"300311\",  //300311\r\n    \"BankAccount\": \"6010913802\" ,  //\r\n    \"CountryCode\": \"GHA\"   //\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sandbox}}/api/Kyc/bank/profile",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"Kyc",
+								"bank",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "KYC momo/profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"network\":\"MTN\",\r\n    \"MSISDN\":\"+233244371378\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{sandbox}}/api/Kyc/momo/profile",
+							"host": [
+								"{{sandbox}}"
+							],
+							"path": [
+								"api",
+								"Kyc",
+								"momo",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "01412551",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "8389734492",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "sandbox",
+			"value": "https://glbl-clxn.cspay.app"
+		}
+	]
+}

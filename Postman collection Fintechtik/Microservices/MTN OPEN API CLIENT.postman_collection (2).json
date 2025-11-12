@@ -1,0 +1,809 @@
+{
+	"info": {
+		"_postman_id": "7e2ebe85-c8cb-4aa1-bb45-ba92105c3269",
+		"name": "MTN OPEN API CLIENT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-7e2ebe85-c8cb-4aa1-bb45-ba92105c3269?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "Collections",
+			"item": [
+				{
+					"name": "/MtnCollections/AccountHolder",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/MtnCollections/AccountHolder?accountHolderIdType=msisdn&accountHolderId=233264371234",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnCollections",
+								"AccountHolder"
+							],
+							"query": [
+								{
+									"key": "accountHolderIdType",
+									"value": "msisdn"
+								},
+								{
+									"key": "accountHolderId",
+									"value": "233264371234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/MtnCollections/AccountHolder Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://devsrv.cspay.app/mtnapi/MtnCollections/AccountBalance",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"mtnapi",
+								"MtnCollections",
+								"AccountBalance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MtnCollections/RequestToPay",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-collection-type",
+								"value": "direct-debit",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": \"1\",\r\n  \"currency\": \"EUR\",\r\n  \"externalId\": \"22222\",\r\n  \"payer\": {\r\n    \"partyIdType\": \"MSISDN\",\r\n    \"partyId\": \"0557143133\"\r\n  },\r\n  \"payerMessage\": \"test\",\r\n  \"payeeNote\": \"test note\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/MtnCollections/RequestToPay?referenceId=21305a4d-55e1-25dc-85d7-56b41121a21b",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnCollections",
+								"RequestToPay"
+							],
+							"query": [
+								{
+									"key": "referenceId",
+									"value": "21305a4d-55e1-25dc-85d7-56b41121a21b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CollectionTransfer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-collection-type",
+								"value": "instore",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": \"1\",\r\n  \"currency\": \"EUR\",\r\n  \"externalId\": \"22233\",\r\n  \"payee\": {\r\n    \"partyIdType\": \"MSISDN\",\r\n    \"partyId\": \"0557143133\"\r\n  },\r\n  \"payerMessage\": \"test\",\r\n  \"payeeNote\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/MtnCollections/CollectionTransfer?referenceId=6b947021-7867-4dd8-ae4a-9a38a5625093",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnCollections",
+								"CollectionTransfer"
+							],
+							"query": [
+								{
+									"key": "referenceId",
+									"value": "6b947021-7867-4dd8-ae4a-9a38a5625093"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MtnCollections/RequestToPay  status",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/MtnCollections/RequestToPay/6b947021-7867-4dd8-ae4a-9a38a5615193",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnCollections",
+								"RequestToPay",
+								"6b947021-7867-4dd8-ae4a-9a38a5615193"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MtnCollections/RequestToPay  status Copy",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://devsrv.cspay.app/mtnapi/MtnCollections/RequestToPayCallback/27309a9d-55e3-45dc-86d2-56b45427a40b",
+							"protocol": "http",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"mtnapi",
+								"MtnCollections",
+								"RequestToPayCallback",
+								"27309a9d-55e3-45dc-86d2-56b45427a40b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Remittance",
+			"item": [
+				{
+					"name": "/MtnRemittance/Transfer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": \"22\",\r\n  \"currency\": \"EUR\",\r\n  \"externalId\": \"2223\",\r\n  \"payee\": {\r\n    \"partyIdType\": \"MSISDN\",\r\n    \"partyId\": \"0557143133\"\r\n  },\r\n  \"payerMessage\": \"test\",\r\n  \"payeeNote\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/MtnRemittance/Transfer?referenceId=27349a9d-85e3-41dc-86d8-56b45427b56b",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnRemittance",
+								"Transfer"
+							],
+							"query": [
+								{
+									"key": "referenceId",
+									"value": "27349a9d-85e3-41dc-86d8-56b45427b56b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/MtnRemittance/Transfer status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": \"2\",\r\n  \"currency\": \"EUR\",\r\n  \"externalId\": \"456000\",\r\n  \"payer\": {\r\n    \"partyIdType\": \"0\",\r\n    \"partyId\": \"0557143133\"\r\n  },\r\n  \"payerMessage\": \"test\",\r\n  \"payeeNote\": \"test note\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/MtnRemittance/Transfer/27341a9d-83e3-41dc-86d8-56b45427b56b",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnRemittance",
+								"Transfer",
+								"27341a9d-83e3-41dc-86d8-56b45427b56b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/MtnRemittance/AccountBalance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/MtnRemittance/AccountBalance",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnRemittance",
+								"AccountBalance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/MtnCollections/AccountHolder",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/MtnRemittance/AccountHolder?accountHolderIdType=msisdn&accountHolderId=0557143133",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnRemittance",
+								"AccountHolder"
+							],
+							"query": [
+								{
+									"key": "accountHolderIdType",
+									"value": "msisdn"
+								},
+								{
+									"key": "accountHolderId",
+									"value": "0557143133"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PreApprovals",
+			"item": [
+				{
+					"name": "/MtnPreApproval/PreApproval status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/MtnPreApproval/PreApproval/fa27230e-75a1-40bc-b6c0-88c292838b55",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnPreApproval",
+								"PreApproval",
+								"fa27230e-75a1-40bc-b6c0-88c292838b55"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/MtnPreApproval/PreApproval",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-collection-type",
+								"value": "direct-debit",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"payer\": {\r\n    \"partyIdType\": \"MSISDN\",\r\n    \"partyId\": \"0551198121\"\r\n  },\r\n  \"currency\": \"EUR\",\r\n  \"message\": \"test\",\r\n  \"validityTime\": 3700\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/MtnPreApproval/PreApproval?referenceId=27349a9d-85e3-41dc-16d1-56b45421b56b",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnPreApproval",
+								"PreApproval"
+							],
+							"query": [
+								{
+									"key": "referenceId",
+									"value": "27349a9d-85e3-41dc-16d1-56b45421b56b"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Disbursement",
+			"item": [
+				{
+					"name": "/MtnDisbursements/Transfer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": \"22\",\r\n  \"currency\": \"EUR\",\r\n  \"externalId\": \"2223\",\r\n  \"payee\": {\r\n    \"partyIdType\": \"MSISDN\",\r\n    \"partyId\": \"0557143133\"\r\n  },\r\n  \"payerMessage\": \"test\",\r\n  \"payeeNote\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/MtnDisbursements/Transfer?referenceId=06e5f874-6d8b-4a4c-a0d7-2d5a11a31e1b",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnDisbursements",
+								"Transfer"
+							],
+							"query": [
+								{
+									"key": "referenceId",
+									"value": "06e5f874-6d8b-4a4c-a0d7-2d5a11a31e1b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/MtnDisbursements/Deposit",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": \"22\",\r\n  \"currency\": \"EUR\",\r\n  \"externalId\": \"2223\",\r\n  \"payee\": {\r\n    \"partyIdType\": \"MSISDN\",\r\n    \"partyId\": \"0557143133\"\r\n  },\r\n  \"payerMessage\": \"test\",\r\n  \"payeeNote\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/MtnDisbursements/Deposit?referenceId=331e7617-e649-4fe1-ae44-02d4bc823d31",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnDisbursements",
+								"Deposit"
+							],
+							"query": [
+								{
+									"key": "referenceId",
+									"value": "331e7617-e649-4fe1-ae44-02d4bc823d31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/MtnDisbursements/Transfer status",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/MtnDisbursements/Transfer/332e7607-e649-4fe1-ae54-02d4bc823d35",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnDisbursements",
+								"Transfer",
+								"332e7607-e649-4fe1-ae54-02d4bc823d35"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/MtnDisbursements/basicUserInfo",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/MtnDisbursements/BasicUserInfo?accountHolderId=233244860060",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"MtnDisbursements",
+								"BasicUserInfo"
+							],
+							"query": [
+								{
+									"key": "accountHolderId",
+									"value": "233244860060"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/MtnDisbursements/Deposit",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/MtnDisbursements/Deposit/331e7617-e649-4fe1-ae44-02d4bc823d31",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"MtnDisbursements",
+								"Deposit",
+								"331e7617-e649-4fe1-ae44-02d4bc823d31"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "12345",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "test",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "https://devsrv.cspay.app/mtnapi",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "local",
+			"value": "http://localhost:38096",
+			"type": "string"
+		}
+	]
+}

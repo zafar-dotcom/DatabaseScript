@@ -1,0 +1,591 @@
+{
+	"info": {
+		"_postman_id": "2b05fda7-ae09-49b0-8b79-3db71441e6db",
+		"name": "G money - Share with Partners - Request To Pay",
+		"description": "# AUTH REQUIREMENTS\n\n1. UAT/PROD Base URL\n    \n2. Merchant Code\n    \n3. Client ID and Client Secrete\n    \n4. Your Prod IP to whitelist\n    \n\n# API LIST\n\n## 🔐 1. Generate Token\n\nFirst you need to generate your Bearer token using your client ID and password\n\n## 💸 2. Initiate Request To Pay\n\nUse your generated token trigger an RTP request to the G-money customer and wait for the user to approve\n\n## 🔎 3. RTP Status Query\n\nUse your generated token to call this API to check the status of the Request to Pay. Possible values include:\n\nPENDING - user is yet to approve  \nEXPIRED - request has expired  \nDECLINED - user declined the RTP request  \nCANCELLED - request is cancelled\n\nPROCESSED - Process completed",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-2b05fda7-ae09-49b0-8b79-3db71441e6db?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "Generate token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"partner_token\", `${jsonData.data.access_token}`);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientId\": \"{{partner_client_id}}\",\n    \"clientSecret\": \"{{partner_client_secrete}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PARTNER_BASE_URL}}/api/v1/auth/partner/token",
+					"host": [
+						"{{PARTNER_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"partner",
+						"token"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST https://eu-west-1qldiarkyu.auth.eu-west-1.amazoncognito.com/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials&client_id=4g89h4qr4mm40l3luqv5b0idsf&client_secret=<client secret>&scope=gmfs_ire_uat_oauth/all.read gmfs_ire_uat_oauth/all.write\""
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clientId\": \"\",\n    \"clientSecret\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PARTNER_BASE_URL}}/api/v1/auth/partner/token",
+							"host": [
+								"{{PARTNER_BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"partner",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 30 Jun 2025 16:31:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1755"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "apigw-requestid",
+							"value": "M_JLChIAjoEEPxg="
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "expires",
+							"value": "0"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"success\",\n    \"data\": {\n        \"access_token\": \"eyJraWQiOiJvRHltT2JzeXFqVHZzaTlRXC81UmRIR25VMUVzeW9CT2hqcGxPTGpBS21xQT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI0Zzg5aDRxcjRtbTQwbDNsdXF2NWIwaWRzZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiZ21mc19pcmVfdWF0X29hdXRoXC9wYXJ0bmVyLnJlYWQgZ21mc19yb2xlXC9wYXJ0bmVyLmIyY2Z1bmRzdHJhbnNhZmVyIGRlZmF1bHQtbTJtLXJlc291cmNlLXNlcnZlci1oemdndHBcL3JlYWQgZ21mc19yb2xlXC9wYXJ0bmVyLm5hbWVxdWVyeSBnbWZzX2lyZV91YXRfb2F1dGhcL2FkbWluIGdtZnNfcm9sZVwvcGFydG5lci5yZWFkIGdtZnNfcm9sZVwvZmVhdHVyZXRvZ2dsZS5yZWFkIGdtZnNfcm9sZVwvY2xhcmk1LnJlYWQgZ21mc19yb2xlXC9mZWF0dXJldG9nZ2xlLndyaXRlIGdtZnNfcm9sZVwvcGFydG5lci50cmFuc2FjdGlvbnF1ZXJ5IGdtZnNfaXJlX3VhdF9vYXV0aFwvcGFydG5lci53cml0ZSBnbWZzX3JvbGVcL3BhcnRuZXIud3JpdGUgZGVmYXVsdC1tMm0tcmVzb3VyY2Utc2VydmVyLXRsZS1kb1wvcmVhZCBnbWZzX3JvbGVcL3BhcnRuZXIuYmFsYW5jZXF1ZXJ5IGdtZnNfaXJlX3VhdF9vYXV0aFwvZmVhdHVyZXRvZ2dsZS5yZWFkIGdtZnNfaXJlX3VhdF9vYXV0aFwvYWxsLndyaXRlIGdtZnNfaXJlX3VhdF9vYXV0aFwvYWxsLnJlYWQgZ21mc19yb2xlXC9wYXJ0bmVyLnJldmVyc2V0cmFuc2FjdGlvbiBnbWZzX2lyZV91YXRfb2F1dGhcL2ZlYXR1cmV0b2dnbGUud3JpdGUiLCJhdXRoX3RpbWUiOjE3NTEzMDEwODgsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0xX1FMRElhUkt5VSIsImV4cCI6MTc1MTMwODI4OCwiaWF0IjoxNzUxMzAxMDg4LCJ2ZXJzaW9uIjoyLCJqdGkiOiIwMWZiYThiNy04NDc0LTQ0MjktYmRhMy01MTIwN2UyNWI4YjAiLCJjbGllbnRfaWQiOiI0Zzg5aDRxcjRtbTQwbDNsdXF2NWIwaWRzZiJ9.cMJ5q49Wz6DsEHDhx3fizkyFfqTvGn-8ohbG05PnjWU7qpg6FwROoCz9fsgVAADlHHAeZDQhvypPyHAbKKX5TU46gbGkgQqjYKXO3adNSQBVnfaFNb7oElI-PzUOWv96VOoaG61HvIU3FPlMZdmRpBY3PViVTmSIWuaK5y0HYGsKLAIR4zIr46YDhR3Cev8OURvgNwtUcpWZ0XgPJKCTpoeZBd9A2u1bBP5xXMWA1I040RV_8ADI3fBmLFpDSKAmVrigZbtV6FxvJbuGw97SYRw0gyNtYiwwOvHRh-S3Ooa_E-9o9ZQlfUPoea3VhUX2gdEEpul-7M78YGaiBY29bA\",\n        \"expires_in\": 7200,\n        \"token_type\": \"Bearer\"\n    },\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Initiate Request To Pay",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiJvRHltT2JzeXFqVHZzaTlRXC81UmRIR25VMUVzeW9CT2hqcGxPTGpBS21xQT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI0Zzg5aDRxcjRtbTQwbDNsdXF2NWIwaWRzZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiZ21mc19yb2xlXC9naGlwc3Muc2VuZGluZy5uZWMgZGVmYXVsdC1tMm0tcmVzb3VyY2Utc2VydmVyLWh6Z2d0cFwvcmVhZCBnbWZzX3JvbGVcL2NoYW5uZWxzLm1vYmlsZSBnbWZzX3JvbGVcL2ZlYXR1cmV0b2dnbGUucmVhZCBnbWZzX3JvbGVcL2NsYXJpNS5yZWFkIGdtZnNfcm9sZVwvZmVhdHVyZXRvZ2dsZS53cml0ZSBkZWZhdWx0LW0ybS1yZXNvdXJjZS1zZXJ2ZXItdGxlLWRvXC9yZWFkIGdtZnNfcm9sZVwvcGFydG5lci5yZXF1ZXN0MnBheSBnbWZzX3JvbGVcL2NoYW5uZWxzLmF0bSBnbWZzX3JvbGVcL2doaXBzcy5zZW5kaW5nLmZ0YyBnbWZzX3JvbGVcL2doaXBzcy5zZW5kaW5nLnRzcSBnbWZzX3JvbGVcL3BhcnRuZXIuaW53YXJkcmVtaXR0YW5jZSIsImF1dGhfdGltZSI6MTc2MTIwMDM0MiwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tXC9ldS13ZXN0LTFfUUxESWFSS3lVIiwiZXhwIjoxNzYxMjA3NTQyLCJpYXQiOjE3NjEyMDAzNDIsInZlcnNpb24iOjIsImp0aSI6IjEyMzUyOGRmLTZiNzMtNDYwOC1hOWRlLWE1ZGU2ZmI2OWVjNiIsImNsaWVudF9pZCI6IjRnODloNHFyNG1tNDBsM2x1cXY1YjBpZHNmIn0.gdMJ81zj6E_v9-stfEiCwTs8TFKEl1prpYvolKW340ukebGlzzIsJ2yukJy25fe2Es36ddyPBOyiGkbco79gtM-jtHFkZf-fnCNLQuBtpqPaPcwtGiI3SlCAr5X3tXoK-5V3Hh7LuV-EaS7TUlcb71abUcZ0_nas5ghNkAs6mBWygxcfaZx1WrnOkpovLgxX1R1DfG5366KoL4Qclxn3HhRFZO9WG0bvpNRNZX2nNjhsRBiZHTe0tdvXET50R-qcK86qS9snMLyFe1c-PAVZthGui0FsrCjKcWxSHZTj0WpHSE91QPGZ0aYKvK8GI4rJMlde25mdcWeM6QzpOu0I2g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{partner_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"merchantRef\": \"BRXTRF202502037748078307232\",\n  \"approverAccount\": \"0209999999\", //0209999999 test number from g money\n  \"amount\": 15.0,\n  \"narration\": \"Requesting money from Gmoney Merchant to Gmoney Customer\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PARTNER_BASE_URL}}/api/v2/core/partners/:MERCHANT_SHORT_CODE/rtp/initiate",
+					"host": [
+						"{{PARTNER_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"core",
+						"partners",
+						":MERCHANT_SHORT_CODE",
+						"rtp",
+						"initiate"
+					],
+					"variable": [
+						{
+							"key": "MERCHANT_SHORT_CODE",
+							"value": "200204",
+							"description": "Your merchant shortcode"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{partner_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"merchantRef\": \"BRXTRF2025020377480783072\",\n  \"approverAccount\": \"0209999999\",\n  \"amount\": 15.0,\n  \"narration\": \"Requesting money from Merchant to Gmoney Customer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PARTNER_BASE_URL}}/api/v2/core/partners/:MERCHANT_SHORT_CODE/rtp/initiate",
+							"host": [
+								"{{PARTNER_BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"core",
+								"partners",
+								":MERCHANT_SHORT_CODE",
+								"rtp",
+								"initiate"
+							],
+							"variable": [
+								{
+									"key": "MERCHANT_SHORT_CODE",
+									"value": "tani78"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 22 Jul 2025 12:07:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Validation failed for request parameters\",\n    \"data\": {\n        \"merchantRef\": \"Merchant Ref is required\"\n    },\n    \"code\": 400\n}"
+				},
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{partner_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"merchantRef\": \"BRXTRF2025020377480783072\",\n  \"approverAccount\": \"0209999999\",\n  \"amount\": 15.0,\n  \"narration\": \"Requesting money from Merchant to Gmoney Customer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PARTNER_BASE_URL}}/api/v2/core/partners/:MERCHANT_SHORT_CODE/rtp/initiate",
+							"host": [
+								"{{PARTNER_BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"core",
+								"partners",
+								":MERCHANT_SHORT_CODE",
+								"rtp",
+								"initiate"
+							],
+							"variable": [
+								{
+									"key": "MERCHANT_SHORT_CODE",
+									"value": "tani78"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 22 Jul 2025 12:08:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Request money successfully initiated\",\n    \"data\": {\n        \"status\": \"PENDING\",\n        \"expiresAt\": \"2025-07-22 12:38:20.283\",\n        \"rtpID\": \"2522J0QCBV\"\n    },\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Request to pay Status Query",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{partner_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PARTNER_BASE_URL}}/api/v2/core/partners/:MERCHANT_SHORT_CODE/rtp/check-status/:GMFS_REQUEST_TO_PAY_ID",
+					"host": [
+						"{{PARTNER_BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"core",
+						"partners",
+						":MERCHANT_SHORT_CODE",
+						"rtp",
+						"check-status",
+						":GMFS_REQUEST_TO_PAY_ID"
+					],
+					"variable": [
+						{
+							"key": "MERCHANT_SHORT_CODE",
+							"value": "200101"
+						},
+						{
+							"key": "GMFS_REQUEST_TO_PAY_ID",
+							"value": "2527XMGRX0"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{partner_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PARTNER_BASE_URL}}/api/v2/core/partners/:MERCHANT_SHORT_CODE/rtp/check-status/:GMFS_REQUEST_TO_PAY_ID",
+							"host": [
+								"{{PARTNER_BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v2",
+								"core",
+								"partners",
+								":MERCHANT_SHORT_CODE",
+								"rtp",
+								"check-status",
+								":GMFS_REQUEST_TO_PAY_ID"
+							],
+							"variable": [
+								{
+									"key": "MERCHANT_SHORT_CODE",
+									"value": "tani78"
+								},
+								{
+									"key": "GMFS_REQUEST_TO_PAY_ID",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Jul 2025 18:28:04 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Status check processed successfully\",\n    \"data\": {\n        \"status\": \"EXPIRED\",\n        \"expiresAt\": \"2025-07-21 18:17:50.809\",\n        \"rtpID\": \"2521KKB12Q\"\n    },\n    \"code\": 200\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "partner_client_id",
+			"value": ""
+		},
+		{
+			"key": "partner_client_secrete",
+			"value": ""
+		},
+		{
+			"key": "PARTNER_BASE_URL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

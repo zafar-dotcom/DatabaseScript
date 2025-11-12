@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "d7910b3c-4561-4b3d-8887-0a1b77e780e6",
+		"name": "USSD APPS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "MOOVBENIN-UUSD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:58306/ussd/redirect/csbj/mo/bn/moov?USSDRequestString=789*111*9&TransactionID=8756456642345454&MSISDN=241000000&Request=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58306",
+					"path": [
+						"ussd",
+						"redirect",
+						"csbj",
+						"mo",
+						"bn",
+						"moov"
+					],
+					"query": [
+						{
+							"key": "USSDRequestString",
+							"value": "789*111*9"
+						},
+						{
+							"key": "TransactionID",
+							"value": "8756456642345454"
+						},
+						{
+							"key": "MSISDN",
+							"value": "241000000"
+						},
+						{
+							"key": "Request",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MTNBENIN USSD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<request type=\"pull\">\r\n <msisdn>919611909091</msisdn>\r\n <newRequest>1</newRequest>\r\n <sessionId>132054243</sessionId>\r\n <subscriberInput>789*111*9</subscriberInput>\r\n</request>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:58306/ussd/redirect/alias/mo/bj/mtn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58306",
+					"path": [
+						"ussd",
+						"redirect",
+						"alias",
+						"mo",
+						"bj",
+						"mtn"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

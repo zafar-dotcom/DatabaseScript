@@ -1,0 +1,574 @@
+{
+	"info": {
+		"_postman_id": "5ab7e1ee-80f6-47b1-8202-c0815e4becc3",
+		"name": "BlackStarApiDirectTesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "reverserepoOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk2MDAwMjIsImlhdCI6MTY4OTU5OTcyMiwianRpIjoiNDY3MGE1ODUtM2I2MC00ZmQ1LThhZGQtMDBjMDZlN2FlZTNmIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiIyZWVhMTRiNi00ZWY5LTQzYzgtYWQ3OC04YjhiNWNiMjcxODciLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjJlZWExNGI2LTRlZjktNDNjOC1hZDc4LThiOGI1Y2IyNzE4NyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.pcR07Ty5mxWN2U3CllF0q7-X2Zq0cMXAmOYkGS2wGapmLzHSVxFBVaLh5ICxLlSbtjfT_UiOf4yaZAY3YNyGBnFC_yl9pNSymxKg7AW82ZS1MT_99EIWdEJG9lT8Ujz_lwBj2B_OeBMhoHYciBbtqpB1D-YX9KtemVh7PlVSkwVZU_juL_w4pNSEeKtH2tGpTOYT3_j0TTeO8Ac_cDOp8_mdGopuorGExO4ZebcuS1O7OJfUHL4w57Qb8VCzEolwlkQCz-_2997ywjKngtydBzT9kKNhGAv8A-fQQ5I1A14nvp6qePlpHsMl0QEVVlHk79JR6ezoMpx__w2FXFIaAw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"portfolioId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"considerationWithCurrency\": 10.0,\r\n    \"description\": \"new order\",\r\n    \"counterPartyUUID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"custodianUUID\": \"1fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"settlementType\": \"T1\",\r\n    \"orderValidity\": \"GTC\",\r\n    \"orderOfferId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"error\": true,\r\n    \"errorMessage\": {\r\n        \"message\": null,\r\n        \"additionalProp2\": \"Insufficient funds for this transaction \",\r\n        \"additionalProp3\": \"Invalid counter party \"\r\n    },\r\n    \"errorRawString\": {\r\n        \"additionalProp1\": \"An error was encountered while processing the request. \",\r\n        \"additionalProp2\": \"The transaction cannot be completed at this time. \",\r\n        \"additionalProp3\": \"The provided counter party is not valid. \"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/3fa85f64-5717-4562-b3fc-2c963f66afa6/portfolio/3fa85f64-5717-4562-b3fc-2c963f66afa6/reverse-repo/order/place",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"3fa85f64-5717-4562-b3fc-2c963f66afa6",
+						"portfolio",
+						"3fa85f64-5717-4562-b3fc-2c963f66afa6",
+						"reverse-repo",
+						"order",
+						"place"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "repoorder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk1NzQyMTEsImlhdCI6MTY4OTU3MzkxMSwianRpIjoiY2ZiNzNjOTAtMjkxNC00ZjM3LTg0NzEtZGMzNmM0YzYxMGM5IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiIzYjg3OWZiNC1iMWZjLTRmOGMtOTVhNi0wNjg1OWY1YmZmNGMiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjNiODc5ZmI0LWIxZmMtNGY4Yy05NWE2LTA2ODU5ZjViZmY0YyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.j4LmMsoUa2zBKkyFaSlhkgzmyxR-hz4voI-VDuFrs4XqkHk3cEcJ21mrvlGbB9XqbjKccoOx4R4aof0yBU9yBLHV7XDHkCZstHtjpeinHwWARJ6dmmuEEqXCz3ujoE91B2FfJ2TOQ_ldVsve0nj5Zz9vwlkhcd3qMyFe1bXjE_nNuL8mn6novQlIW7fjHDD_48nE3LJgARROvuDkPGnMnbazilIPIT4HL0cndSU6_KqBamNVgS6SYRDDgOSCdXLq7UJVzi-J1_js7rCDuWUi20RXtHAh8ZPKKWELeLzs91vVYAVrikNPrpPKF8nnhbkJWPXeOsQLDbrsf6JnhlK1mQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"securityUUID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"considerationWithCurrency\": 0,\r\n  \"description\": \"this is repo order\",\r\n  \"counterPartyUUID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"custodianUUID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"settlementType\": \"T0\",\r\n  \"orderValidity\": \"GTC\",\r\n  \"orderOfferId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"error\": false,\r\n  \"errorMessage\": {\r\n    \"additionalProp1\": \"string\",\r\n    \"additionalProp2\": \"string\",\r\n    \"additionalProp3\": \"string\"\r\n  },\r\n  \"errorRawString\": {\r\n    \"additionalProp1\": \"string\",\r\n    \"additionalProp2\": \"string\",\r\n    \"additionalProp3\": \"string\"\r\n  }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/gnii-wealth-app/portfolio/gnii-wealth-app/repo/order/place",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"gnii-wealth-app",
+						"portfolio",
+						"gnii-wealth-app",
+						"repo",
+						"order",
+						"place"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createorder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk1NzUzMTgsImlhdCI6MTY4OTU3NTAxOCwianRpIjoiOWFjZTAyM2UtM2M2NS00Y2JhLTgyOTYtMTU0ZGQ2NmVjYTQ2IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiI1MzY4Y2M1My1lNzRjLTQ5ZTAtOTlmNC1kZmQ1Y2U0ZWQ5NzkiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjUzNjhjYzUzLWU3NGMtNDllMC05OWY0LWRmZDVjZTRlZDk3OSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.WB8BjqecdwimnbB-rBJndOBKg2ng2euTnn-Zu8gFqCRl4XtaApfuecjJACP_EOJrog46Sp7JtWelbQk_uj9vXldaFMBLBXaEuvYGzDLx_zii4ywibAYaGsqZ3S_YkW_ecs41wTjlLbzfvxd63xojDLlzsmlAN_Vi699gq5Lyy9_8inaI7VsrrcDbq7x5XQUrQsxlDZWfZVhgqdfrvfIUxTLNDL4BQ10HQvwApK0DoYVNHIuWMwPk4PfiaCERpb0oQDYc11uvs65VZ04VaR8ePWLTi8DfKlvRbxxWilcUR77lGIE1aSqv1nYbCUnf3GZVRUF76Br_gXUouPrr_UPkrg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"securityUUID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"orderSide\": \"BUY\",\r\n  \"orderType\": \"MARKET\",\r\n  \"quantity\": 1,\r\n  \"price\": 0,\r\n  \"yield\": 0,\r\n  \"considerationWithCurrency\": 0,\r\n  \"description\": \"string\",\r\n  \"counterPartyUUID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"custodianUUID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"settlementType\": \"T0\",\r\n  \"orderValidity\": \"GTC\",\r\n  \"orderOfferId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"error\": true,\r\n  \"errorMessage\": {\r\n    \"additionalProp1\": \"string\",\r\n    \"additionalProp2\": \"string\",\r\n    \"additionalProp3\": \"string\"\r\n  },\r\n  \"errorRawString\": {\r\n    \"additionalProp1\": \"string\",\r\n    \"additionalProp2\": \"string\",\r\n    \"additionalProp3\": \"string\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/gnii-wealth-app/portfolio/gnii-wealth-app/order/place",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"gnii-wealth-app",
+						"portfolio",
+						"gnii-wealth-app",
+						"order",
+						"place"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchorder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk2NTE2NTQsImlhdCI6MTY4OTY1MTM1NCwianRpIjoiYzlhNTdiMmItYWU4OC00MjNlLTk5YjgtODliZjQxNTE4YTA1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiI1OWRkYTJjZi0wNTZlLTRiNDgtODI2YS0wOWU4YzZkMTc5MmIiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjU5ZGRhMmNmLTA1NmUtNGI0OC04MjZhLTA5ZThjNmQxNzkyYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.m3Ey_SJPc8AMj1ZkTmf0hlXg9ri3gt5UQeYaJKjbj6vN0HBkwFDA7w39BjFePf3qSCY2I-L9Hb7q9QGItYK8Hl3Yu7LvRna8DVE5IJ8FUcSZimXycIg7PubGsJ_LE_2yspch3Mb0gvmvbR0aYr1oQgQNCu5WvR8j3XXYbjMkjAhuBc4XLzagg70NqtHfkGDDPzcN2Vf6KLHzG3TR9Rg5VtmY_hAm-6UeJI7Fgl_njQSH0v14tenPbLVKDRBzEWH_pCkhT4dQCgyqINeEKlrPlQilIy-lkyx2tfZLV5Put6X8yaUN0WxM89HvhgEoe6S4Um16l69dSZDg3QA04NvwZw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AssetClassList\": [\r\n        \"BOND\",\r\n        \"EQUITY\"\r\n    ],\r\n    \"SearchQuery\": \"example query\",\r\n    \"OrderStatuses\": [\r\n        \"SUBMITTED\"\r\n    ],\r\n    \"OrderSide\": \"BUY\",\r\n    \"StartDate\": \"2023-07-17T12:57:47.417Z\",\r\n    \"EndDate\": \"2023-07-17T12:57:47.417Z\",\r\n    \"OrderType\": \"LIMIT\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/3fa85f64-5717-4562-b3fc-2c963f66afa6/order/search?portfolioId=3fa85f64-5717-4562-b3fc-2c963f66afa1&page=1&size=10",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"3fa85f64-5717-4562-b3fc-2c963f66afa6",
+						"order",
+						"search"
+					],
+					"query": [
+						{
+							"key": "portfolioId",
+							"value": "3fa85f64-5717-4562-b3fc-2c963f66afa1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchorderoffer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk2NTIyNzcsImlhdCI6MTY4OTY1MTk3NywianRpIjoiYmI4NGM3ODAtZDNiYS00YmYyLThjMzItOTM2NGUxMzRjNTY2IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiJhMWNjOGViYS1hMjAzLTQ0NTQtYmRkYS0zMmY2MzM3MDEzMGYiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImExY2M4ZWJhLWEyMDMtNDQ1NC1iZGRhLTMyZjYzMzcwMTMwZiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.hqkucARwg4qo8vrOt13mSuDORWBU-Bs38uI_nVpK4llegM5Zbripts3aOAo7EX4DMZJ1wzBwxjm_SdUHPVlyZCaxGH-lmnJ64fHZ6qh-d9xtdNCoAw-CfOBJS54yZ3-OrNE8iKLKwP8mz8-BFOvuiJHxUBjtZGZSumjupVmkMJADGrp7_284E579MHfPc-G2xN0UKEvtOvJD83zcZ3UzVG10BC945PZ27OM-tMEvQwD5El-97Y7zzwc6Q41n9k_YKN9g5pCu17wd4M73Pa49wO_9IEmiE-ztVMku1-drWSQKkMS6Smi0y1mXvrl7aeCJKFLOScvd2qbY5wDRoxgf-A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"AssetClassList\": [\"BOND\", \"VENTURE_CAPITAL\"],\r\n  \"SearchQuery\": \"your-search-query\",\r\n  \"MaturityDate\": \"2023-07-14\",\r\n  \"IssueDate\": \"2023-07-14\",\r\n  \"BondFixedIncomeAssetClasses\": [\"CB\",\"LGB\"],\r\n  \"CurrencyCodes\": [\"SGD\", \"SGD\"],\r\n  \"CountryNames\": [\"SINGAPOR\", \"SINGAPOR\"],\r\n  \"CISTypes\": [\"FIXED_INCOME\", \"MONEY_MARKET\"],\r\n  \"RepoType\": \"REPO\",\r\n  \"ProductStatus\": [\"UPCOMING\", \"MATURED\"],\r\n  \"IsArchived\": true,\r\n  \"OnlyWithQuantity\": false,\r\n  \"OrderSideOrderOfferList\": [\"BUY\",\"SELL\",\"BOTH\"],\r\n  \"OrderOfferTypes\": [\"REGULAR\",\"REVERSE_REPO\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/5fa85f64-5717-4562-b3fc-2c963f66afa6/order-offer/search?portfolioId=3fa85f64-5717-4562-b3fc-2c963f66afa1&page=1&size=10&sort=sort-field-1&sort=sort-field-2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"5fa85f64-5717-4562-b3fc-2c963f66afa6",
+						"order-offer",
+						"search"
+					],
+					"query": [
+						{
+							"key": "portfolioId",
+							"value": "3fa85f64-5717-4562-b3fc-2c963f66afa1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "sort-field-1"
+						},
+						{
+							"key": "sort",
+							"value": "sort-field-2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancelorder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk1NzY1NDIsImlhdCI6MTY4OTU3NjI0MiwianRpIjoiYmQ4YWNmZGEtYmIzZC00NjM5LTk2YmEtOTVkMzk5NmRiZjA0IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiIyZTk2MDMzZi0wNTk5LTRiNDQtYTc4ZC1lYjI5Zjc4MDI5YzYiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjJlOTYwMzNmLTA1OTktNGI0NC1hNzhkLWViMjlmNzgwMjljNiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.cDi6l3Y4M98Lxw3-ZwO8mc2HZPHVGc4hM3-oJgWW7u_WwXg8c6lCVbtis93IzT4WW_GR_81MRLbykuSzV83DfFYWhtk0hixsW27_VuVI1eTsVdMax3WYBpaJjFHLxAWRDvMUIVuIp-hpABzB_PzvNJAenzz3M5QlHZNWZuUVrSAR9Nz-tr4p-ka-daiPGcwPysBRY4sIaZ4pQsgbGr8fBiUFDEccHUZbrwBOqHZzZ96p4EDYPfzF0fVaymjBbInrcxuRz_sC3WBEO5YQI2v0ylezyvdU0251SCs0J3MiUxsQmHOQ81DU2mTQLHgf5w9HidOjXP-d-OzUDFo2BHKcMQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"1fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/3fa85f64-5717-4562-b3fc-2c963f66afa6/order/1fa85f64-5717-4562-b3fc-2c963f66afa6/cancel",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"3fa85f64-5717-4562-b3fc-2c963f66afa6",
+						"order",
+						"1fa85f64-5717-4562-b3fc-2c963f66afa6",
+						"cancel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Balancevalidation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk1NzcyMDEsImlhdCI6MTY4OTU3NjkwMSwianRpIjoiNTFiZTg5ZjktODFkNC00MTNlLWJiNDItMzY5NTUzZjRiMmU1IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiI1OTVhZTA3NS1kODlkLTQ5NTQtOTg2Yi0wMWYyYmNhZGU4ZGMiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjU5NWFlMDc1LWQ4OWQtNDk1NC05ODZiLTAxZjJiY2FkZThkYyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.BVddDCi-C1kocfIJZ07R1xmWxXlU4ocbWMx2b07hIWakZuO4qJzGixrzrAiheoMJUNFYqF9ZGmhPu1oo2IQmZYommaLhLaqERinllkvwv2LpO2vvbpVMbnbK9F20VK-IIV1KfAV3sSU2hxlq0Up1kJcmZKeY1vmHVLMuk3StJsnBodgnnIqcLoYtZbC3IMz8M479Er4aamzba2E5o2ubwaEvfuRyTw8SlsEPSjnehuIYjo05EnEExJAZtAv6T-BXT8i-5atpMqqCErtQyYbPLs140NOkheJlvdvVOvXCRXt--AD8llOBhfnbD31qngA6ilieHgkCts1zquZwKyTDUQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"SecurityId\": \"4a92c27e-8eaf-4fb3-aa1d-43bc7b912345\",\r\n  \"CounterPartyId\": \"b3ee7c61-2d97-4a1d-ae4e-6a359612345\",\r\n  \"CustodianId\": \"f8a74d09-8b5d-4ea9-91ad-cc9f0912345\",\r\n  \"OrderOfferId\": \"8f8cb7bc-726e-4fd9-971e-2f825e123456\",\r\n  \"ConsiderationWithCurrency\": 1000.50\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/gnii-wealth-app/portfolio/gnii-wealth-app/balance/validate",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"gnii-wealth-app",
+						"portfolio",
+						"gnii-wealth-app",
+						"balance",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "portfoliopositio",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk1Nzc2NjEsImlhdCI6MTY4OTU3NzM2MSwianRpIjoiMmQwNTRmMGEtOWIzZi00MjRhLTg2NDItNGNjMGQyZGNkNzJjIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiJhNWU3NGYyYS0xMDc4LTQ0YWYtYmI2My0zOGU5NzU2MDRhODAiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImE1ZTc0ZjJhLTEwNzgtNDRhZi1iYjYzLTM4ZTk3NTYwNGE4MCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.cxnq7_cO4vR-39-RZXhEB7IyBWFZt9OW-nS921Y8V_UIsxTR8VYP_4n5zhcnp4ddZyYjkVscfEBFy0XQwYM7dXIEbxiAMUWakWSPpDqoE4-CNoG_NBfjC0e4pPojIsgGA6RqY3S2pCf6cqptdokGVRKrCCFb_PliIhujB6LqKfKD8AG4eewYeAjMlGRBBsKBhgOGkwScAjbB2Y0DPYP4avID1pv5L_xpA1c8R2ePqfT0ymOywYch1o_y6BQFF43sl7uZk30L_tgOenx58Jg27SZoMmh83-XKd_lB-kwzzKBdMBeNYkLb5jFTKY0DxlZD9JV-ElaNYT1lBSOUGj0E4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/2fa85f64-5717-4562-b3fc-2c963f66afa6/product/3fa85f64-5717-4562-b3fc-2c963f66afa6/position?portfolioId=4fa85f64-5717-4562-b3fc-2c963f66afa6&counterPartyId=5fa85f64-5717-4562-b3fc-2c963f66afa6&custodianId=6fa85f64-5717-4562-b3fc-2c963f66afa6&date=13-07-2023",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"2fa85f64-5717-4562-b3fc-2c963f66afa6",
+						"product",
+						"3fa85f64-5717-4562-b3fc-2c963f66afa6",
+						"position"
+					],
+					"query": [
+						{
+							"key": "portfolioId",
+							"value": "4fa85f64-5717-4562-b3fc-2c963f66afa6"
+						},
+						{
+							"key": "counterPartyId",
+							"value": "5fa85f64-5717-4562-b3fc-2c963f66afa6"
+						},
+						{
+							"key": "custodianId",
+							"value": "6fa85f64-5717-4562-b3fc-2c963f66afa6"
+						},
+						{
+							"key": "date",
+							"value": "13-07-2023"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "positionofCleint",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk1NzgwNDAsImlhdCI6MTY4OTU3Nzc0MCwianRpIjoiOTVkNmUzYmItZDJmZS00OGU4LWFhYjUtYWM2ZDJiNmE2NjFlIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiI3NGQ0MjI1OS1mZTQ0LTRjMGQtOTM2Mi1hNjQzY2IyNjBmODAiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6Ijc0ZDQyMjU5LWZlNDQtNGMwZC05MzYyLWE2NDNjYjI2MGY4MCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.iSHMIVpp6cWGgrXND13JKf3Vt2tlPeQJJAxbw10scb8GMyWipLad_dcLRStR42JRe_lAY9TGtnah7WPWUwQKI_EEk1pDKePwOHWeqdzvtgoO0Y5nxgfVm6wrgT0qHaZxqM8UycN_pSwDRqU4_BeZC_bndffx_wgCf_npIAPvBjrKpR8sGU738GBfwCB6NadLsbhG3dEd09AWnMp_FFAncQIEkxEdfWBlK8BRPhQffDvVf7TKts9d7Y22QL8XEI9OTS4CvmpwtawGuHY4u-xTuvLqardtpzMfEy_UMg3_pWhQmTZgF_hmvjR3-dSQSZq4rZSS2agfWR8Cqmkq7xiHYQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"AssetClassList\": [\"BILL\", \"BOND\", \"CASH\"],\r\n  \"SearchQuery\": \"WHAT IS POSITION OF CLIENT\",\r\n  \"MaturityDate\": \"2023-07-17T14:21:52.423Z\",\r\n  \"IssueDate\": \"2023-07-17T14:21:52.423Z\",\r\n  \"BondFixedIncomeAssetClasses\": [\"CB\", \"GB\"],\r\n  \"CurrencyCodes\": [\"USD\", \"EUR\"],\r\n  \"CountryNames\": [\"USA\", \"UK\"],\r\n  \"CISTypes\": [\"FIXED_INCOME\", \"EQUITY\"],\r\n  \"RepoType\": \"REVERSE_REPO\",\r\n  \"ProductStatus\": [\"ALL\", \"UPCOMING\"],\r\n  \"IsArchived\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/3fa85f64-5717-4562-b3fc-2c963f66afa6/position?portfolioId=1fa85f64-5717-4562-b3fc-2c963f66afa6&date=13-07-2023",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"3fa85f64-5717-4562-b3fc-2c963f66afa6",
+						"position"
+					],
+					"query": [
+						{
+							"key": "portfolioId",
+							"value": "1fa85f64-5717-4562-b3fc-2c963f66afa6"
+						},
+						{
+							"key": "date",
+							"value": "13-07-2023"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "portfoliosummary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk1Nzg2MDEsImlhdCI6MTY4OTU3ODMwMSwianRpIjoiN2U5ZDk2OGMtZDljMS00ZWQzLWIzOTUtNDU4ZTZiMjFiOWE2IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiJhM2Y4M2VmZC1kNzIzLTQxZDktYWE0Mi1jZmU0Mjk4NWJmOWUiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImEzZjgzZWZkLWQ3MjMtNDFkOS1hYTQyLWNmZTQyOTg1YmY5ZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.Xgo9Y2GwXTS9QaAlbaYhdOFZ1LN4bcUbJL9LkzQcHohnCtQtz7j-xPT31jrsA8li18OMKyfw0QiG3jNA8l9Nvedg1I_zLHOs_IN5VJwF72S1Nm9nVnrSuOgKq_BgkMhW004jFO_r6q3EaUz99WO0JrwQ-qoASNpBZ14tMjZFguk-qi1b32owmIJ8p_1QRb8crGEK2Fr0AIKQg20bsoUUtAW9tW7GWvHG8Kqws4I1rsJHFvJx8ocSHLKL1SAB1Hqska02mrtDE5i8SYzvJfMTAQz2yWCkuEglyvzvukdB2NvMMwBOiPU4fJKBC3oWuqA_tIaHtCK9U1hQ6tfzbV5NqQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Date\": \"2023-07-13\",\r\n  \"PortfolioId\": \"gnii-wealth-app\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/gnii-wealth-app/portfolioSummary",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"gnii-wealth-app",
+						"portfolioSummary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Allportfoliosummary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFdlFlZ0MxTTJBXzZ3ZzZpTzEwNE93LW9BSGNvdUtDSHVaNlVHV25uMGZVIn0.eyJleHAiOjE2ODk1NzkzNjcsImlhdCI6MTY4OTU3OTA2NywianRpIjoiNTlkMTk5OGQtMTJkMy00OTE5LTllODEtY2U0YzllMjE3OWY3IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnVhdGRldi5nbmlpLmFpL3JlYWxtcy9nbmlpIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQ2NTk2OWY4LTVmNmItNDk3MS05NmYwLWM3ZTExZTIzM2JlNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImduaWktd2VhbHRoLWFwcCIsInNlc3Npb25fc3RhdGUiOiI1ZjIyMzQ1YS04NjUzLTQ1ODgtOGRiNy1mOTMxMzhmMDEyNDQiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly91YXRkZXYuZ25paS5haSIsImh0dHBzOi8vdWF0ZGV2LmduaWkuYWkvKiIsImh0dHBzOi8vYXBpLnVhdGRldi5nbmlpLmFpIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwLyoiLCJodHRwczovL2FwaS51YXRkZXYuZ25paS5haS8qIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtZ2VuaWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjVmMjIzNDVhLTg2NTMtNDU4OC04ZGI3LWY5MzEzOGYwMTI0NCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU2Vsb3JtIFNlbGF3b2thIiwiZ3JvdXBzIjpbIkNNNjgxMTMwIiwiSkQzMTkyMTMiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VsYSIsImdpdmVuX25hbWUiOiJTZWxvcm0iLCJkZXBhcnRtZW50IjoiYnNhIiwiZmFtaWx5X25hbWUiOiJTZWxhd29rYSIsInRlbmFudCI6ImJsYWNrc3RhciIsImVtYWlsIjoic2Vsa2Fsb3JtQGdtYWlsLmNvbSJ9.n-zqwoHFzZbRghhW4T20o48DcHoWXZduRjJEj0iXYuD8tngt4Y0cTkRhuXgmeikpRiXcY8gKKW_TdVSolFnzbeFAGeUrNW4FjBH-qqooJlvtX7o_cGlREnFcO90qL8yBDlp3E8yqNJN7slB4dXLC-jy5KFckQjZdDVJwwojxoGwX3UlzDDEHNjtkrSlIpC_JZFg05cB5Nr2umMSysWxcY0HWDbVOEaN0CZnejckNNrldqy_sdyD5Kv1gMp3SlVqqOHRaJI2OYLZEL8FwYhZytkH624FLZll6mb30M4ZSp8oAVLcRqwTUJAGFDfzHAvNALCGAeDQJHKxunVBLOvTLxg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Date\": \"2023-07-13\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.uatdev.gnii.ai/api/client/your_client_id/portfolioSummary/all",
+					"protocol": "https",
+					"host": [
+						"api",
+						"uatdev",
+						"gnii",
+						"ai"
+					],
+					"path": [
+						"api",
+						"client",
+						"your_client_id",
+						"portfolioSummary",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

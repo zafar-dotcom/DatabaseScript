@@ -1,0 +1,484 @@
+{
+	"info": {
+		"_postman_id": "5db6283d-968a-46e5-8a64-2d3b17a8f0d8",
+		"name": "BlackStar_Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "CreateReverseRepoOrder",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\": \"5fa85f64-5717-4562-b3fc-2c963f66afa5\",\r\n    \"portfolioId\": \"2fa85f64-5717-4562-b3fc-2c963f66afa5\",\r\n  \"considerationWithCurrency\": 10.0,\r\n  \"description\": \"new order\",\r\n  \"counterPartyUUID\": \"5fa85f64-5717-4562-b3fc-2c963f66afa5\",\r\n  \"custodianUUID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa5\",\r\n  \"settlementType\": \"T1\",\r\n  \"orderValidity\": \"GTC\",\r\n  \"orderOfferId\": \"6fa85f64-5717-4562-b3fc-2c963f66afa5\",\r\n  \"error\": true,\r\n  \"errorMessage\": {\r\n    \"additionalProp1\": \"Error occurred during order placement\",\r\n    \"additionalProp2\": \"Insufficient funds for this transaction \",\r\n    \"additionalProp3\": \"Invalid counter party \"\r\n  },\r\n  \"errorRawString\": {\r\n    \"additionalProp1\": \"An error was encountered while processing the request. \",\r\n    \"additionalProp2\": \"The transaction cannot be completed at this time. \",\r\n    \"additionalProp3\": \"The provided counter party is not valid. \"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/CreateReverseRepoOrder",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"CreateReverseRepoOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateRepoOrder",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\": \"1fa85f64-5717-4562-b3fc-2c963f66afa5\",\r\n    \"portfolioId\": \"2fa85f64-5717-4562-b3fc-2c963f66afa4\",\r\n  \"securityUUID\": \"6fa85f64-5717-4562-b3fc-2c963f66afa4\",\r\n  \"considerationWithCurrency\": 0,\r\n  \"description\": \"this is repo order\",\r\n  \"counterPartyUUID\": \"5fa85f64-5717-4562-b3fc-2c963f66afa3\",\r\n  \"custodianUUID\": \"1fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"settlementType\": \"T0\",\r\n  \"orderValidity\": \"GTC\",\r\n  \"orderOfferId\": \"4fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"error\": true,\r\n  \"errorMessage\": {\r\n    \"additionalProp1\": \"string\",\r\n    \"additionalProp2\": \"string\",\r\n    \"additionalProp3\": \"string\"\r\n  },\r\n  \"errorRawString\": {\r\n    \"additionalProp1\": \"string\",\r\n    \"additionalProp2\": \"string\",\r\n    \"additionalProp3\": \"string\"\r\n  }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/CreateRepoOrder",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"CreateRepoOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"clientId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"portfolioId\": \"2fa85f64-5717-4562-b3fc-2c963f66afa3\",\r\n  \"securityUUID\": \"1fa85f64-5717-4562-b3fc-2c963f66afa4\",\r\n  \"orderSide\": \"BUY\",\r\n  \"orderType\": \"MARKET\",\r\n  \"quantity\": 1,\r\n  \"price\": 0,\r\n  \"yield\": 0,\r\n  \"considerationWithCurrency\": 0,\r\n  \"description\": \"string\",\r\n  \"counterPartyUUID\": \"7fa85f64-5717-4562-b3fc-2c963f66afa5\",\r\n  \"custodianUUID\": \"6fa85f64-5717-4562-b3fc-2c963f66afa3\",\r\n  \"settlementType\": \"T0\",\r\n  \"orderValidity\": \"GTC\",\r\n  \"orderOfferId\": \"1fa85f64-5717-4562-b3fc-2c963f66afa2\",\r\n  \"error\": true,\r\n  \"errorMessage\": {\r\n    \"additionalProp1\": \"string\",\r\n    \"additionalProp2\": \"string\",\r\n    \"additionalProp3\": \"string\"\r\n  },\r\n  \"errorRawString\": {\r\n    \"additionalProp1\": \"string\",\r\n    \"additionalProp2\": \"string\",\r\n    \"additionalProp3\": \"string\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/CreateOrder",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"CreateOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchOrder",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"clientId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n   \"PortfolioId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa1\",\r\n  \"page\": 1,\r\n  \"size\": 10,\r\n  \"assetClassList\": [\r\n      \"BOND\", \r\n      \"EQUITY\"\r\n      ],\r\n  \"searchQuery\": \"example query\",\r\n  \"orderStatuses\": [\r\n      \"SUBMITTED\"\r\n      ],\r\n  \"orderSide\": \"BUY\",\r\n  \"startDate\": \"2023-07-17T12:57:47.417Z\",\r\n  \"endDate\": \"2023-07-17T12:57:47.417Z\",\r\n  \"orderType\": \"LIMIT\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/SearchOrder",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"SearchOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchOrderOffer",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ClientId\": \"5fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"PortfolioId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa1\",\r\n  \"Page\": 1,\r\n  \"Size\": 10,\r\n  \"Sort\": [\"sort-field-1\", \"sort-field-2\"],\r\n \"AssetClassList\": [\"BOND\", \"VENTURE_CAPITAL\"],\r\n  \"SearchQuery\": \"find my order\",\r\n  \"MaturityDate\": \"2023-07-18T02:45:25.787Z\",\r\n  \"IssueDate\": \"2023-07-18T02:45:25.787Z\",\r\n  \"BondFixedIncomeAssetClasses\": [\"CB\",\"LGB\"],\r\n  \"CurrencyCodes\": [\"currency-code-1\", \"currency-code-2\"],\r\n  \"CountryNames\": [\"country-name-1\", \"country-name-2\"],\r\n  \"CISTypes\": [\"FIXED_INCOME\", \"MONEY_MARKET\"],\r\n  \"RepoType\": \"REPO\",\r\n  \"ProductStatus\": [\"UPCOMING\", \"MATURED\"],\r\n  \"IsArchived\": true,\r\n  \"OnlyWithQuantity\": false,\r\n  \"OrderSideOrderOfferList\": [\"BUY\",\"SELL\",\"BOTH\"],\r\n  \"OrderOfferTypes\": [\"REGULAR\",\"REVERSE_REPO\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/SearchOrderOffer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"SearchOrderOffer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CancelOrder",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"clientId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"id\": \"1fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/CancelOrder",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"CancelOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BalanceValidation",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ClientId\": \"9fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"PortfolioId\": \"0fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"SecurityId\": \"2fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"CounterPartyId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"CustodianId\": \"f8a74d09-8b5d-4ea9-91ad-cc9f0912342\",\r\n  \"OrderOfferId\": \"1fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"ConsiderationWithCurrency\": 1000.50\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/BalanceValidation",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"BalanceValidation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PortfolioPosition",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ClientId\": \"2fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"SecurityId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"PortfolioId\": \"4fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"CounterPartyId\": \"5fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"CustodianId\": \"6fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"Date\": \"2023-07-13\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/PortfolioPosition",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"PortfolioPosition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PositionOfClient",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ClientId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"PortfolioId\": \"1fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"Date\": \"2023-07-13\",\r\n  \"AssetClassList\": [\"BILL\", \"BOND\", \"CASH\"],\r\n  \"SearchQuery\": \"what is the postion of client\",\r\n  \"MaturityDate\": \"2023-07-17T14:21:52.423Z\",\r\n  \"IssueDate\": \"2023-07-17T14:21:52.423Z\",\r\n  \"BondFixedIncomeAssetClasses\": [\"CB\", \"GB\"],\r\n  \"CurrencyCodes\": [\"USD\", \"EUR\"],\r\n  \"CountryNames\": [\"USA\", \"UK\"],\r\n  \"CISTypes\": [\"FIXED_INCOME\", \"EQUITY\"],\r\n  \"RepoType\": \"REVERSE_REPO\",\r\n  \"ProductStatus\": [\"ALL\", \"UPCOMING\"],\r\n  \"IsArchived\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/PositionOfClient",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"PositionOfClient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PortfolioSummary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ClientId\": \"1fa85f64-5717-4562-b3fc-2c963f66afa5\",\r\n  \"Date\": \"2023-07-13\",\r\n  \"PortfolioId\": \"8fa85f64-5717-4562-b3fc-2c963f66afa5\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/PortfolioSummary",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"PortfolioSummary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AllPortFolioSummary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ClientId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"Date\": \"2023-07-13\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7153/api/BlackStarApi/AllPortFolioSummary",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7153",
+					"path": [
+						"api",
+						"BlackStarApi",
+						"AllPortFolioSummary"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

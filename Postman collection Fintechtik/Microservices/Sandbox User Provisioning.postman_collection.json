@@ -1,0 +1,751 @@
+{
+	"info": {
+		"_postman_id": "89a00868-1dfe-4a9b-bfa3-ca9a9cc82138",
+		"name": "Sandbox User Provisioning",
+		"description": "Sandbox User Provisioning ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-89a00868-1dfe-4a9b-bfa3-ca9a9cc82138?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "v1_0",
+			"item": [
+				{
+					"name": "apiuser",
+					"item": [
+						{
+							"name": "{X-Reference-Id}",
+							"item": [
+								{
+									"name": "apikey",
+									"item": [
+										{
+											"name": "/v1_0/apiuser/{X-Reference-Id}/apikey - POST",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id/apikey",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1_0",
+														"apiuser",
+														":X-Reference-Id",
+														"apikey"
+													],
+													"variable": [
+														{
+															"key": "X-Reference-Id",
+															"value": "adf020f2-5cd8-4652-99e0-7ba1721fae10",
+															"description": "(Required) Format - UUID. Recource ID for the API user to be created. UUID version 4 is required."
+														}
+													]
+												},
+												"description": "Used to create an API key for an API user in the sandbox target environment."
+											},
+											"response": [
+												{
+													"name": "Created",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"key": "Ocp-Apim-Subscription-Key",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id/apikey",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"v1_0",
+																"apiuser",
+																":X-Reference-Id",
+																"apikey"
+															],
+															"variable": [
+																{
+																	"key": "X-Reference-Id"
+																}
+															]
+														}
+													},
+													"status": "Created",
+													"code": 201,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"apiKey\": \"<string>\"\n}"
+												},
+												{
+													"name": "Bad request, e.g. invalid data was sent in the request.",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"key": "Ocp-Apim-Subscription-Key",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id/apikey",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"v1_0",
+																"apiuser",
+																":X-Reference-Id",
+																"apikey"
+															],
+															"variable": [
+																{
+																	"key": "X-Reference-Id"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Not found, reference id not found or closed in sandbox",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "Requested resource was not found"
+															},
+															{
+																"key": "Ocp-Apim-Subscription-Key",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id/apikey",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"v1_0",
+																"apiuser",
+																":X-Reference-Id",
+																"apikey"
+															],
+															"variable": [
+																{
+																	"key": "X-Reference-Id"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"code\": \"RESOURCE_ALREADY_EXIST\",\n  \"message\": \"<string>\"\n}"
+												},
+												{
+													"name": "Internal error. Check log for information.",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															},
+															{
+																"key": "Ocp-Apim-Subscription-Key",
+																"value": "<API Key>",
+																"description": "Added as a part of security scheme: apikey"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id/apikey",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"v1_0",
+																"apiuser",
+																":X-Reference-Id",
+																"apikey"
+															],
+															"variable": [
+																{
+																	"key": "X-Reference-Id"
+																}
+															]
+														}
+													},
+													"status": "Internal Server Error",
+													"code": 500,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "/v1_0/apiuser/{X-Reference-Id} - GET",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "Requested resource was not found"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1_0",
+												"apiuser",
+												":X-Reference-Id"
+											],
+											"variable": [
+												{
+													"key": "X-Reference-Id",
+													"value": "adf020f2-5cd7-4652-99e0-7ba1721fae11",
+													"description": "(Required) Format - UUID. Recource ID for the API user to be created. UUID version 4 is required."
+												}
+											]
+										},
+										"description": "Used to get API user information."
+									},
+									"response": [
+										{
+											"name": "Ok",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Ocp-Apim-Subscription-Key",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1_0",
+														"apiuser",
+														":X-Reference-Id"
+													],
+													"variable": [
+														{
+															"key": "X-Reference-Id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad request, e.g. invalid data was sent in the request.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Ocp-Apim-Subscription-Key",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1_0",
+														"apiuser",
+														":X-Reference-Id"
+													],
+													"variable": [
+														{
+															"key": "X-Reference-Id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not found, reference id not found or closed in sandbox",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "Requested resource was not found"
+													},
+													{
+														"key": "Ocp-Apim-Subscription-Key",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1_0",
+														"apiuser",
+														":X-Reference-Id"
+													],
+													"variable": [
+														{
+															"key": "X-Reference-Id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "Requested resource was not found"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"code\": \"RESOURCE_ALREADY_EXIST\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"name": "Internal error. Check log for information.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Ocp-Apim-Subscription-Key",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/v1_0/apiuser/:X-Reference-Id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"v1_0",
+														"apiuser",
+														":X-Reference-Id"
+													],
+													"variable": [
+														{
+															"key": "X-Reference-Id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/apiuser - POST",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Reference-Id",
+										"value": "adf020f2-5cd7-4652-99e0-7ba1721fae29",
+										"description": "(Required) Format - UUID. Recource ID for the API user to be created. UUID version 4 is required."
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"providerCallbackHost\": \"d5prsfc2r360x.cloudfront.net\" //devsrv.cspay.app // dev.cspay.app\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v1_0/apiuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1_0",
+										"apiuser"
+									]
+								},
+								"description": "Used to create an API user in the sandbox target environment."
+							},
+							"response": [
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Reference-Id",
+												"value": "<string>",
+												"description": "(Required) Format - UUID. Recource ID for the API user to be created. UUID version 4 is required."
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Ocp-Apim-Subscription-Key",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"providerCallbackHost\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/v1_0/apiuser",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1_0",
+												"apiuser"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad request, e.g. invalid data was sent in the request.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Reference-Id",
+												"value": "<string>",
+												"description": "(Required) Format - UUID. Recource ID for the API user to be created. UUID version 4 is required."
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Ocp-Apim-Subscription-Key",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"providerCallbackHost\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/v1_0/apiuser",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1_0",
+												"apiuser"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Conflict, duplicated reference id",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Reference-Id",
+												"value": "<string>",
+												"description": "(Required) Format - UUID. Recource ID for the API user to be created. UUID version 4 is required."
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "ReferenceId already in use"
+											},
+											{
+												"key": "Ocp-Apim-Subscription-Key",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"providerCallbackHost\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/v1_0/apiuser",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1_0",
+												"apiuser"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"code\": \"RESOURCE_ALREADY_EXIST\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"name": "Internal error. Check log for information.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Reference-Id",
+												"value": "<string>",
+												"description": "(Required) Format - UUID. Recource ID for the API user to be created. UUID version 4 is required."
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Ocp-Apim-Subscription-Key",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"providerCallbackHost\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/v1_0/apiuser",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1_0",
+												"apiuser"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "Ocp-Apim-Subscription-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://sandbox.momodeveloper.mtn.com"
+		},
+		{
+			"key": "apiKey",
+			"value": "9d8e0abd24a5440cb676aeaa4b0bf22f",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "557c77b4-b663-4de4-98e6-5b08e3b3bffd",
+		"name": "Zenith Bank card payment backend service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645",
+		"_collection_link": "https://dark-satellite-211344.postman.co/workspace/Zenith-Redirect-Base-~dbd4a2b6-1c98-4e06-94c9-f3f2b1179edf/collection/14223645-557c77b4-b663-4de4-98e6-5b08e3b3bffd?action=share&source=collection_link&creator=14223645"
+	},
+	"item": [
+		{
+			"name": "RedirectBased",
+			"item": [
+				{
+					"name": "SecurePaymentRequest",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let timestamp = Date.now();\r",
+									"let randomNumber = Math.floor(Math.random() * 100000);\r",
+									"let referenceID = `zenghglobalpay${timestamp}${randomNumber}`;\r",
+									"\r",
+									"// Set in ENVIRONMENT (not local or global)\r",
+									"const CryptoJS = require(\"crypto-js\");\r",
+									"\r",
+									"// Get the raw request body string from Postman (must be exact)\r",
+									"const rawBody = pm.request.body.raw;\r",
+									"\r",
+									"const secret = \"FF!26rP1M#Tb#x&kSk;l9&;d>9*W~-7S0y^QjdaGWMCgFB9Wppf2q_N\";\r",
+									"const hash = CryptoJS.HmacSHA256(rawBody, secret);\r",
+									"const signature = CryptoJS.enc.Base64.stringify(hash);\r",
+									"\r",
+									"pm.environment.set(\"signature\", signature);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34"
+							},
+							{
+								"key": "X-HMAC-Signature",
+								"value": "{{signature}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 2.0,\r\n    \"desc\": \"Test\",\r\n    \"referenceID\": \"5435436546\",\r\n    \"ProductID\": \"Test\",\r\n    \"CustomerID\": \"1111\",\r\n    \"Currency\": \"GHS\",\r\n    \"merLogo\": \"\",\r\n    \"merName\": \"ZBG Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/zenith/CardPayments/SecurePaymentRequest",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"zenith",
+								"CardPayments",
+								"SecurePaymentRequest"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SecurePaymentRequest",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "API-KEY",
+										"value": "3ddada1bd06242458f828fe9143dfa34"
+									},
+									{
+										"key": "X-HMAC-Signature",
+										"value": "{{signature}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n/*{\r\n    \"GPID\" :\"324324\",\r\n    \"amount\": 0.8,\r\n    \"desc\": \"Test\",\r\n    \"referenceID\": \"{{referenceID}}\",\r\n    \"ProductID\": \"Test\",\r\n    \"CustomerID\": \"1111\",\r\n    \"Currency\": \"{{Currency}}\",\r\n    \"merLogo\": \"\",\r\n    \"merName\": \"ZBG Test\"\r\n} */\r\n\r\n\r\n{{requestBody}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{dev}}/api/zenith/CardPayments/SecurePaymentRequest",
+									"host": [
+										"{{dev}}"
+									],
+									"path": [
+										"api",
+										"zenith",
+										"CardPayments",
+										"SecurePaymentRequest"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "private, no-store, no-cache, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Correlation-ID",
+									"value": "8022342e-74c7-4c13-9562-721512289f08"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 24 Jun 2025 07:14:14 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"status\": \"Successful\",\n    \"securePaymentResponse\": {\n        \"orderID\": \"25062407125199434\",\n        \"statusCode\": \"000\",\n        \"statusMessage\": \"Successful\",\n        \"transactionID\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Initiate - Redirect to payment page of Global Pay.",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34"
+							}
+						],
+						"url": {
+							"raw": "{{PCIBaseUrl}}/api/CardPayments/Initiate/{{referenceID}}",
+							"host": [
+								"{{PCIBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"CardPayments",
+								"Initiate",
+								"{{referenceID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Status - to get the final payment status of the transaction",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Set in ENVIRONMENT (not local or global)\r",
+									"const CryptoJS = require(\"crypto-js\");\r",
+									"\r",
+									"// Get the raw request body string from Postman (must be exact)\r",
+									"const rawBody = pm.request.body.raw;\r",
+									"\r",
+									"const secret = \"FF!26rP1M#Tb#x&kSk;l9&;d>9*W~-7S0y^QjdaGWMCgFB9Wppf2q_N\";\r",
+									"const hash = CryptoJS.HmacSHA256(rawBody, secret);\r",
+									"const ConfirmTxnsignature = CryptoJS.enc.Base64.stringify(hash);\r",
+									"\r",
+									"pm.environment.set(\"ConfirmTxnsignature\", ConfirmTxnsignature);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34"
+							},
+							{
+								"key": "X-HMAC-Signature",
+								"value": "{{ConfirmTxnsignature}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n   \r\n    \"referenceid\":\"2506110731450EE31\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{loca}}/api/zenith/CardPayments/ConfirmTransaction",
+							"host": [
+								"{{loca}}"
+							],
+							"path": [
+								"api",
+								"zenith",
+								"CardPayments",
+								"ConfirmTransaction"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthToken",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"ZPK#mMRztzL\",\r\n  \"password\": \"3?7F5!#@9j7f\"\r\n \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/api/zenith/auth/token",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"zenith",
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJaUEsjbU1SenR6TCIsImp0aSI6IjJmYzA4MDk3LWM5MzYtNDUxNi04YTRjLTg3ZWEwY2I5MzM2ZiIsImV4cCI6MTc1MDQwNTA3NCwiaXNzIjoiWmVuaXRoLkdsb2JhbHBheS5BUEkiLCJhdWQiOiJNb2pvUGF5In0.fwwuZtJk9wxB8tnD7jM6uI53wGJv4NnAPaLSdbFVNMA",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "GPID",
+			"value": "GPTEST0053",
+			"type": "string"
+		},
+		{
+			"key": "local",
+			"value": "https://localhost:7061",
+			"type": "string"
+		},
+		{
+			"key": "dev",
+			"value": "https://devsrv.cspay.app/zenith-api",
+			"type": "string"
+		},
+		{
+			"key": "fargatedev",
+			"value": "http://18.185.124.103",
+			"type": "string"
+		},
+		{
+			"key": "fargate",
+			"value": "https://zenith-pci.cspayafrica.com",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "fargate",
+			"value": "https://zenithapi.cspayafrica.com",
+			"type": "string"
+		},
+		{
+			"key": "Currency",
+			"value": "GHS",
+			"type": "string"
+		},
+		{
+			"key": "referenceID",
+			"value": "test001",
+			"type": "string"
+		},
+		{
+			"key": "PCIBaseUrl",
+			"value": "https://sandbox-card.mojo-pay.com",
+			"type": "string"
+		},
+		{
+			"key": "bearer token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

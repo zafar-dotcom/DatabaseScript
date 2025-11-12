@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "85bde7bc-8ee3-4c0d-a09a-f7c3198412fd",
+		"name": "SMS-Portal-Client 8.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Client-sms",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"GAMA SEWER\",\r\n    \"password\": \"gama789\",\r\n    \"destination\": \"+923094485925\",\r\n    \"source\": \"GAMASEWER\",\r\n    \"message\": \"message\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://deywuro.com/api/sms",
+							"protocol": "https",
+							"host": [
+								"deywuro",
+								"com"
+							],
+							"path": [
+								"api",
+								"sms"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Portal",
+			"item": [
+				{
+					"name": "Send-sms",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Glovoapp\",\r\n    \"password\": \"8d0ddc\",\r\n    \"destination\": \"+233244371378\",\r\n    \"source\": \"Glovoapp\",\r\n    \"message\": \"This is a test message from service client 3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7129/api/Deywuro/send-sms",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7129",
+							"path": [
+								"api",
+								"Deywuro",
+								"send-sms"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

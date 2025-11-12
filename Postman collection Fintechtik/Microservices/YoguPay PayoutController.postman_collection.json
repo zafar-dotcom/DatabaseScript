@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "e0c36dcb-9316-4028-b8e4-9f909661b06e",
+		"name": "YoguPay PayoutController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25808278"
+	},
+	"item": [
+		{
+			"name": "Get Account Balance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic base64encodedcredentials",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/api/Payout/AccountBalance",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Payout",
+						"AccountBalance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Transactions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic base64encodedcredentials",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/api/Payout/Transactions",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Payout",
+						"Transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic base64encodedcredentials",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/api/Payout/Transaction?transactionCode=ECQ14Y4PQS&paymentReference=123456",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Payout",
+						"Transaction"
+					],
+					"query": [
+						{
+							"key": "transactionCode",
+							"value": "ECQ14Y4PQS"
+						},
+						{
+							"key": "paymentReference",
+							"value": "123456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Payout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic base64encodedcredentials",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"BankAccountNumber\": \"1234567890\",\n    \"BankCode\": \"KCBL\",\n    \"CountryCode\": \"KE\",\n    \"SourceCurrency\": \"KES\",\n    \"SourceAmount\": 1000,\n    \"PurposeOfFunds\": \"Business Payment\",\n    \"RecipientName\": \"John Doe\",\n    \"Msisdn\": \"254701234567\",\n    \"RecipientEmail\": \"john.doe@yogupay.com\",\n    \"PaymentReference\": \"Invoice123\",\n    \"CollectionNetwork\": \"MPESA\",\n    \"Channel\": \"MOBILE\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/Payout/CreatePayout",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Payout",
+						"CreatePayout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

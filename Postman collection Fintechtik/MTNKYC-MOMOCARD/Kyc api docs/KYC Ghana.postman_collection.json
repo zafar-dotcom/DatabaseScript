@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "5a75acc6-0791-4ee7-a330-4b5a57c22c67",
+		"name": "KYC Ghana",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27578384"
+	},
+	"item": [
+		{
+			"name": "KYC Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"consentType\": \"ussd\",\r\n  \"companyName\": \"Chenosis\",\r\n  \"callbackUrl\": \"https://your.call.back.io/spike/arrest/url1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.chenosis.io/v1/gha/kyc-details/customers/233550868609",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chenosis",
+						"io"
+					],
+					"path": [
+						"v1",
+						"gha",
+						"kyc-details",
+						"customers",
+						"233550868609"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "kyc verification",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "fCxdKA40aNrZAVedLItQDjxsiFgwjFYx",
+						"type": "text"
+					},
+					{
+						"key": "transactionId",
+						"value": "100223433444",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"MAKAFUI\",\n  \"lastName\": \"AGBOTTA\",\n  \"phoneNumber\": \"233558610773\",\n  \"emailAddress\": \"\",\n  \"nationalIdNumber\": \"1193030887\",\n  \"streetAddress\": \"SPINTEX, ACCRA\",\n  \"city\": \"AC\",\n  \"postCode\": \"\",\n  \"country\": \"GH\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.chenosis.io/kycVerify/gh/v1/customers/233558610773",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chenosis",
+						"io"
+					],
+					"path": [
+						"kycVerify",
+						"gh",
+						"v1",
+						"customers",
+						"233558610773"
+					],
+					"query": [
+						{
+							"key": "targetSystem",
+							"value": "DCLM",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "kyc verification",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "fCxdKA40aNrZAVedLItQDjxsiFgwjFYx",
+								"type": "text"
+							},
+							{
+								"key": "transactionId",
+								"value": "100223433444",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"MAKAFUI\",\n  \"lastName\": \"AGBOTTA\",\n  \"phoneNumber\": \"233558610773\",\n  \"emailAddress\": \"\",\n  \"nationalIdNumber\": \"1193030887\",\n  \"streetAddress\": \"SPINTEX, ACCRA\",\n  \"city\": \"AC\",\n  \"postCode\": \"\",\n  \"country\": \"GH\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.chenosis.io/kycVerify/gh/v1/customers/233558610773",
+							"protocol": "https",
+							"host": [
+								"api",
+								"chenosis",
+								"io"
+							],
+							"path": [
+								"kycVerify",
+								"gh",
+								"v1",
+								"customers",
+								"233558610773"
+							],
+							"query": [
+								{
+									"key": "targetSystem",
+									"value": "DCLM",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 10 Oct 2023 10:39:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "x-response-time",
+							"value": "228"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "ADRUM_BT=R:0|i:6469|g:bb5394d0-ad54-40f5-bd0f-d72ce7556e343638237|e:754|s:f|n:customer1_ce36442d-e4ae-4d0c-a8c8-b730fbf2b56e; Path=/; Expires=Tue, 10 Oct 2023 10:39:40 GMT"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "31e9233b7d701d4e58998b0d5ea9ed02=b653a17ecbc268f6a397964862fee1b0; path=/; HttpOnly"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "chenosis-transactionId",
+							"value": "rrt-2671473720002387502-b-geu1-22479-37340-1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"customerId\": \"233558610773\",\n    \"statusCode\": \"0000\",\n    \"statusMessage\": \"Success.\",\n    \"transactionId\": \"rrt-2671473720002387502-b-geu1-22479-37340-1\",\n    \"data\": {\n        \"firstName\": 100,\n        \"lastName\": 100,\n        \"phoneNumber\": 100,\n        \"emailAddress\": 0,\n        \"nationalIdNumber\": 100,\n        \"streetAddress\": 100,\n        \"city\": 100,\n        \"postCode\": 0,\n        \"country\": 100\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "getToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res = pm.response.json();\r",
+							"if(res.access_token){\r",
+							"pm.environment.set('chenosis-accesstoken', res.access_token);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UjTFJUUgU3kzbreX",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "M4QWSXnGRpUtcD58ZWWkbOWFiqzTRT46",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://api.chenosis.io/oauth/client/accesstoken?grant_type=client_credentials",
+					"protocol": "https",
+					"host": [
+						"api",
+						"chenosis",
+						"io"
+					],
+					"path": [
+						"oauth",
+						"client",
+						"accesstoken"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

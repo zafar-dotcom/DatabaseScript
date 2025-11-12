@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "2fe164b1-9a79-496f-b209-8baefec9cab3",
+		"name": "EpTEST2025-CallbackApi",
+		"description": "Postman collection to test AWS API Gateway endpoints for EpTEST2025-CallbackApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Interpay-New-Infra~d65341ee-9c03-43b2-a92c-89556aef4082/collection/16194081-2fe164b1-9a79-496f-b209-8baefec9cab3?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "vodafone Cashout - /credit/{proxy+}",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:res=\"http://api-vodafone/result\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <res:ResultMsg>\r\n            <![CDATA[\r\n         <Response><ResultCode>0</ResultCode><ResultDesc>Transaction successful</ResultDesc><ConversationID>ABC123XYZ</ConversationID><TransactionID>1215320\r\n</TransactionID><ReferenceItem><Key>TransactionID</Key><Value>1215320\r\n</Value></ReferenceItem><ReferenceItem><Key>BatchID</Key><Value>0\r\n       </Value></ReferenceItem>\r\n         </Response>\r\n         ]]>\r\n     \r\n\r\n</res:ResultMsg>\r\n</soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://diij3avn54.execute-api.eu-west-3.amazonaws.com/devtest/VodafoneCallback/Credit",
+							"protocol": "https",
+							"host": [
+								"diij3avn54",
+								"execute-api",
+								"eu-west-3",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"devtest",
+								"VodafoneCallback",
+								"Credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:res=\"http://api-vodafone/result\">    <soapenv:Header/>    \r\n<soapenv:Body>       \r\n    <res:ResultMsg>          \r\n        <![CDATA[             <Response>                 <ResultCode>0</ResultCode>                 <ResultDesc>Transaction successful</ResultDesc>                 <ConversationID>ABC123XYZ</ConversationID>                 <TransactionID>1252025</TransactionID>                 <ReferenceItem><Key>TransactionID</Key><Value>1252025</Value></ReferenceItem>                 <ReferenceItem><Key>BatchID</Key><Value>0</Value></ReferenceItem>             </Response>          ]]>       \r\n    </res:ResultMsg>    \r\n</soapenv:Body> \r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://cs6sy5pyrg.execute-api.eu-west-3.amazonaws.com/devtest",
+							"protocol": "https",
+							"host": [
+								"cs6sy5pyrg",
+								"execute-api",
+								"eu-west-3",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"devtest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vodafone Collection - /vf-notification/{proxy+}",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"538741414\",\r\n    \"vcash_user\": 4,\r\n    \"transaction_type\": \"D\",\r\n    \"msisdn\": \"233201877254\",\r\n    \"status\": \"SUCCESS\",\r\n    \"amount\": 3.00,\r\n    \"created\": \"2025-06-10T09:06:45.42104+00:00\",\r\n    \"last_updated\": \"2025-06-10T09:06:54.806481+00:00\",\r\n    \"reference_number\": \"1215343\",\r\n    \"mm_conversation_id\": null,\r\n    \"mm_transaction_id\": \"0000009724892082\",\r\n    \"TransactionSuccessfull\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dxgqtuo3zd.execute-api.eu-west-3.amazonaws.com/test/ep-callback/vf-notification/test-path",
+							"protocol": "https",
+							"host": [
+								"dxgqtuo3zd",
+								"execute-api",
+								"eu-west-3",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"test",
+								"ep-callback",
+								"vf-notification",
+								"test-path"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vodafone-kyc-callback",
+			"item": [
+				{
+					"name": "POST /ep-callback/kyc-callback/{proxy+}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version='1.0' encoding='ISO-8859-1'?>\r\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soapenv:Body>\r\n        <res:ResultMsg xmlns:res=\"http://cps.huawei.com/cpsinterface/result\">\r\n            <![CDATA[\r\n            <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><Result><ResultType>0</ResultType><ResultCode>0</ResultCode><ResultDesc>The service request is processed successfully.</ResultDesc><ConversationID>AG_20250610_70504725a12e72925f8f</ConversationID><TransactionID>1000009724891665</TransactionID><ResultParameters><ResultParameter><Key>[KYC][Personal Details][First Name]</Key><Value>SHADRACK</Value></ResultParameter><ResultParameter><Key>[KYC][Personal Details][Last Name]</Key><Value>ALABI</Value></ResultParameter><ResultParameter><Key>[KYC][Personal Details][Gender]</Key><Value>01</Value></ResultParameter><ResultParameter><Key>[KYC][Tier 1 ID Details]</Key><Value><Record><KYC FieldType=\"[ID Type]\" FieldValue=\"01\"/><KYC FieldType=\"[ID Number]\" FieldValue=\"GHA-727856898-4\"/><KYC FieldType=\"[ID Expiry Date]\" FieldValue=\"null\"/><KYC FieldType=\"[Document Received]\" FieldValue=\"null\"/></Record><Record><KYC FieldType=\"[ID Type]\" FieldValue=\"02\"/><KYC FieldType=\"[ID Number]\" FieldValue=\"6850007383\"/><KYC FieldType=\"[ID Expiry Date]\" FieldValue=\"null\"/><KYC FieldType=\"[Document Received]\" FieldValue=\"null\"/></Record></Value></ResultParameter></ResultParameters></Result>]]>\r\n</res:ResultMsg>\r\n</soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://cavew3asc5.execute-api.eu-west-3.amazonaws.com/test/ep-callback/kyc-callback/test-path",
+							"protocol": "https",
+							"host": [
+								"cavew3asc5",
+								"execute-api",
+								"eu-west-3",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"test",
+								"ep-callback",
+								"kyc-callback",
+								"test-path"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ep-callback/kyc-callback/{proxy+} Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version='1.0' encoding='ISO-8859-1'?>\r\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soapenv:Body>\r\n        <res:ResultMsg xmlns:res=\"http://cps.huawei.com/cpsinterface/result\">\r\n            <![CDATA[\r\n            <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><Result><ResultType>0</ResultType><ResultCode>0</ResultCode><ResultDesc>The service request is processed successfully.</ResultDesc><ConversationID>AG_20250610_70504725a12e72925f8f</ConversationID><TransactionID>1000009724891665</TransactionID><ResultParameters><ResultParameter><Key>[KYC][Personal Details][First Name]</Key><Value>SHADRACK</Value></ResultParameter><ResultParameter><Key>[KYC][Personal Details][Last Name]</Key><Value>ALABI</Value></ResultParameter><ResultParameter><Key>[KYC][Personal Details][Gender]</Key><Value>01</Value></ResultParameter><ResultParameter><Key>[KYC][Tier 1 ID Details]</Key><Value><Record><KYC FieldType=\"[ID Type]\" FieldValue=\"01\"/><KYC FieldType=\"[ID Number]\" FieldValue=\"GHA-727856898-4\"/><KYC FieldType=\"[ID Expiry Date]\" FieldValue=\"null\"/><KYC FieldType=\"[Document Received]\" FieldValue=\"null\"/></Record><Record><KYC FieldType=\"[ID Type]\" FieldValue=\"02\"/><KYC FieldType=\"[ID Number]\" FieldValue=\"6850007383\"/><KYC FieldType=\"[ID Expiry Date]\" FieldValue=\"null\"/><KYC FieldType=\"[Document Received]\" FieldValue=\"null\"/></Record></Value></ResultParameter></ResultParameters></Result>]]>\r\n</res:ResultMsg>\r\n</soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://interpayafrica.com/VodafoneCallback/KYCCallback",
+							"protocol": "https",
+							"host": [
+								"interpayafrica",
+								"com"
+							],
+							"path": [
+								"VodafoneCallback",
+								"KYCCallback"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/mtn-madapi-preapproval-callBack/{proxy+}",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"referenceId\": \"testReference007\",\r\n    \"preapprovalStatus\": \"APPROVED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://diij3avn54.execute-api.eu-west-3.amazonaws.com/devtest/MtnApi/MadApiPreApprovalCallback",
+							"protocol": "https",
+							"host": [
+								"diij3avn54",
+								"execute-api",
+								"eu-west-3",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"devtest",
+								"MtnApi",
+								"MadApiPreApprovalCallback"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/mtn-madapi-debitCallback/{proxy+}",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"receiverInfo\": {\r\n        \"fromFri\": \"FRI:BlupOVA.sp/USER\",\r\n        \"status\": \"SUCCESSFUL\",\r\n        \"referenceid\": \"1214981\",\r\n        \"communicationchannel\": null\r\n    },\r\n    \"transactionid\": \"59078135242\",\r\n    \"externaltransactionid\": \"1214981\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:52227/MtnApi/MadApiDebitCallback",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "52227",
+							"path": [
+								"MtnApi",
+								"MadApiDebitCallback"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"receiverInfo\": {\r\n        \"fromFri\": \"FRI:INSTOREOT.sp/USER \",\r\n        \"status\": \"SUCCESS\",\r\n        \"referenceid\": \"1252666\",\r\n        \"communicationchannel\": null\r\n    },\r\n    \"transactionid\": null,\r\n    \"externaltransactionid\": \"1252666\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://diij3avn54.execute-api.eu-west-3.amazonaws.com/devtest/MtnApi/MadApiDebitCallback",
+							"protocol": "https",
+							"host": [
+								"diij3avn54",
+								"execute-api",
+								"eu-west-3",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"devtest",
+								"MtnApi",
+								"MadApiDebitCallback"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Airtel",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"trans_id\": \"MP1234567890\",\r\n  \"trans_ref\": \"1214981\",\r\n  \"message\": \"Transaction successful\",\r\n  \"trans_status\": \"200\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dxgqtuo3zd.execute-api.eu-west-3.amazonaws.com/test/ep-callback/airtel",
+							"protocol": "https",
+							"host": [
+								"dxgqtuo3zd",
+								"execute-api",
+								"eu-west-3",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"test",
+								"ep-callback",
+								"airtel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

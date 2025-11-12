@@ -1,0 +1,400 @@
+{
+	"info": {
+		"_postman_id": "178d27d8-8e50-4447-8391-0e96fc5fdd0f",
+		"name": "VODAFONE-OPEN-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35170033"
+	},
+	"item": [
+		{
+			"name": "b2b-payment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_Amount\": \"10\", \r\n  \"input_Country\": \"GHA\", \r\n  \"input_Currency\": \"GHS\", \r\n  \"input_PrimaryPartyCode\": \"000000\", \r\n  \"input_ReceiverPartyCode\": \"000001\", \r\n  \"input_ThirdPartyConversationID\": \"asv02e5958774f7ba228d83d0d689761\", \r\n  \"input_TransactionReference\": \"T12344C\",\r\n  \"input_PurchasedItemsDesc\": \"Shoes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/B2BTransactions/b2b-payment",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"B2BTransactions",
+						"b2b-payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "b2c-disbursement",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_Amount\": \"10\", \r\n  \"input_Country\": \"GHA\", \r\n  \"input_Currency\": \"GHS\", \r\n  \"input_CustomerMSISDN\": \"000000000001\", \r\n  \"input_ServiceProviderCode\": \"000000\", \r\n  \"input_ThirdPartyConversationID\": \"asv02e5958774f7ba228d83d0d689761\", \r\n  \"input_TransactionReference\": \"T12344C\",\r\n  \"input_PaymentItemsDesc\": \"Salary payment\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/Cashout/b2c-disbursement",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"Cashout",
+						"b2c-disbursement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c2bPayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_Amount\": \"10\", \r\n  \"input_Country\": \"GHA\", \r\n  \"input_Currency\": \"GHS\", \r\n  \"input_CustomerMSISDN\": \"000000000001\", \r\n  \"input_ServiceProviderCode\": \"000000\", \r\n  \"input_ThirdPartyConversationID\": \"asv02e5958774f7ba228d83d0d689761\", \r\n  \"input_TransactionReference\": \"T1234C\",\r\n  \"input_PurchasedItemsDesc\": \"Shoes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/Collection/c2bPayment",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"Collection",
+						"c2bPayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c2b-pyment-multistage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_Amount\": \"10\", \r\n  \"input_Country\": \"GHA\", \r\n  \"input_Currency\": \"GHS\", \r\n  \"input_CustomerMSISDN\": \"233544338841\", \r\n  \"input_ServiceProviderCode\": \"000000\", \r\n  \"input_ThirdPartyConversationID\": \"asv02e5958774f7ba228d83d0d689761\", \r\n  \"input_TransactionReference\": \"T1234C\",\r\n  \"input_PurchasedItemsDesc\": \"Shoes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/Collection/c2b-pyment-multistage",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"Collection",
+						"c2b-pyment-multistage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-direct-debitMandate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_AgreedTC\": \"1\", \r\n  \"input_Country\": \"GHA\", \r\n  \"input_CustomerMSISDN\": \"233544338841\", \r\n  \"input_EndRangeOfDays\": \"22\", \r\n  \"input_ExpiryDate\": \"20161126\", \r\n  \"input_FirstPaymentDate\": \"20160324\", \r\n  \"input_Frequency\": \"06\", \r\n  \"input_ServiceProviderCode\": \"000000\", \r\n  \"input_StartRangeOfDays\": \"01\", \r\n  \"input_ThirdPartyConversationID\": \"AAA6d1f9391a0052de0b5334a912jbsj1j2kk\", \r\n  \"input_ThirdPartyReference\": \"3333\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/DirectDebits/create-direct-debitMandate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"DirectDebits",
+						"create-direct-debitMandate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "directd-debit-payments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"input_Amount\": \"10\",\r\n  \"input_Country\": \"GHA\",\r\n  \"input_Currency\": \"GHS\",\r\n  \"input_CustomerMSISDN\": \"233544338841\",\r\n  \"input_ServiceProviderCode\": \"000000\",\r\n  \"input_ThirdPartyConversationID\": \"AAA6d1f939c1005v2de053v4912jbasdj1j2kk\",\r\n  \"input_MandateID\": \"15045\",\r\n  \"input_ThirdPartyReference\": \"00000000000000000001\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/DirectDebits/directd-debit-payments",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"DirectDebits",
+						"directd-debit-payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query-direct-debit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"input_QueryBalanceAmount\": \"True\",\r\n  \"input_BalanceAmount\": \"100\",\r\n  \"input_Country\": \"GHA\",\r\n  \"input_CustomerMSISDN\": \"255744553111\",\r\n  \"input_MsisdnToken\": \"cvgwUBZ3lAO9ivwhWAFeng==\",\r\n  \"input_ServiceProviderCode\": \"112244\",\r\n  \"input_ThirdPartyConversationID\": \"GPO3051656128\",\r\n  \"input_ThirdPartyReference\": \"Test123\",\r\n  \"input_MandateID\": \"15045\",\r\n  \"input_Currency\": \"GHS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/DirectDebits/query-direct-debit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"DirectDebits",
+						"query-direct-debit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancel-direct-debit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_Country\": \"GHA\",\r\n  \"input_CustomerMSISDN\": \"000000000001\",\r\n  \"input_ServiceProviderCode\": \"000000\",\r\n  \"input_ThirdPartyConversationID\": \"AAA6d1f939c1005v2de053v4912jbasdj1j2kk\",\r\n  \"input_MandateID\": \"15045\",\r\n  \"input_ThirdPartyReference\": \"00000000000000000001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/DirectDebits/cancel-direct-debit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"DirectDebits",
+						"cancel-direct-debit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query-customer-kyc",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_CustomerMSISDN\": \"254707161122\",\r\n  \"input_Country\": \"GHA\",\r\n  \"input_ServiceProviderCode\": \"000000\",\r\n  \"input_ThirdPartyConversationID\": \"asv02e5958774f7ba228d83d0d689761\",\r\n  \"input_KYCQueryType\": \"Name\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/Kyc/query-customer-kyc",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"Kyc",
+						"query-customer-kyc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query-beneficiary-name",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_CustomerMSISDN\": \"233544338841\",\r\n  \"input_Country\": \"GHA\",\r\n  \"input_ServiceProviderCode\": \"000000\",\r\n  \"input_ThirdPartyConversationID\": \"asv02e5958774f7ba228d83d0d689992\",\r\n  \"input_KYCQueryType\": \"Name\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/Kyc/query-beneficiary-name",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"Kyc",
+						"query-beneficiary-name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query-organization-balances",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_Country\": \"GHA\",\r\n  \"input_ServiceProviderCode\": \"000000\",\r\n  \"input_ThirdPartyConversationID\": \"asv02e5958774f7ba228d83d0d689761\",\r\n  \"input_TargetOrgList\": \"001123;331122;310234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/QueryBalances/query-organization-balances",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"QueryBalances",
+						"query-organization-balances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reverse-transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_Country\": \"GHA\", \r\n  \"input_ReversalAmount\": \"25\", \r\n  \"input_ServiceProviderCode\": \"000000\", \r\n  \"input_ThirdPartyConversationID\": \"asv02e5958774f7ba228d83d0d689761\", \r\n  \"input_TransactionID\":  \"0000000000001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/Reversal/reverse-transaction",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"Reversal",
+						"reverse-transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query-transaction-status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_QueryReference\": \"000000000000000000001\",\r\n  \"input_ServiceProviderCode\": \"000000\",\r\n  \"input_ThirdPartyConversationID\": \"asv02e5958774f7ba228d83d0d689761\",\r\n  \"input_Country\": \"GHA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7258/api/Reversal/query-transaction-status",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7258",
+					"path": [
+						"api",
+						"Reversal",
+						"query-transaction-status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "44f824c8-693d-4acf-9bec-9b7ba9af324a",
+		"name": "Zenith Bank direct",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "MOMODirect",
+			"item": [
+				{
+					"name": "SecurePaymentRequest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "5fffe792-8d6a-4beb-b948-8bc79c4a6c19"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GPID\": \"GPTEST0053\",\r\n    \"amount\": 0.8,\r\n    \"desc\": \"Test\",\r\n    \"referenceID\": \"zenghglobalpay104\",\r\n    \"ProductID\": \"Test\",\r\n    \"CustomerID\": \"1111\",\r\n    \"Currency\": \"GHS\",\r\n    \"merLogo\": \"\",\r\n    \"merName\": \"ZBG Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/Order/SecurePaymentRequest/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"Order",
+								"SecurePaymentRequest",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthenticateMOMO",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "6aba7689-8ca5-4971-a829-98b20a04fc76"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GPID\": \"GPTEST0053\",\r\n     \"OrderID\": \"2405091127271CCC8\",\r\n    \"PhoneNumber\": \"233544338841\",  \r\n    \"Network\": \"MTN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/DirectPayment/AuthenticateMOMO/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"DirectPayment",
+								"AuthenticateMOMO",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PayMomo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "cc3641c5-154a-4b0e-9a81-6881c41c7647"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"OrderID\": \"2405091127271CCC8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/DirectPayment/PayMomo/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"DirectPayment",
+								"PayMomo",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RedirectBased",
+			"item": [
+				{
+					"name": "SecurePaymentRequest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "dab92623-6486-499f-b06b-6b8d7bdfa689"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GPID\": \"GPTEST0053\",\r\n    \"amount\": 0.8,\r\n    \"desc\": \"Test\",\r\n    \"referenceID\": \"zenghglobalpay104347\",\r\n    \"ProductID\": \"Test\",\r\n    \"CustomerID\": \"1111\",\r\n    \"Currency\": \"GHS\",\r\n    \"merLogo\": \"\",\r\n    \"merName\": \"ZBG Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/Order/SecurePaymentRequest/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"Order",
+								"SecurePaymentRequest",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Initiate - Redirect to payment page of Global Pay.",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "6bb3e6f9-cc6e-493e-bc1e-dc20f2346e80"
+							}
+						],
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/Pay/Initiate/2405091127271CCC8",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"Pay",
+								"Initiate",
+								"2405091127271CCC8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Status - to get the final payment status of the transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "af5e9b13-55e4-48d7-9f37-fc2b7e324405"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GPID\": \"GPTEST0053\",\r\n    \"OrderID\":\"2405091127271CCC8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/Order/ConfirmTransaction/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"Order",
+								"ConfirmTransaction",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RedirectBased local",
+			"item": [
+				{
+					"name": "SecurePaymentRequest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "dab92623-6486-499f-b06b-6b8d7bdfa689"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GPID\": \"GPTEST0053\",\r\n    \"amount\": 0.8,\r\n    \"desc\": \"Test\",\r\n    \"referenceID\": \"zenghglobalpay104347\",\r\n    \"ProductID\": \"Test\",\r\n    \"CustomerID\": \"1111\",\r\n    \"Currency\": \"GHS\",\r\n    \"merLogo\": \"\",\r\n    \"merName\": \"ZBG Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7061/api/CardPayments/SecurePaymentRequest",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7061",
+							"path": [
+								"api",
+								"CardPayments",
+								"SecurePaymentRequest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Initiate - Redirect to payment page of Global Pay.",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "6bb3e6f9-cc6e-493e-bc1e-dc20f2346e80"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7061/api/CardPayments/Initiate/2405091127271CCC8\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7061",
+							"path": [
+								"api",
+								"CardPayments",
+								"Initiate",
+								"2405091127271CCC8\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Status - to get the final payment status of the transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "af5e9b13-55e4-48d7-9f37-fc2b7e324405"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GPID\": \"GPTEST0053\",\r\n    \"referenceid\":\"zenghglobalpay104347\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7061/api/CardPayments/ConfirmTransaction",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7061",
+							"path": [
+								"api",
+								"CardPayments",
+								"ConfirmTransaction"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Card Direct Integration",
+			"item": [
+				{
+					"name": "InitAuthCard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "a1b22ace-05ab-4fd2-b7cd-fd6c9f05986d"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"OrderID\": \"240509124114F9F08\",\r\n    \"CardNumber\": \"4440000009900010\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/DirectPayment/InitAuthCard/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"DirectPayment",
+								"InitAuthCard",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthenticateCard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "8aededdd-41c8-48e0-867b-ca4c53d3c1ab"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"OrderID\": \"240509124114F9F08\",\r\n    \"CardNumber\": \"4440000009900010\",\r\n    \"NameOnCard\": \"Kwaku Kennedy\",\r\n    \"BrowserName\": \"MOZILLA\",\r\n    \"BrowserWindowSize\": \"FULL_SCREEN\",\r\n    \"BrowserAcceptHeaders\": \"application/json\",\r\n    \"BrowserColorDepth\": \"24\",\r\n    \"BrowserJavaEnabled\": \"true\",\r\n    \"BrowserLanguage\": \"en-US\",\r\n    \"BrowserScreenHeight\": \"640\",\r\n    \"BrowserScreenWidth\": \"480\",\r\n    \"BrowserTimeZone\": \"273\",\r\n    \"ExpireMonth\": \"01\",\r\n    \"ExpireYear\": \"39\",\r\n    \"Secret\": \"111\",\r\n    \"ACSCallbackUrl\": \"https: //localhost/acscallback/\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/DirectPayment/AuthenticateCard/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"DirectPayment",
+								"AuthenticateCard",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PayCard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "ae1faa34-2dd8-4c7b-b01e-e80fe311967d"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"OrderID\": \"2405091127271CCC8\"   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/DirectPayment/PayCard/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"DirectPayment",
+								"PayCard",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SecurePaymentRequest Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "a0825a80-03e2-4a0a-8293-b1da2603df75"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GPID\": \"GPTEST0053\",\r\n    \"amount\": 0.8,\r\n    \"desc\": \"Test\",\r\n    \"referenceID\": \"zenghglobalpay10499\",\r\n    \"ProductID\": \"Test\",\r\n    \"CustomerID\": \"1111\",\r\n    \"Currency\": \"GHS\",\r\n    \"merLogo\": \"\",\r\n    \"merName\": \"ZBG Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/Order/SecurePaymentRequest/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"Order",
+								"SecurePaymentRequest",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Status - to get the final payment status of the transaction Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "3ddada1bd06242458f828fe9143dfa34",
+								"uuid": "3ef62959-5fe8-4dca-975b-d6248867be16"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GPID\": \"GPTEST0053\",\r\n    \"OrderID\":\"240509124114F9F08\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://aspd.zenithbank.com.gh/globalpayapiV2/Order/ConfirmTransaction/{{GPID}}",
+							"protocol": "https",
+							"host": [
+								"aspd",
+								"zenithbank",
+								"com",
+								"gh"
+							],
+							"path": [
+								"globalpayapiV2",
+								"Order",
+								"ConfirmTransaction",
+								"{{GPID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "GPID",
+			"value": "GPTEST0053",
+			"type": "string"
+		}
+	]
+}

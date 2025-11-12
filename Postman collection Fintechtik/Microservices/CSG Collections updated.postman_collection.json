@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "87622ab2-1cc3-4b73-94f7-a53eba6cf4d1",
+		"name": "CSG Collections updated",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "GetAccountProfile KYC",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\r\n//     \"app_id\": \"6765146852\",\r\n//     \"app_key\": \"44475272\",\r\n//     \"mobile\": \"+233535010044\",\r\n//     \"network\": \"MTN\"  \r\n// }\r\n{\r\n    \"app_id\": \"2673488631\",\r\n    \"app_key\": \"35453173\",\r\n    \"mobile\": \"+233539291140\",  /*233244371378*/\r\n    \"network\": \"MTN\"  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44311/Interapi.svc/GetAccountProfile",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44311",
+					"path": [
+						"Interapi.svc",
+						"GetAccountProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccountProfile KYC dev",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"2673488631\",\r\n    \"app_key\": \"35453173\",\r\n    \"mobile\": \"+233539291140\",  /*233244371378*/\r\n    \"network\": \"MTN\"  \r\n}\r\n\r\n ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://devsrv.cspay.app/v1/Interapi.svc/GetAccountProfile",
+					"protocol": "https",
+					"host": [
+						"devsrv",
+						"cspay",
+						"app"
+					],
+					"path": [
+						"v1",
+						"Interapi.svc",
+						"GetAccountProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetInvoiceStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"app_id\": \"2673488631\",\r\n    \"app_key\": \"35453173\",\r\n    \"order_id\": \"294\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://devsrv.cspay.app/v1/interapi.svc/GetInvoiceStatus",
+					"protocol": "https",
+					"host": [
+						"devsrv",
+						"cspay",
+						"app"
+					],
+					"path": [
+						"v1",
+						"interapi.svc",
+						"GetInvoiceStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createmmpayment groupBillings",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_id\": \"2673488631\",\r\n    \"app_key\": \"35453173\",\r\n    \"name\": \"ZeeshanIlyas\",\r\n    \"mobile_network\": \"MTN\",\r\n    \"email\": \"zeeshan.ilyas@cross-switch.com\",\r\n    \"mobile\": \"+233244371378\",\r\n    \"currency\": \"GHS\",\r\n    \"feetypecode\": \"GENERALPAYMENT\",\r\n    \"amount\": 1,\r\n    \"order_id\": \"InvOrderTest001xx21x2311\",\r\n    \"order_desc\": \"CSP TEST INVUAT00000002609941\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://devsrv.cspay.app/v1/Interapi.svc/CreateMMPayment",
+					"protocol": "https",
+					"host": [
+						"devsrv",
+						"cspay",
+						"app"
+					],
+					"path": [
+						"v1",
+						"Interapi.svc",
+						"CreateMMPayment"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "https://devsrv.cspay.app/v1",
+			"type": "string"
+		},
+		{
+			"key": "BaseUrl",
+			"value": "http://localhost:14331",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "APPIDCSGTEST1",
+			"value": "8412217316",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "APPKeyCSGTEST1",
+			"value": "32075727",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "BaseUrl",
+			"value": "http://localhost:8080",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

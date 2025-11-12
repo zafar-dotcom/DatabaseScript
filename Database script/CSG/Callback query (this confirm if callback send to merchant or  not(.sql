@@ -1,0 +1,69 @@
+--(1)--configure call back url from screen (for cashout and collection )   Admin>Misc>Callback Url configuration 
+--(2) we will send callback url : https://dev.cspay.app/MerchantSetup/InstantPaymentNotification   for only success and rejected transactions .if callback alreadt sent then also cant be send again
+--(3) this Admin>Misc>Callback will send callback to merchant on its configured url 
+-- (4) wether callback sent or not following query will confrim on the basis of...
+       --.. if posted_to_main_entity =1 and MERCHANT_RESPONSE_TEXT have text then its mean callback has been delivered to them
+
+SELECT EFV.MOBILE,
+       EFV.SYSTEM_TRANS_ID,
+       VEWTR.TRANSACTION_DATE,
+       VEWTR.BANK_ENTITY_ID,
+       VEWTR.ENTITY_ID,
+       EFV.MERCHANT_ENTITY_ID,
+       VEWTR.STATUS_CODE,
+       VEWTR.OVA_SERVICEID,
+       VEWTR.BANK_RESPONSE_TEXT,
+       EFV.POSTED_TO_MAIN_ENTITY,
+       EFV.MERCHANT_RESPONSE_TEXT,
+       EFV.MERCHANT_TRANSACTION_DATE,
+       GPRP.*
+  FROM ENTITY_WALLET_TOPUP_REQUEST VEWTR
+INNER JOIN ENTITY_FEEPAYMENT_VIA_3RDPARTY EFV
+    ON VEWTR.FEEPAYMENT_VIA3RDPARTY_TRANSID = EFV.TRANSACTION_ID
+INNER JOIN GENERAL_PAYMENT_REQUEST_POS GPRP
+    ON EFV.GENERAL_PAYREQ_POS_TRANSID = GPRP.TRANSACTION_ID
+----inner join entity e on e.entity_id = efv.merchant cb_entity_id
+--inner join direct_debit_term_structure ddts on ddts.transaction_id = efv.dd_termstruct_trans_id
+--inner join direct_debit_request ddr on ddr.transaction_id = ddts.ddreq_trans_id
+WHERE VEWTR.TRANSACTION_DATE >=
+       TO_DATE('28/05/2025',
+               'dd/mm/yyyy')
+   AND VEWTR.TRANSACTION_DATE <
+       TO_DATE('30/05/2025',
+               'dd/mm/yyyy')
+      --and vewtr.status_code in (2)
+      --and vewtr.bank_entity_id  = 43035 -- airtel 37135, 43035 MTN, vodafone 55851
+      --and vewtr.ova_serviceid = 'EPSaham.sp'
+      --and efv.system_trans_id in (393528,372958)
+      --and efv.posted_to_main_entity = 1
+  AND EFV.MERCHANT_ENTITY_ID IN (149807)
+--and gprp.txn_monitoring_status = 1
+--and efv.fee_type_id = 1659
+--and efv.dd_termstruct_trans_id is not null
+--and vewtr.system_trans_id  in (106100140,106100142,106100139)  
+--and efv.mobile = '+233205489580'
+--and gprp.transaction_id = 50361663
+-- and gprp.txn_monitoring_status is not null
+-- and vewtr.bank_response_text like '%;;MTN Status Check%'
+--and vewtr.bank_response_text like '%;;MTN Failesafe%'
+--and gprp.merchant_trans_ref_code = 'RockzWaakye'
+-- and vewtr.transaction_id in (54420365, 54421962, 54423592 ) 
+ORDER BY VEWTR.TRANSACTION_ID DESC; --9212518 296269
+
+--Note for above callback query: we will send callback from Admin>Misc>Send call back screen 
+--and get systemid from change payment status screen under Admin>Transaction>Change Payment status screen
+ 1- if posted_to_main_entity =1 and MERCHANT_RESPONSE_TEXT have text then its mean callback has been delivered to them
+ 2- you can query on the basis of datetime and systemid as well
+ 3- MERCHANT_RESPONSE_TEXT this column basically will contain response message which we will recieve from them 
+ 
+-- url configured here
+
+select * from ENTITY_URL where main_entity_id=;
+
+--check whete merchant is enable for callback or not from ENTITY_IPN_CONFIG
+
+select * from ENTITY_IPN_CONFIG config where config.entity_id=149927;
+ 
+--after callback sent succesfuly and we got 200 from callback endpoint this query run 
+update ENTITY_FEEPAYMENT_VIA_3RDPARTY set POSTED_TO_MAIN_ENTITY=:POSTED_TO_MAIN_ENTITY, MERCHANT_RESPONSE_TEXT=:MERCHANT_RESPONSE_TEXT,POSTED_TO_MAIN_ENTITY_DATE=:POSTED_TO_MAIN_ENTITY_DATE" +
+                " where TRANSACTION_ID=:TRANSACTION_ID

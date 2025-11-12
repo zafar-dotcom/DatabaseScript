@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "82e49151-443e-4168-ae18-4089cf5d16c7",
+		"name": "Direct debit (DD) Unified API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-82e49151-443e-4168-ae18-4089cf5d16c7?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "CreateMandate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Mobile\": \"233544338841\",\r\n    \"Network\": \"VODAFONE\",\r\n    \"Amount\": 101.50,\r\n    \"Currency\": \"GHS\",\r\n    \"Frequency\": \"MONTHLY\",\r\n    \"Country\": \"GHA\",\r\n    \"StartDate\": \"2025-01-29T00:00:00\",\r\n    \"EndDate\": \"2025-12-31T00:00:00\",\r\n    \"DayOfDebit\": 5,\r\n    \"Data\": {\r\n        \"OrderId\": \"3455464609\",\r\n        \"Description\": \"Amozon prime Subscription!\"\r\n    },\r\n    \"PlatformScheduling\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7186/api/Recurring/CreateMandate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7186",
+					"path": [
+						"api",
+						"Recurring",
+						"CreateMandate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consent",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Mobile\": \"233501234567\",\r\n    \"Network\": \"VODAFONE\",\r\n    \"Amount\": 101.50,\r\n    \"Currency\": \"GHS\",\r\n    \"Frequency\": \"MONTHLY\",\r\n    \"Country\": \"GHA\",\r\n    \"StartDate\": \"2025-01-29T00:00:00\",\r\n    \"EndDate\": \"2025-12-31T00:00:00\",\r\n    \"DayOfDebit\": 5,\r\n    \"Data\": {\r\n        \"OrderId\": \"34554646\",\r\n        \"Description\": \"Amozon prime Subscription!\"\r\n    },\r\n    \"PlatformScheduling\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7186/api/Recurring/Consent?Mobile=+233501230567&MandateId=8",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7186",
+					"path": [
+						"api",
+						"Recurring",
+						"Consent"
+					],
+					"query": [
+						{
+							"key": "Mobile",
+							"value": "+233501230567"
+						},
+						{
+							"key": "MandateId",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create payment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"app_id\": \"3314934024\", \r\n    \"app_key\": \"64603344\",\r\n    \"MandateId\": \"6\",\r\n    \"Amount\": 20.00,\r\n    \"Currency\": \"GHS\",\r\n    \"TransactionReferenceId\": \"TestReference00134\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7186/api/DirectDebitPayments/ProcessPayment",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7186",
+					"path": [
+						"api",
+						"DirectDebitPayments",
+						"ProcessPayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Direct Debit Payment status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7186/api/DirectDebitPayments/status/90986459",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7186",
+					"path": [
+						"api",
+						"DirectDebitPayments",
+						"status",
+						"90986459"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MandateVodafone Callback",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"input_OriginalConversationID\": \"1234567890\",\r\n  \"input_TransactionReference\": \"8\",\r\n  \"input_MsisdnToken\": \"TOKEN123456\",\r\n  \"input_ThirdPartyConversationID\": \"fbf833c40b29aa86103b82fd3936830f\",\r\n  \"input_ResultCode\": \"INS-0\",\r\n  \"input_ResultDesc\": \"Successfully Processed!\",\r\n  \"input_MandateID\": \"MANDATE12345\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7006/api/VodafoneOpenApiCallbacks/DDMandateNotification",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"VodafoneOpenApiCallbacks",
+						"DDMandateNotification"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "01412551",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "8389734492",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

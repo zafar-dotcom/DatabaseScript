@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "5bc31cf7-697c-4ca5-910b-cbcd53353d1c",
+		"name": "csfouta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14223645"
+	},
+	"item": [
+		{
+			"name": "Validate",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Y3Nmb3V0YTpIdWF3ZWkxMiMk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"receiverMobileWalletProvider\": \"MOOV\",\r\n\t\"receiverMobileWalletId\": \"22896127045\",\r\n\t\"receiveAmount\": {\r\n\t\t\"value\": 400,\r\n\t\t\"currencyCode\": \"XOF\"\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mmapi.moov-africa.tg:39002/payment/HttpService/json/cv/Validate",
+					"protocol": "https",
+					"host": [
+						"mmapi",
+						"moov-africa",
+						"tg"
+					],
+					"port": "39002",
+					"path": [
+						"payment",
+						"HttpService",
+						"json",
+						"cv",
+						"Validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckStatus",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Y3Nmb3V0YTpIdWF3ZWkxMiMk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n\t\"receiverMobileWalletProvider\": \"MOOV\",\r\n\t\"receiverMobileWalletId\": \"22899990137\",\r\n\t\"TLCiTransacationid\": \"000009587097\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://mm3papi.moov-africa.tg:38443/apiaccess/gateway/checktrans",
+					"protocol": "https",
+					"host": [
+						"mm3papi",
+						"moov-africa",
+						"tg"
+					],
+					"port": "38443",
+					"path": [
+						"apiaccess",
+						"gateway",
+						"checktrans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checkbal",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"receiverMobileWalletProvider\": \"MOOV\",\r\n\t\"receiverMobileWalletId\": \"22899990137\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mm3papi.moov-africa.tg:38443/apiaccess/gateway/checkbal",
+					"protocol": "https",
+					"host": [
+						"mm3papi",
+						"moov-africa",
+						"tg"
+					],
+					"port": "38443",
+					"path": [
+						"apiaccess",
+						"gateway",
+						"checkbal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Y3Nmb3V0YTpIdWF3ZWkxMiMk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"receiverMobileWalletId\": \"22896127045\",\r\n    \"receiverMobileWalletProvider\": \"MOOV\",\r\n    \"transaction\": {\r\n        \"TLCiReferenceNumber\": \"000000239783360089\",\r\n        \"TLCiTransactionId\": \"000011510047\", // MM交易ID，Validate会返回\r\n        \"message\": \"any\",\r\n        \"purposeOfTransaction\": \"\",\r\n        \"receiveAmount\": {\r\n            \"currencyCode\": \"XOF\",\r\n            \"value\": 400\r\n        },\r\n        \"receiveCountryCode\": \"TG\",\r\n        \"receiver\": {\r\n            \"person\": {\r\n                \"firstName\": \"ClientFlooz\",\r\n                \"lastName\": \"1\",\r\n                \"middleName\": \"\",\r\n                \"secondLastName\": \"\"\r\n            },\r\n            \"receiverIdCountryCode\": \"XOF\",\r\n            \"receiverIdNumber\": \"22896127045\",\r\n            \"receiverIdType\": \"\"\r\n        },\r\n        \"sendAmount\": {\r\n            \"currencyCode\": \"XOF\",\r\n            \"value\": 400\r\n        },\r\n        \"sendCountryCode\": \"CI\",\r\n        \"sender\": {\r\n            \"address\": {\r\n                \"city\": \"LOME\",\r\n                \"countryCode\": \"CI\",\r\n                \"line1\": \"ETC\",\r\n                \"line2\": \"BLA\",\r\n                \"line3\": \"BLA\",\r\n                \"postalCode\": \"024567\",\r\n                \"stateCode\": \"CI\"\r\n            },\r\n            \"dateOfBirth\": \"12/06/1996\",\r\n            \"person\": {\r\n                \"firstName\": \"\",\r\n                \"lastName\": \"\",\r\n                \"gender\": \"MALE\",\r\n                \"middleName\": \"\",\r\n                \"secondLastName\": \"\"\r\n            },\r\n            \"phone\": {\r\n                \"countryCode\": \"225\",\r\n                \"number\": \"23567890\"\r\n            },\r\n            \"senderIdCountryCode\": \"ORANGE-CI\",\r\n            \"senderIdNumber\": \"\",\r\n            \"senderIdType\": \"\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mmapi.moov-africa.tg:39002/payment/HttpService/json/cv/Load",
+					"protocol": "https",
+					"host": [
+						"mmapi",
+						"moov-africa",
+						"tg"
+					],
+					"port": "39002",
+					"path": [
+						"payment",
+						"HttpService",
+						"json",
+						"cv",
+						"Load"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

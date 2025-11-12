@@ -1,0 +1,17 @@
+select * from entity_api_credentials  e where e.app_id='8389734492';
+select * from entity where entity_id=149807;
+select * from REMIT_ENTITY_PROCESS_CONFIG c where c.mer , c.pm_provider_entity_id=149813;
+  select * from bank_register order by 1 desc;
+  select br.POST_XFR_RESPONSE_STATUS_CODE,br.POST_XFR_RESPONSE_STATUS_DESC ,br.system_trans_id  from bank_register br where br.system_trans_id in (102953760,102953749);
+  POST_XFR_RESPONSE_STATUS_DESC
+Failed
+Success
+
+
+
+REMITTANCE_UTIL.PROCESS_CASHOUT_BATCH_EXT
+SELECT * FROM CASHOUT_PAYMENT_BATCH_TRANS order by 1 desc;
+
+SELECT * FROM CASHOUT_PAYMENT_BATCH_TRANS T
+     WHERE T.BATCH_NO = 9546948;
+       AND T.STATUS=0

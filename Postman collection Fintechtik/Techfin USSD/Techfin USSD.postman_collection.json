@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "370cdb94-8f1c-4a6b-ab26-4c72f83c5405",
+		"name": "Techfin USSD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Techfin~1a339bed-e7ac-4594-ab8b-d4e6570d51fd/collection/16194081-370cdb94-8f1c-4a6b-ab26-4c72f83c5405?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "TechfinMoMoCard initiation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sessionId\": \"323234254355500\",\r\n  \"serviceCode\": \"23242dsdwr2323dw323dq\",\r\n  \"type\": \"initiation\",\r\n  \"message\": \"*711*23#\",\r\n  \"operator\": \"mtn\",\r\n  \"mobile\": \"233244234546\",\r\n   \"platform\": \"USSD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7150/api/TechfinMoMoCard",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7150",
+					"path": [
+						"api",
+						"TechfinMoMoCard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TechfinMoMoCard reponse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sessionId\": \"323234254355500\",\r\n  \"serviceCode\": \"23242dsdwr2323dw323dq\",\r\n  \"type\": \"response\",\r\n  \"message\": \"1\",\r\n  \"operator\": \"mtn\",\r\n  \"mobile\": \"233244234546\",\r\n  \"platform\": \"USSD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7150/api/TechfinMoMoCard",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7150",
+					"path": [
+						"api",
+						"TechfinMoMoCard"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,2144 @@
+{
+	"info": {
+		"_postman_id": "6ea19b74-a771-41cd-bce5-bcc548fa273e",
+		"name": "Biller Api MicroService",
+		"description": "# Biller API Overview\n\nThis document provides a comprehensive overview of the Biller API, designed to facilitate various financial transactions, including bill payments, data bundle subscriptions, and customer lookups. It acts as an intermediary service, allowing your application to interact with external billing and mobile money services.\n\n### Core Functionalities\n\nThe Biller API exposes several key functionalities:\n\n1. **Get Billers**:\n    \n    - **Purpose**: Retrieves a list of supported billers based on a specified country code. This is useful for dynamically populating options in a user interface, allowing users to select the service they wish to pay for.\n        \n    - **Endpoint**: `/api/Billers/get-billers` (POST)\n        \n    - **Request**: Requires `app_id`, `app_key`, and `country_code`.\n        \n2. **Get Bill Details**:\n    \n    - **Purpose**: Fetches outstanding bill details for specific services (e.g., Electricity Company of Ghana (ECG), Startimes, Ghana Water, Vodafone Broadband). This allows users to view their current charges before making a payment.\n        \n    - **Endpoints**:\n        \n        - `/api/Billers/GetBill/ECG` (POST)\n            \n        - `/api/Billers/GetBill/Startimes` (POST)\n            \n        - `/api/Billers/GetBill/GhanaWater` (POST)\n            \n        - `/api/Billers/GetBill/VodafoneBB` (POST)\n            \n    - **Request**: Each endpoint requires `app_id`, `app_key`, and specific request parameters related to the service (e.g., `MobileNo`, `AccountNo`, `MeterNumber`).\n        \n3. **Bill Payments**:\n    \n    - **Purpose**: Facilitates the payment of bills for various services, including electricity, TV subscriptions, airtime, water, and broadband.\n        \n    - **Endpoints**:\n        \n        - `/api/Billers/BillPayment/ECG` (POST)\n            \n        - `/api/Billers/BillPayment/Startimes` (POST)\n            \n        - `/api/Billers/BillPayment/Airtime` (POST)\n            \n        - `/api/Billers/BillPayment/GhanaWater` (POST)\n            \n        - `/api/Billers/BillPayment/VodafoneBB` (POST)\n            \n    - **Request**: Each endpoint requires `app_id`, `app_key`, and specific payment details such as `Amount`, `ClientReference`, and relevant service-specific identifiers (e.g., `PhoneNo`, `Destination`, `MeterNo`).\n        \n4. **Data Bundles**:\n    \n    - **Purpose**: Allows users to retrieve lists of available data bundles for specific mobile networks and subscribe to them.\n        \n    - **Endpoints**:\n        \n        - `/api/Billers/GetDataBundleListByNetworkId` (POST)\n            \n        - `/api/Billers/SubscribeDataBundle` (POST)\n            \n    - **Request**: Requires `app_id`, `app_key`, and parameters like `network_id`, `recipientmobile`, `plan_id`, and `amount`.\n        \n5. **Other Operations**:\n    \n    - **MMCustomerCheck**: Verifies the details of a mobile money customer using their mobile number.\n        \n    - **GetTransStatus**: Retrieves the status of a specific transaction using a merchant transaction reference.\n        \n    - **CheckAvailableBalance**: Checks the available balance in the Interpay Africa account.\n        \n    - **Endpoints**:\n        \n        - `/api/Billers/MMCustomerCheck` (POST)\n            \n        - `/api/Billers/GetTransStatus` (POST)\n            \n        - `/api/Billers/CheckAvailableBalance` (POST)\n            \n    - **Request**: Each requires `app_id`, `app_key`, and operation-specific parameters.\n        \n\n### Authentication\n\nYour Biller API endpoints are secured using **JWT (JSON Web Token) Bearer Authentication**. This means that to access any protected endpoint (like those in the `BillersController`), you must first obtain a valid JWT and include it in your request headers.\n\n**Steps to Authenticate and Make Requests:**\n\n1. **Get a JWT Token:**\n    \n    - Send a `POST` request to `{{baseUrl}}/api/Biller/Auth/token`.\n        \n    - The request body should contain your internal API `username` and `password` (configured in your `appsettings.json` under `BasicAuth`).\n        \n    - The response will contain a `token` and `expiresIn` value.\n        \n    - **Postman Tip:** The \"Get JWT Token\" request in the provided Postman collection automatically extracts this token and sets it as a collection variable (`jwt_token`).\n        \n2. **Use the JWT Token for API Calls:**\n    \n    - For any subsequent requests to protected endpoints (e.g., `/api/Billers/get-billers`), include the obtained JWT in the `Authorization` header.\n        \n    - **Header Format**: `Authorization: Bearer YOUR_GENERATED_TOKEN_HERE`\n        \n    - **Postman Tip**: All other requests in the Postman collection are pre-configured to use the `{{jwt_token}}` collection variable in their Bearer Token authorization, making it seamless after you run the \"Get JWT Token\" request once.\n        \n\nThis setup ensures that only authorized applications or users can interact with your Biller API, providing a secure and organized way to manage financial transactions.\n\nEndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32001383"
+	},
+	"item": [
+		{
+			"name": "Biller Api EndPoints",
+			"item": [
+				{
+					"name": "Bills",
+					"item": [
+						{
+							"name": "Get Biller",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\", \r\n    \"country_code\": \"GH\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/getbillers",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"getbillers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Bill ECG",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"SERVICE_ID\": \"EP-B001\", \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\", \r\n    \"ECG_GET_BILL_REQUEST\": { \r\n        \"MobileNo\": \"0555515341\" \r\n    } \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/GetBill/ECG",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"GetBill",
+										"ECG"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Bill Startimes",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{  \r\n    \"SERVICE_ID\": \"EP-B002\",  \r\n    \"app_id\": \"1053962525\",  \r\n    \"app_key\": \"34375532\",  \r\n    \"STARTIMES_GET_BILL_REQUEST\": {  \r\n        \"AccountNo\": \"02724528806\"  \r\n    }  \r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/GetBill/Startimes",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"GetBill",
+										"Startimes"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Bill Ghana Water",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{  \r\n    \"SERVICE_ID\": \"EP-B004\",  \r\n    \"app_id\": \"1053962525\",  \r\n    \"app_key\": \"34375532\",  \r\n    \"GWCL_GET_BILL_REQUEST\": \r\n\"34375\"  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/GetBill/GhanaWater",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"GetBill",
+										"GhanaWater"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Bill VodafoneBB",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"SERVICE_ID\": \"EP-B006\", \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\", \r\n    \r\n\"VODAFONEBB_GET_BILL_REQUEST\": \r\n{ \r\n        \"mobileNo\": \"0302528144\" \r\n    } \r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/GetBill/VodafoneBB",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"GetBill",
+										"VodafoneBB"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Bill Payments",
+					"item": [
+						{
+							"name": "Bill Payment ECG",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"SERVICE_ID\": \"EP-B001\", \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\", \r\n    \"ECG_TOPUP_REQUEST\": { \r\n        \"PhoneNo\": \"0558393788\", \r\n        \"Amount\": 1, \r\n        \"ClientReference\":\"a-sd-xcxcd\", \r\n        \"Extradata\": { \r\n            \"MeterNo\": \"54310835936\" \r\n        } \r\n    } \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/BillPayment/ECG",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"BillPayment",
+										"ECG"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Bill Payment Startimes",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"SERVICE_ID\": \"EP-B002\", \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\", \r\n    \"STARTIMES_TOPUP_REQUEST\": { \r\n        \"Destination\": \"02724528806\", \r\n        \"ClientReference\":\"45hg-fghj\", \r\n        \"Amount\": 3 \r\n    } \r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/BillPayment/Startimes",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"BillPayment",
+										"Startimes"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Bill Payment Airtime",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"SERVICE_ID\": \"EP-B003\", \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\", \r\n    \"AIRTIME_TOPUP_REQUEST\": { \r\n        \"payermobile\": \"+233561843286\", \r\n        \"payername\": \"topMM\", \r\n        \"payeremail\": \"test@emailMM.com\", \r\n        \"amount\": \"3\", \r\n        \"ClientReference\": \"dsd-6jd77dfdfs\", \r\n        \"recipientmobile\": \"+233555515326\", \r\n        \"countryid\": \"1\" \r\n    } \r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/BillPayment/Airtime",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"BillPayment",
+										"Airtime"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Bill Payment Ghana Water",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"SERVICE_ID\": \"EP-B004\", \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\", \r\n    \"GWCL_PAYMENT_REQUEST\": { \r\n        \"meter_number\": \"4567\", \r\n        \"ClientReference\": \"gh-sds-cxhcx88\", \r\n        \"third_party_customer_name\": \"testname\", \r\n        \"third_party_phone_number\": \r\n\"233561843286\", \r\n        \"amount\": \"0.25\" \r\n    } \r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/BillPayment/GhanaWater",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"BillPayment",
+										"GhanaWater"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Bill Payment VODAFONE BB",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"SERVICE_ID\": \"EP-B006\", \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\", \r\n    \"VODAFONEBB_TOPUP_REQUEST\": { \r\n        \"Destination\": \"0302450262\", \r\n        \"Amount\": 1, \r\n        \"ClientReference\": \"a-sd-xcxcds47\", \r\n        \"Extradata\": { \r\n            \"bundle\": \"0302450262\", \r\n            \"MeterNo\" : \"123\"\r\n        } \r\n    } \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/BillPayment/VODAFONEBB",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"BillPayment",
+										"VODAFONEBB"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Data Bundles",
+					"item": [
+						{
+							"name": "Get Data Bundle List By Network Id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"app_id\":\"1053962525\", \r\n    \"app_key\":\"34375532\", \r\n    \"network_id\":\"4\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/GetDataBundleListByNetworkId",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"GetDataBundleListByNetworkId"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Subscribe Data Bundle",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n     \"app_id\":\"1053962525\", \r\n     \"app_key\":\"34375532\", \r\n     \"recipientmobile\":\"+233555515326\", \r\n     \"plan_id\":\"flexi_data_bundle\", \r\n     \"category\":\"Flexi\", \r\n     \"amount\": \"1\", \r\n     \"merchtxnref\":\"dfdf4sa5435a\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/SubscribeDataBundle",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"SubscribeDataBundle"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Others",
+					"item": [
+						{
+							"name": "MM Customer Check",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\", \r\n    \"mobile\": \"+233274140566\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/MMCustomerCheck",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"MMCustomerCheck"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Trans Status",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"app_id\": \"1053962525\", \r\n    \"app_key\": \"34375532\",   \r\n    \"merchtxnref\": \"4b97166f-567f-489d-b677-995abd8fdfdd\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/GetTransStatus",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"GetTransStatus"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Check Available Balance",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQ0ZBQkdBVCIsImp0aSI6Ijc4YzkwM2Y0LWY2ZDgtNDlhZi05NzFlLTMwNzc5OWU0YjBjOSIsImV4cCI6MTc1MDY4MDc3NCwiaXNzIjoiRkFCLkhvc3RlZENoZWNrb3V0cy5NYXN0ZXJjYXJkIiwiYXVkIjoiR2xvYmFsUGF5In0.G-Le0RmD5UD7QIKPFeXDB-sFecV_oVdMMgmLPZgwVu0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"app_id\":\"1053962525\", \r\n    \"app_key\":\"34375532\" \r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7235/api/Biller/CheckAvailableBalance",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7235",
+									"path": [
+										"api",
+										"Biller",
+										"CheckAvailableBalance"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Auth token",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Username\" :\"MCFABGAT\",\r\n    \"Password\" : \"3?79!@%$@9j7f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/Biller/auth/token",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"Biller",
+										"auth",
+										"token"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"amount\": \"250.00\",\r\n  \"currency\": \"GHS\",\r\n  \"orderId\": \"123e4567-e89b-12d3-a456-426614174000\",\r\n  \"returnUrl\": \"https://dev.cspay.app/ZenithPayment/CreatePayment\",\r\n  \"apiOperation\": \"PURCHASE\",\r\n  \"merchant\": {\r\n    \"name\": \"Test merchant2\",\r\n    \"address\": {\r\n      \"line1\": \"123 Street\",\r\n      \"line2\": \"City, Country\"\r\n    }\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:7167/api/payment/create-session",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "7167",
+											"path": [
+												"api",
+												"payment",
+												"create-session"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Apr 2025 12:00:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"resp\": {\n        \"statusCode\": 400,\n        \"data\": \"{\\\"error\\\":{\\\"cause\\\":\\\"INVALID_REQUEST\\\",\\\"explanation\\\":\\\"Unexpected parameter 'Interaction.Merchant.Name'\\\"},\\\"result\\\":\\\"ERROR\\\"}\",\n        \"status\": 0,\n        \"message\": null\n    }\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"description": "Contains Hosted Checkout example requests for:\n\n- Initial Authentication, Get Bills Information, Bill Payments, Data Bundles, Others."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "dev",
+			"value": "https://fab.cspay.app",
+			"type": "string"
+		},
+		{
+			"key": "local",
+			"value": "https://localhost:7167",
+			"type": "string"
+		},
+		{
+			"key": "pci env",
+			"value": "https://sandbox-card.mojo-pay.com",
+			"type": "string"
+		}
+	]
+}

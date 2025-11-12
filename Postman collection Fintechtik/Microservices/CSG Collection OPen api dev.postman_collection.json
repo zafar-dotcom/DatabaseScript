@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "a1dbc30c-33e3-49f3-ab81-f95a5f68b69f",
+		"name": "CSG Collection OPen api dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-a1dbc30c-33e3-49f3-ab81-f95a5f68b69f?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "Preapprovals",
+			"item": [
+				{
+					"name": "PreApproval Callback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://devsrv.cspay.app/mtnapi/MtnCollections/RequestToPayTest",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"mtnapi",
+								"MtnCollections",
+								"RequestToPayTest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Directdebit CreateMandate dev",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"app_id\": \"3314934024\",\r\n  \"app_key\": \"64603344\",\r\n  \"client_code\": \"test\",\r\n  \"payer_mobile\": \"+233241800220\",\r\n  \"mobile_network\": \"MTN\",\r\n  \"Installment_StartDate\": \"2024-01-26T10:06:08\",\r\n  \"Frequency_Code\": \"MONTHLY\",\r\n  \"instrument_code\": \"test2\",\r\n  \"payer_firstname\": \"John\",\r\n  \"payer_lastname\": \"Doe\",\r\n  \"dd_amount\": 20000,\r\n  \"number_of_installments\": 5,\r\n  \"merch_trans_refno\": \"12xxxxx12x2222\",\r\n  \"narration\": \"test\",\r\n  \"currency_code\": \"EUR\",\r\n  \"frequency_period\": 5,\r\n  \"is_pre_auth_enable\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v2/api/DirectDebit/createddmandate",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"DirectDebit",
+								"createddmandate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Directdebit GetDDMandateStatus dev",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"app_id\": \"3314934024\",\r\n  \"app_key\": \"64603344\",\r\n  \"mobile_number\": \"+233241800220\",\r\n  \"mobile_network\": \"MTN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v2/api/DirectDebit/GetDDMandateStatus",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"DirectDebit",
+								"GetDDMandateStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Directdebit CreateMandate local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n  \"client_code\": \"test\",\r\n  \"payer_mobile\": \"+233260251361\",\r\n  \"mobile_network\": \"MTN\",\r\n  \"Installment_StartDate\": \"2024-01-28T10:06:08\",\r\n  \"Frequency_Code\": \"MONTHLY\",\r\n  \"instrument_code\": \"test2\",\r\n  \"payer_firstname\": \"John\",\r\n  \"payer_lastname\": \"Doe\",\r\n  \"dd_amount\": 900,\r\n  \"number_of_installments\": 5,\r\n  \"merch_trans_refno\": \"12xxx12cc123\",\r\n  \"narration\": \"test\",\r\n  \"currency_code\": \"EUR\",\r\n  \"frequency_period\": 5,\r\n  \"is_pre_auth_enable\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44312/api/DirectDebit/createddmandate",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44312",
+							"path": [
+								"api",
+								"DirectDebit",
+								"createddmandate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

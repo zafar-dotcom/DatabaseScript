@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "160faf27-c961-4461-8d84-bf74be9081b1",
+		"name": "Global Collections Api's Tested",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32001383"
+	},
+	"item": [
+		{
+			"name": "Collection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"TransactionDate\": \"2025-01-22T11:01:41.805\",\r\n    \"CustomerName\":\"test\",\r\n    \"Network\":\"MTN\",\r\n    \"Mobile\":\"+2334545454\",\r\n    \"Email\":\"test@mail.com\",\r\n    \"FeeTypeCode\":\"GENERALPAYMENT\",\r\n    \"Currency\":\"GHS\",\r\n    \"CountryCode\":\"GHA\",\r\n    \"Amount\": 1.0,\r\n    \"OrderId\":\"12GHTEST\",\r\n    \"OrderDesc\":\"1212\",\r\n    \"Signature\": \"Test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7155/api/Collection/init-payment"
+			},
+			"response": []
+		},
+		{
+			"name": "status",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "64603344",
+						"username": "3314934024"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7155/api/Collection/status/12GHTEST"
+			},
+			"response": []
+		},
+		{
+			"name": "KYC momo/profile",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "24027177",
+						"username": "1006496618"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"BankCode\": \"300311\",  //300311\r\n    \"BankAccount\": \"6010913802\" ,  //\r\n    \"CountryCode\": \"GHA\"   //\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7155/api/Kyc/bank/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "KYC momo/profile Copy",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "24027177",
+						"username": "1006496618"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"network\":\"MTN\",\r\n    \"mobile\":\"+233244371378\",\r\n    \"country\":\"GHS\",\r\n    \"CountryCode\":\"GHA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7155/api/Kyc/momo/profile"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": {
+			"password": "64603344",
+			"username": "3314934024"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

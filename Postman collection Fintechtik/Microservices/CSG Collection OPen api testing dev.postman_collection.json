@@ -1,0 +1,1802 @@
+{
+	"info": {
+		"_postman_id": "e80cb32e-944d-41be-a118-4a72e0e1db40",
+		"name": "CSG Collection OPen api testing dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081",
+		"_collection_link": "https://solar-equinox-778250.postman.co/workspace/Cross-Switch~3eeeed1d-d03e-436d-aebc-7ee2037a53cd/collection/16194081-e80cb32e-944d-41be-a118-4a72e0e1db40?action=share&source=collection_link&creator=16194081"
+	},
+	"item": [
+		{
+			"name": "Cashout",
+			"item": [
+				{
+					"name": "CreateCashout MMT MTN dev",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n    //\"app_id\": \"2367618162\",\r\n    //\"app_key\": \"25232322\",\r\n     //\"app_id\": \"8389734492\",\r\n     //\"app_key\": \"01412551\",\r\n    \"transaction_date\": \"2024-03-04 13:18:22\",\r\n    \"expiry_date\": \"2024-12-28 13:30:43\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"zeeshan\",\r\n    \"payer_email\": \"zeeshan.ilyas@cross-switch.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"12\",\r\n    \"merchant_ref\": \"testxxdd12\",\r\n    \"payer_mobile\": \"+233233371378\",\r\n    \"payee_mobile\": \"+233267327390\",\r\n    \"mobile_network\":\"MTN\",\r\n    \"payee_name\": \"OPENAPITEST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v2/api/Cashout/CreateCashout",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"Cashout",
+								"CreateCashout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"9904491\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{ \r\n    \"status_code\": \"CO_SUBMITTED\", \r\n    \"status_message\": \"Transaction Submitted Successfully\", \r\n    \"transaction_ref\": 43535 \r\n}"
+						},
+						{
+							"name": "bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_BAD_REQUEST\",\r\n    \"status_message\": \"app_id is required, app_key is required, payment_mode is required, \"\r\n}"
+						},
+						{
+							"name": "Un-Authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"324343\",\r\n    \"app_key\": \"32456\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_UN_AUTHORIZED\",\n    \"status_message\": \"Unauthorized\",\n    \"transaction_ref\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateCashout MMT MTN dev local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n    //\"app_id\": \"2367618162\",\r\n    //\"app_key\": \"25232322\",\r\n     //\"app_id\": \"8389734492\",\r\n     //\"app_key\": \"01412551\",\r\n    \"transaction_date\": \"2024-03-04 13:18:22\",\r\n    \"expiry_date\": \"2024-12-28 13:30:43\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"zeeshan\",\r\n    \"payer_email\": \"zeeshan.ilyas@cross-switch.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"200\",\r\n    \"merchant_ref\": \"testxxdd12zz\",\r\n    \"payer_mobile\": \"+233233371378\",\r\n    \"payee_mobile\": \"+233267327390\",\r\n    \"mobile_network\":\"MTN\",\r\n    \"payee_name\": \"OPENAPITEST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44312/api/Cashout/CreateCashout",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44312",
+							"path": [
+								"api",
+								"Cashout",
+								"CreateCashout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"9904491\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{ \r\n    \"status_code\": \"CO_SUBMITTED\", \r\n    \"status_message\": \"Transaction Submitted Successfully\", \r\n    \"transaction_ref\": 43535 \r\n}"
+						},
+						{
+							"name": "bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_BAD_REQUEST\",\r\n    \"status_message\": \"app_id is required, app_key is required, payment_mode is required, \"\r\n}"
+						},
+						{
+							"name": "Un-Authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"324343\",\r\n    \"app_key\": \"32456\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_UN_AUTHORIZED\",\n    \"status_message\": \"Unauthorized\",\n    \"transaction_ref\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateCashout MMT MTN local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n    //\"app_id\": \"2367618162\",\r\n    //\"app_key\": \"25232322\",\r\n     //\"app_id\": \"8389734492\",\r\n     //\"app_key\": \"01412551\",\r\n    \"transaction_date\": \"2024-02-09 13:18:22\",\r\n    \"expiry_date\": \"2024-12-28 13:30:43\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"zeeshan\",\r\n    \"payer_email\": \"zeeshan.ilyas@cross-switch.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"12\",\r\n    \"merchant_ref\": \"INVUATtest23451\",\r\n    \"payer_mobile\": \"+233233371378\",\r\n    \"payee_mobile\": \"+233267327390\",\r\n    \"mobile_network\":\"MTN\",\r\n    \"payee_name\": \"OPENAPITEST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44312/api/Cashout/CreateCashout",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44312",
+							"path": [
+								"api",
+								"Cashout",
+								"CreateCashout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"9904491\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{ \r\n    \"status_code\": \"CO_SUBMITTED\", \r\n    \"status_message\": \"Transaction Submitted Successfully\", \r\n    \"transaction_ref\": 43535 \r\n}"
+						},
+						{
+							"name": "bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_BAD_REQUEST\",\r\n    \"status_message\": \"app_id is required, app_key is required, payment_mode is required, \"\r\n}"
+						},
+						{
+							"name": "Un-Authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"324343\",\r\n    \"app_key\": \"32456\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_UN_AUTHORIZED\",\n    \"status_message\": \"Unauthorized\",\n    \"transaction_ref\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateCashout MMT callback local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:53864/MtnDisbursements/TransferCallback/de58d99e-929b-47c0-9d45-f6f3be819441",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "53864",
+							"path": [
+								"MtnDisbursements",
+								"TransferCallback",
+								"de58d99e-929b-47c0-9d45-f6f3be819441"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"9904491\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{ \r\n    \"status_code\": \"CO_SUBMITTED\", \r\n    \"status_message\": \"Transaction Submitted Successfully\", \r\n    \"transaction_ref\": 43535 \r\n}"
+						},
+						{
+							"name": "bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_BAD_REQUEST\",\r\n    \"status_message\": \"app_id is required, app_key is required, payment_mode is required, \"\r\n}"
+						},
+						{
+							"name": "Un-Authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"324343\",\r\n    \"app_key\": \"32456\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_UN_AUTHORIZED\",\n    \"status_message\": \"Unauthorized\",\n    \"transaction_ref\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateCashout MMT callback local Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.cs-pay.app/v1/OpenApiTest/ValidateAccount?accountNo=233244371378",
+							"protocol": "https",
+							"host": [
+								"api",
+								"cs-pay",
+								"app"
+							],
+							"path": [
+								"v1",
+								"OpenApiTest",
+								"ValidateAccount"
+							],
+							"query": [
+								{
+									"key": "accountNo",
+									"value": "233244371378"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"9904491\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{ \r\n    \"status_code\": \"CO_SUBMITTED\", \r\n    \"status_message\": \"Transaction Submitted Successfully\", \r\n    \"transaction_ref\": 43535 \r\n}"
+						},
+						{
+							"name": "bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"123456789\",\r\n    \"app_key\": \"987654321\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_BAD_REQUEST\",\r\n    \"status_message\": \"app_id is required, app_key is required, payment_mode is required, \"\r\n}"
+						},
+						{
+							"name": "Un-Authorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"324343\",\r\n    \"app_key\": \"32456\",\r\n    \"transaction_date\": \"2023-05-25 10:06:08\",\r\n    \"expiry_date\": \"2023-10-14 10:06:08\",\r\n    \"transaction_type\": \"local\",\r\n    \"payment_mode\": \"MMT\",\r\n    \"payer_name\": \"Peter Adua\",\r\n    \"payer_email\": \"PeterAdua@gmail.com\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": \"1.11\",\r\n    \"merchant_ref\": \"99044990\",\r\n    \"payer_mobile\": \"+233555515326\",\r\n    \"payee_mobile\": \"+233263319711\",\r\n    \"mobile_network_id\":\"1\",\r\n    \"payee_name\": \"Charles\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CreateCashout",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CreateCashout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_UN_AUTHORIZED\",\n    \"status_message\": \"Unauthorized\",\n    \"transaction_ref\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "GetTxnStatus dev",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n    \"merchant_ref\": \"testxxdd12zz\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v2/api/Cashout/GetTxnStatus",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"Cashout",
+								"GetTxnStatus"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_SUCCESS\",\r\n    \"status_message\": \"TRANSACTION SUCCESSFULLY PROCESSED\"\r\n}"
+						},
+						{
+							"name": "FAILED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904492\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_FAILED\",\n    \"status_message\": \"TRANSACTION FAILED\"\n}"
+						},
+						{
+							"name": "PENDING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904493\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_PENDING\",\r\n    \"status_message\": \"TRANSACTION PENDING\"\r\n}"
+						},
+						{
+							"name": "EXPIRED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_EXPIRED\",\r\n    \"status_message\": \"TRANSACTION EXPIRED\"\r\n}"
+						},
+						{
+							"name": "CANCELLED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CANCELLED\",\n    \"status_message\": \"TRANSACTION CANCELLED\"\n}"
+						},
+						{
+							"name": "PREPARED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PREPARED\",\n    \"status_message\": \"TRANSACTION BEING PREPARED\"\n}"
+						},
+						{
+							"name": "PROCESSING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PROCESSING\",\n    \"status_message\": \"PREPARED FOR PROCESSING\"\n}"
+						},
+						{
+							"name": "CONFLICTING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CONFLICTING\",\n    \"status_message\": \"CONFLICTING TRANSACTION\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GetTxnStatus dev Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"3907037457\", //3907037457\r\n    \"app_key\": \"02304717\", \r\n    \"merchant_ref\": \"INVOPENAPITEST021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.cs-pay.app/v2/api/Cashout/GetTxnStatus",
+							"protocol": "https",
+							"host": [
+								"api",
+								"cs-pay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"Cashout",
+								"GetTxnStatus"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_SUCCESS\",\r\n    \"status_message\": \"TRANSACTION SUCCESSFULLY PROCESSED\"\r\n}"
+						},
+						{
+							"name": "FAILED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904492\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_FAILED\",\n    \"status_message\": \"TRANSACTION FAILED\"\n}"
+						},
+						{
+							"name": "PENDING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904493\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_PENDING\",\r\n    \"status_message\": \"TRANSACTION PENDING\"\r\n}"
+						},
+						{
+							"name": "EXPIRED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"status_code\": \"CO_EXPIRED\",\r\n    \"status_message\": \"TRANSACTION EXPIRED\"\r\n}"
+						},
+						{
+							"name": "CANCELLED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CANCELLED\",\n    \"status_message\": \"TRANSACTION CANCELLED\"\n}"
+						},
+						{
+							"name": "PREPARED",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PREPARED\",\n    \"status_message\": \"TRANSACTION BEING PREPARED\"\n}"
+						},
+						{
+							"name": "PROCESSING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_PROCESSING\",\n    \"status_message\": \"PREPARED FOR PROCESSING\"\n}"
+						},
+						{
+							"name": "CONFLICTING",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"app_id\": \"95196**\",\r\n    \"app_key\": \"27450**\",\r\n    \"merchant_ref\": \"9904491\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/Cashout/CheckStatus",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"Cashout",
+										"CheckStatus"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": \"CO_CONFLICTING\",\n    \"status_message\": \"CONFLICTING TRANSACTION\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Collections",
+			"item": [
+				{
+					"name": "CreateMMPayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n    \"name\": \"Peter Adua\",\r\n    \"mobile_network\": \"MTN\",\r\n    \"email\": \"PeterAdua@gmail.com\",\r\n    \"mobile\": \"+233501149440\",\r\n    \"currency\": \"EUR\",\r\n    \"feetypecode\": \"GENERALPAYMENT\",\r\n    \"amount\": 9.10,\r\n    \"order_id\": \"xxwzx2\",\r\n    \"order_desc\": \"Peter Adua order\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44311/Interapi.svc/CreateMMPayment",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44311",
+							"path": [
+								"Interapi.svc",
+								"CreateMMPayment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateMMPayment dev",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n    \"name\": \"zeeshan ilyas\",\r\n    \"mobile_network\": \"MTN\",\r\n    \"email\": \"zeeshanilyas002@gmail.com\",\r\n    \"mobile\": \"+233501149440\",\r\n    \"currency\": \"EUR\",\r\n    \"feetypecode\": \"GENERALPAYMENT\",\r\n    \"amount\": 32.10,\r\n    \"order_id\": \"xx2xx223xxx\",\r\n    \"order_desc\": \"zeeshan test \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v1/Interapi.svc/CreateMMPayment",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v1",
+								"Interapi.svc",
+								"CreateMMPayment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateMMPayment dev local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n    \"name\": \"zeeshan ilyas\",\r\n    \"mobile_network\": \"MTN\",\r\n    \"email\": \"zeeshanilyas002@gmail.com\",\r\n    \"mobile\": \"+233501149440\",\r\n    \"currency\": \"EUR\",\r\n    \"feetypecode\": \"GENERALPAYMENT\",\r\n    \"amount\": 2.10,\r\n    \"order_id\": \"xx2xx223xxxz2\",\r\n    \"order_desc\": \"zeeshan test \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44311/Interapi.svc/CreateMMPayment",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44311",
+							"path": [
+								"Interapi.svc",
+								"CreateMMPayment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Collection Callback dev",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"amount\": \"20\",\r\n        \"currency\": \"EUR\",\r\n        \"financialTransactionId\": 1944167888,\r\n        \"externalId\": 222,\r\n        \"payer\": {\r\n            \"partyIdType\": \"MSISDN\",\r\n            \"partyId\": \"0557143133\"\r\n        },\r\n        \"status\": \"SUCCESSFUL\",\r\n        \"reason\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev.cspay.app/MtnCollections/RequestToPayCallback/8e477410-235c-452d-a18d-4749878a1a3f",
+							"protocol": "https",
+							"host": [
+								"dev",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"MtnCollections",
+								"RequestToPayCallback",
+								"8e477410-235c-452d-a18d-4749878a1a3f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Collection Callback dev Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:53864/MtnCollections/RequestToPayCallback/73bca1a7-0f2f-4889-80d0-5cbe08efd3a6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "53864",
+							"path": [
+								"MtnCollections",
+								"RequestToPayCallback",
+								"73bca1a7-0f2f-4889-80d0-5cbe08efd3a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CollectionTransferCallback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"amount\": \"20\",\r\n        \"currency\": \"EUR\",\r\n        \"financialTransactionId\": 1944167888,\r\n        \"externalId\": 222,\r\n        \"payer\": {\r\n            \"partyIdType\": \"MSISDN\",\r\n            \"partyId\": \"0557143133\"\r\n        },\r\n        \"status\": \"SUCCESSFUL\",\r\n        \"reason\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:53864/MtnCollections/CollectionTransferCallback/8a74f101-8e21-4540-9653-d7b67d215eed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "53864",
+							"path": [
+								"MtnCollections",
+								"CollectionTransferCallback",
+								"8a74f101-8e21-4540-9653-d7b67d215eed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetInvoiceStatus Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n    \"order_id\": \"xx2xx223xxxz2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v1/Interapi.svc/GetInvoiceStatus",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v1",
+								"Interapi.svc",
+								"GetInvoiceStatus"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Preapprovals",
+			"item": [
+				{
+					"name": "PreApproval Callback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://devsrv.cspay.app/mtnapi/MtnCollections/RequestToPayTest",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"mtnapi",
+								"MtnCollections",
+								"RequestToPayTest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PreApproval Callback local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://dev.cspay.app/MtnPreApproval/PreApprovalCallback/7441547a-e066-4214-a46f-02693e634392",
+							"protocol": "https",
+							"host": [
+								"dev",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"MtnPreApproval",
+								"PreApprovalCallback",
+								"7441547a-e066-4214-a46f-02693e634392"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Directdebit CreateMandate dev",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"app_id\": \"3314934024\",\r\n  \"app_key\": \"64603344\",\r\n  \"client_code\": \"test\",\r\n  \"payer_mobile\": \"+233241800220\",\r\n  \"mobile_network\": \"MTN\",\r\n  \"Installment_StartDate\": \"2024-01-26T10:06:08\",\r\n  \"Frequency_Code\": \"MONTHLY\",\r\n  \"instrument_code\": \"test2\",\r\n  \"payer_firstname\": \"John\",\r\n  \"payer_lastname\": \"Doe\",\r\n  \"dd_amount\": 20000,\r\n  \"number_of_installments\": 5,\r\n  \"merch_trans_refno\": \"12xxxxx12x2222\",\r\n  \"narration\": \"test\",\r\n  \"currency_code\": \"EUR\",\r\n  \"frequency_period\": 5,\r\n  \"is_pre_auth_enable\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v2/api/DirectDebit/createddmandate",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"DirectDebit",
+								"createddmandate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Directdebit GetDDMandateStatus dev",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"app_id\": \"3314934024\",\r\n  \"app_key\": \"64603344\",\r\n  \"mobile_number\": \"+233241800220\",\r\n  \"mobile_network\": \"MTN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://devsrv.cspay.app/v2/api/DirectDebit/GetDDMandateStatus",
+							"protocol": "https",
+							"host": [
+								"devsrv",
+								"cspay",
+								"app"
+							],
+							"path": [
+								"v2",
+								"api",
+								"DirectDebit",
+								"GetDDMandateStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Directdebit CreateMandate local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"app_id\": \"3314934024\",\r\n    \"app_key\": \"64603344\",\r\n  \"client_code\": \"test\",\r\n  \"payer_mobile\": \"+233260251361\",\r\n  \"mobile_network\": \"MTN\",\r\n  \"Installment_StartDate\": \"2024-01-28T10:06:08\",\r\n  \"Frequency_Code\": \"MONTHLY\",\r\n  \"instrument_code\": \"test2\",\r\n  \"payer_firstname\": \"John\",\r\n  \"payer_lastname\": \"Doe\",\r\n  \"dd_amount\": 900,\r\n  \"number_of_installments\": 5,\r\n  \"merch_trans_refno\": \"12xxx12cc123\",\r\n  \"narration\": \"test\",\r\n  \"currency_code\": \"EUR\",\r\n  \"frequency_period\": 5,\r\n  \"is_pre_auth_enable\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44312/api/DirectDebit/createddmandate",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44312",
+							"path": [
+								"api",
+								"DirectDebit",
+								"createddmandate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

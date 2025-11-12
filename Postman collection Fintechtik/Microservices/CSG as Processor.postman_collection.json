@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "d3670248-e018-4fe2-8b76-37198ecebf79",
+		"name": "CSG as Processor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16194081"
+	},
+	"item": [
+		{
+			"name": "Cashouts",
+			"item": [
+				{
+					"name": "CreateCashoutGIP Bank Transfer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"5312087842\",\r\n    \"app_key\": \"60070471\",\r\n    \"trans_amount\": 10,\r\n    \"payment_mode\": \"BAT\",\r\n    \"payee_name\": \"AnchoraTechs\",\r\n    \"payee_mobile\": \"+233552813681\",\r\n    \"recipient_name\": \"Bernard Danso\",\r\n    \"trans_currency\": \"GHS\",\r\n    \"narration\": \"CREDIT\",\r\n    \"bank_name\": \"Test\",\r\n    \"bank_code\": \"300302\",\r\n    \"bank_account_no\": \"0043490200\", //0043490218\r\n    \"bank_account_title\": \"ikenna iloeje\",\r\n    \"transaction_type\": \"local\",\r\n    \"expiry_date\": \"/Date(2024-12-09t11:43:37/\",\r\n    \"transaction_date\": \"/Date(2024-12-02t11:43:37/\",\r\n    \"merch_trans_ref_no\": \"45g4343hjyt123zxccdxcvcvbvc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:14331/CashoutRestV2.svc/CreateCashoutGIP",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "14331",
+							"path": [
+								"CashoutRestV2.svc",
+								"CreateCashoutGIP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCashoutTrans",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"5312087842\",\r\n    \"app_key\": \"60070471\",\r\n    \"trans_amount\": 5,\r\n    \"payment_mode\": \"MMT\",\r\n    \"payee_name\": \"AnchoraTechs\",\r\n    \"payee_mobile\": \"+233552813681\",\r\n    \"recipient_mobile\": \"+233552813681\",\r\n    \"recipient_name\": \"Bernard Danso\",\r\n    \"trans_currency\": \"GHS\",\r\n    \"narration\": \"CREDIT\",\r\n    \"transaction_type\": \"local\",\r\n    \"expiry_date\": \"/Date(2024-12-09t11:43:37/\",\r\n    \"transaction_date\": \"/Date(2024-12-02t11:43:37/\",\r\n    \"merch_trans_ref_no\": \"45g4343hjyt123zxccdxcv\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:14331/CashoutRestV2.svc/CreateCashoutTrans",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "14331",
+							"path": [
+								"CashoutRestV2.svc",
+								"CreateCashoutTrans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTransStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"5312087842\",\r\n    \"app_key\": \"60070471\",\r\n    \"merch_trans_ref_no\": \"3107202010089\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1097/Test/GetTransStatus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1097",
+							"path": [
+								"Test",
+								"GetTransStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CSG Cashout Callback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"trans_ref_no\": 9177846,\r\n    \"transaction_date\": \"2024-12-03T12:01:06\",\r\n    \"amount\": 5.0,\r\n    \"transaction_type\": \"DR\",\r\n    \"merchant_trans_ref_no\": \"2476887\",\r\n    \"transaction_status\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://callbacks-dev.interpayafrica.com:8080/api/CSGCallback/CsgCashoutCallback",
+							"protocol": "http",
+							"host": [
+								"callbacks-dev",
+								"interpayafrica",
+								"com"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"CSGCallback",
+								"CsgCashoutCallback"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Collections",
+			"item": [
+				{
+					"name": "CreateMMPayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"app_id\": \"5312087842\",\r\n    \"app_key\": \"60070471\",\r\n    \"name\": \"John Doe\",\r\n    \"mobile_network\": \"VODAFONE\",\r\n    \"email\": \"john.doe@csgh.com\",\r\n    \"mobile\": \"+233244371370\",\r\n    \"currency\": \"GHS\",\r\n    \"feetypecode\": \"GENERALPAYMENT\",\r\n    \"amount\": 30.00,\r\n    \"order_id\": \"xxxxxxx3vt56\",\r\n    \"order_desc\": \"Wara TEST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/interapi.svc/CreateMMPayment",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"interapi.svc",
+								"CreateMMPayment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetInvoiceStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"app_id\": \"5312087842\",\r\n    \"app_key\": \"60070471\",\r\n    \"order_id\": \"xxxxxxx3vt56\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev}}/interapi.svc/GetInvoiceStatusV4",
+							"host": [
+								"{{dev}}"
+							],
+							"path": [
+								"interapi.svc",
+								"GetInvoiceStatusV4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CSG collection Callback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "trans_ref_no",
+									"value": "55176051",
+									"type": "text"
+								},
+								{
+									"key": "transaction_date",
+									"value": "2024-21-03T05:38:24",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "status_code",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "status_message",
+									"value": "Success",
+									"type": "text"
+								},
+								{
+									"key": "payment_mode",
+									"value": "MTN",
+									"type": "text"
+								},
+								{
+									"key": "order_id",
+									"value": "1205871",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://callbacks-dev.interpayafrica.com:8080/api/CSGCallback/PaymentCallBack",
+							"protocol": "http",
+							"host": [
+								"callbacks-dev",
+								"interpayafrica",
+								"com"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"CSGCallback",
+								"PaymentCallBack"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
